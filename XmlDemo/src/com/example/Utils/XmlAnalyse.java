@@ -38,7 +38,7 @@ public class XmlAnalyse {
 			serializer.setOutput(fos, "utf-8");
 
 			/*
-			 * 开始定XML文档，相当于开始写。<?xml version="1.0" encoding="UTF-8"
+			 * 开始写XML文档，相当于开始写。<?xml version="1.0" encoding="UTF-8"
 			 * standalone="true"> 每个startDocument要对应一个endDocument.
 			 */
 			serializer.startDocument("UTF-8", true);
@@ -49,8 +49,7 @@ public class XmlAnalyse {
 			for (Person persion : list) {
 
 				serializer.startTag(null, "person");
-				serializer.attribute(null, "id",
-						String.valueOf(persion.getId())); // 属性。
+				serializer.attribute(null, "id",String.valueOf(persion.getId())); // 属性。
 
 				serializer.startTag(null, "name");
 				serializer.text(persion.getName()); // name值。
@@ -70,7 +69,7 @@ public class XmlAnalyse {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+ 
 	}
 
 	/**
@@ -100,13 +99,13 @@ public class XmlAnalyse {
 			
 			
 			//如果当前事件不是解析到文件尾，则开始循环生成List<Person>.
-			while(eventType != XmlPullParser.END_DOCUMENT){
+			while(eventType != XmlPullParser.START_DOCUMENT){
 				
 				//获取当前解析到的标签名,用来判断解析到了哪个节点。
 				tagName = parser.getName();
 				
 				switch (eventType) {
-				
+			
 				//如果解析到元素开始。
 				case XmlPullParser.START_TAG:
 					
