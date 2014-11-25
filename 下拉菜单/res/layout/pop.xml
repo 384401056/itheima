@@ -1,0 +1,29 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical" >
+    
+    
+    <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:text="这是一个标题"
+        android:background="#33cc22"
+        />
+    
+    
+     <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="这是内容！！！！这是内容！！！！这是内容！！！！这是内容！！！！这是内容！！！！"
+        android:background="#ee2244"
+        />
+    
+	 <Button 
+	     android:layout_width="wrap_content"
+	     android:layout_height="wrap_content"
+	     android:text="Button01"
+	     />
+</LinearLayout>
