@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 以下内容的 vendor-id、product-id就是USB的vid和pid了，请大家自己在Windows中找到这个设备的属性，检查设备的VID_PID值-->
+    <!-- 还要说明一点的是：Windows设备属性中看到的ID值是16进制表示的，必须转换成10进制，并配置 。-->
+    <!-- 测试用的U盘 只要插入设备，就会自动运行此程序-->
+    <usb-device vendor-id="516" product-id="24613"/>
+    
+    <!-- 读卡器 -->
+    <usb-device vendor-id="3034" product-id="344"/>
+    
+    <!-- U盾 -->
+    <usb-device vendor-id="5692" product-id="21617"/>
+    
+    <!-- USB转串口1 -->
+    <usb-device vendor-id="1659" product-id="8963"/>
+    
+    <!-- USB转串口2 -->
+    <usb-device vendor-id="6790" product-id="29987"/>
+</resources>
