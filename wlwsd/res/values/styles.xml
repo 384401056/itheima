@@ -16,5 +16,18 @@
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
+    
+    <style name="MyTheme" parent="android:Theme.Holo">
+        <!--<item name="android:windowTitleSize">30dp</item>-->
+        <item name="android:windowBackground">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <!--<item name="android:windowTitleBackgroundStyle">@style/app_title_bg</item>-->
+        <!--<item name="android:windowTitleStyle">@style/app_title_style</item>-->
+    </style>
+    
+    <style name="TextStyle_White">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
 
 </resources>

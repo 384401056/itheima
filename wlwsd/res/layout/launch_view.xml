@@ -1,18 +1,32 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.blueice.wlwsd.LaunchView" >
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="@drawable/bg"
+    >
 
-    <ImageView 
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
-    
-    
+  	<ImageView
+  	    android:layout_width="190dp"
+  	    android:layout_height="wrap_content"
+		android:layout_marginTop="100dp"
+  	    android:src="@drawable/logo"
+  	    />
 
-</RelativeLayout>
+    <TextView
+        android:id="@+id/versionNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:typeface="serif"
+        android:shadowDx="0"
+        android:shadowDy="2"
+        android:shadowRadius="1"
+        android:shadowColor="#cccccc"
+        android:textColor="@color/text_black"
+        android:textSize="12sp"
+        android:gravity="bottom">
+    </TextView>
+
+</LinearLayout>
