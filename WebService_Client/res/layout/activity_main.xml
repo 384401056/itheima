@@ -14,15 +14,9 @@
         android:text="通过HttpURLConnectio调用WebService" />
 
     <Button
-        android:id="@+id/button2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="通过wsimport生成的接口类调用WebService" />
-
-    <Button
         android:id="@+id/button3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="通过Service调用WebService" />
+        android:text="通过KSoap2来调用WebService" />
 
 </LinearLayout>
