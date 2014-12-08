@@ -7,12 +7,22 @@
     <uses-sdk
         android:minSdkVersion="10"
         android:targetSdkVersion="21" />
+    
+    <!-- 引入测试类框架 -->
+    <instrumentation android:name="android.test.InstrumentationTestRunner" android:targetPackage="com.blueice.mobilelottery"></instrumentation>
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        
+         <!-- 引入测试类框架 -->
+        <uses-library android:name="android.test.runner"/>
+        
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" >
