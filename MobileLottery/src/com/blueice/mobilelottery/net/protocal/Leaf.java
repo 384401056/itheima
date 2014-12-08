@@ -16,6 +16,11 @@ public class Leaf {
 		this.tagName = tagName;
 	}
 	
+	/**
+	 * 构造Leaf
+	 * @param tagName 节点名称
+	 * @param tagValue 节点值
+	 */
 	public Leaf(String tagName, String tagValue) {
 		this.tagName = tagName;
 		this.tagValue = tagValue;

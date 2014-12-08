@@ -3,42 +3,67 @@ package com.blueice.mobilelottery.net.protocal;
 import org.xmlpull.v1.XmlSerializer;
 
 /**
- * Body数据中的节点。
+ * Body数据中的请求节点父类。
  *
  */
-public class Element {
+public abstract class Element {
 
-	/*
-	 * 彩票种类编号。此值不确定要从外部输入。
+
+
+
+	/**
+	 * 序列化。
+	 * @param serializer XmlSerializer对象。
 	 */
-	private Leaf lotteryid = new Leaf("lotteryid");
+	public abstract void serializerElement(XmlSerializer serializer);
 	
 	/**
-	 * 第几期。
+	 * 获取请求的标识。
+	 * @return 
 	 */
-	private Leaf issues = new Leaf("issues");
-
-	
-	public Leaf getLotteryid() {
-		return lotteryid;
-	}
+	public abstract String getTransactionType();
 	
 	
-	public void serializerElement(XmlSerializer serializer){
-		issues.setTagValue("1");
-		try {
-			
-			serializer.startTag(null,"element");
-			lotteryid.serializerLeaf(serializer);
-			issues.serializerLeaf(serializer);
-			serializer.endTag(null, "element");
-			
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		
-	}
+//	/**
+//	 * 序列化。
+//	 * @param serializer XmlSerializer对象。
+//	 */
+//	public void serializerElement(XmlSerializer serializer){
+//		issues.setTagValue("1");
+//		try {
+//			
+//			serializer.startTag(null,"element");
+//			lotteryid.serializerLeaf(serializer);
+//			issues.serializerLeaf(serializer);
+//			serializer.endTag(null, "element");
+//			
+//		}catch(Exception e) {
+//			e.printStackTrace();
+//		}
+//		
+//	}
 	
+//	/**
+//	 * 获取请求的标识。
+//	 * @return 
+//	 */
+//	public String getTransactionType(){
+//		
+//		return "1202";
+//		
+//	}
 	
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+

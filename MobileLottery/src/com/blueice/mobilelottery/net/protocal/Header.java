@@ -80,7 +80,7 @@ public class Header {
 		list.add(digest);
 
 		/**
-		 * 这两个值不确定，要从处部输入。
+		 * 这两个值不确定，要从Element获得。
 		 */
 		list.add(transactiontype);
 		list.add(username);
