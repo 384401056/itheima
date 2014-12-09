@@ -15,7 +15,8 @@ import com.blueice.mobilelottery.ConstValue;
 /**
  * XML文件的Header部分。
  * 
- * @author ServerAdmin
+ * 问题
+ * 1.userName不知道从何输入。
  *
  */
 public class Header {
@@ -80,9 +81,13 @@ public class Header {
 		list.add(digest);
 
 		/**
-		 * 这两个值不确定，要从Element获得。
+		 * 这个值是在message.getXml()方法只从element中得到的。
 		 */
 		list.add(transactiontype);
+		
+		/**
+		 * 登陆的请求自行设置。
+		 */
 		list.add(username);
 		
 		

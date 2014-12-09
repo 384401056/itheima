@@ -8,10 +8,8 @@ import android.util.Log;
 
 
 /**
- * 生成XML文件的测试类。
+ * XML文件的测试类。
  * 
- * @author ServerAdmin
- *
  */
 public class XMLTest extends AndroidTestCase {
 
@@ -20,6 +18,7 @@ public class XMLTest extends AndroidTestCase {
 	
 		Message message = new Message();
 		CurrentIssues element = new CurrentIssues();
+		
 		String xml = message.getXml(element);
 		Log.i("MyLog", xml);
 		

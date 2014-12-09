@@ -11,6 +11,7 @@
     <!-- 引入测试类框架 -->
     <instrumentation android:name="android.test.InstrumentationTestRunner" android:targetPackage="com.blueice.mobilelottery"></instrumentation>
 
+    <!-- 权限 -->
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     

@@ -18,7 +18,7 @@ public abstract class Element {
 	public abstract void serializerElement(XmlSerializer serializer);
 	
 	/**
-	 * 获取请求的标识。
+	 * 设置操作标识。
 	 * @return 
 	 */
 	public abstract String getTransactionType();

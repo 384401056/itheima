@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<message version="1.0" >
+
+    <header>
+
+        <messengerid>
+20091113101533000001
+        </messengerid>
+
+        <timestamp>
+20091113101533
+        </timestamp>
+
+        <transactiontype>
+1201
+        </transactiontype>
+
+        <digest>
+58fded57f6f33b37e5900762b96aa768
+        </digest>
+
+        <compress>
+DES
+        </compress>
+
+        <agenterid>
+1000002
+        </agenterid>
+    </header>
+
+    <body>
+HmtGfqfbbCvzJvIvv+HjhHmbzgj+JRAutc2wOfw9+rsKAEKJX79jf5cF2dD3+aRf8Y26ka11lWFO2lh6IrpngpddLrX6wv0eR31eUXbasIM=
+    </body>
+
+</message>

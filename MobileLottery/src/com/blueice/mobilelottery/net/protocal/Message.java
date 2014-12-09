@@ -77,6 +77,19 @@ public class Message {
 		
 		return null;
 	}
+
+
+	public Header getHeader() {
+		return header;
+	}
+
+
+	public Body getBody() {
+		return body;
+	}
+	
+	
+	
 	
 }
 
