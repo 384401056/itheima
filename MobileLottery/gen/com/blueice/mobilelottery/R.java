@@ -15,6 +15,7 @@ public final class R {
         public static final int abc_slide_in_top=0x7f040003;
         public static final int abc_slide_out_bottom=0x7f040004;
         public static final int abc_slide_out_top=0x7f040005;
+        public static final int ia_view_change=0x7f040006;
     }
     public static final class attr {
         /**  Custom divider drawable to use for elements in the action bar. 
@@ -858,10 +859,39 @@ containing a value of this type.
         public static final int abc_split_action_bar_is_narrow=0x7f060002;
     }
     public static final class color {
-        public static final int abc_search_url_text_holo=0x7f070003;
+        public static final int abc_search_url_text_holo=0x7f070020;
         public static final int abc_search_url_text_normal=0x7f070000;
         public static final int abc_search_url_text_pressed=0x7f070002;
         public static final int abc_search_url_text_selected=0x7f070001;
+        public static final int back=0x7f070008;
+        public static final int black=0x7f070004;
+        public static final int black_slight=0x7f07001e;
+        public static final int blue=0x7f070007;
+        public static final int gray=0x7f07000f;
+        public static final int gray1=0x7f070010;
+        public static final int grayt=0x7f07001a;
+        public static final int grayy=0x7f070016;
+        public static final int green=0x7f07001f;
+        public static final int greend=0x7f070018;
+        public static final int greensfc=0x7f070017;
+        public static final int invest=0x7f07000c;
+        public static final int investhui=0x7f07000d;
+        public static final int loginback=0x7f07001b;
+        public static final int logoback=0x7f070019;
+        public static final int orange=0x7f070011;
+        public static final int orange1=0x7f070012;
+        public static final int orange2=0x7f070013;
+        public static final int orange3=0x7f070014;
+        public static final int paleyellow=0x7f070009;
+        public static final int purple=0x7f07001c;
+        public static final int red=0x7f070005;
+        public static final int red2=0x7f070006;
+        public static final int red_slight=0x7f07001d;
+        public static final int seashell=0x7f07000b;
+        public static final int snow=0x7f07000a;
+        public static final int white=0x7f070003;
+        public static final int yellow=0x7f07000e;
+        public static final int yellowy=0x7f070015;
     }
     public static final class dimen {
         /**  Default height of an action bar. 
@@ -1078,6 +1108,74 @@ containing a value of this type.
         public static final int abc_textfield_searchview_right_holo_dark=0x7f020055;
         public static final int abc_textfield_searchview_right_holo_light=0x7f020056;
         public static final int ic_launcher=0x7f020057;
+        public static final int icon=0x7f020058;
+        public static final int id_3d=0x7f020059;
+        public static final int id_3d_number_container_bg=0x7f02005a;
+        public static final int id_3d_type_current_bg=0x7f02005b;
+        public static final int id_3d_type_default_bg=0x7f02005c;
+        public static final int id_add=0x7f02005d;
+        public static final int id_alipay=0x7f02005e;
+        public static final int id_analysis_default=0x7f02005f;
+        public static final int id_ball_tip_red=0x7f020060;
+        public static final int id_bell=0x7f020061;
+        public static final int id_betting=0x7f020062;
+        public static final int id_blueball=0x7f020063;
+        public static final int id_buttom_bg=0x7f020064;
+        public static final int id_buttom_menu_bg=0x7f020065;
+        public static final int id_buy_default=0x7f020066;
+        public static final int id_category_selector=0x7f020067;
+        public static final int id_charge_mobile=0x7f020068;
+        public static final int id_choose_ok=0x7f020069;
+        public static final int id_clear_button=0x7f02006a;
+        public static final int id_clear_choose=0x7f02006b;
+        public static final int id_cmc_logo=0x7f02006c;
+        public static final int id_defalut_ball=0x7f02006d;
+        public static final int id_drawlotter=0x7f02006e;
+        public static final int id_helper=0x7f02006f;
+        public static final int id_loading1=0x7f020070;
+        public static final int id_loading2=0x7f020071;
+        public static final int id_loading3=0x7f020072;
+        public static final int id_loading4=0x7f020073;
+        public static final int id_loading5=0x7f020074;
+        public static final int id_loading6=0x7f020075;
+        public static final int id_login_bg_1=0x7f020076;
+        public static final int id_login_bg_2=0x7f020077;
+        public static final int id_login_login=0x7f020078;
+        public static final int id_login_registe=0x7f020079;
+        public static final int id_login_tel=0x7f02007a;
+        public static final int id_login_tip=0x7f02007b;
+        public static final int id_logo=0x7f02007c;
+        public static final int id_lotter_shopping_clear=0x7f02007d;
+        public static final int id_lottery_add_optional_num=0x7f02007e;
+        public static final int id_lottery_add_random_num=0x7f02007f;
+        public static final int id_lottery_hall=0x7f020080;
+        public static final int id_lottery_home=0x7f020081;
+        public static final int id_lottery_myself=0x7f020082;
+        public static final int id_lottery_phone_shake=0x7f020083;
+        public static final int id_lottery_phone_shake_bg=0x7f020084;
+        public static final int id_lottery_recharge=0x7f020085;
+        public static final int id_lottery_shopping_buy=0x7f020086;
+        public static final int id_lottery_shopping_initiate_buy=0x7f020087;
+        public static final int id_news_default=0x7f020088;
+        public static final int id_news_details_web_error=0x7f020089;
+        public static final int id_purchase=0x7f02008a;
+        public static final int id_purchase_login=0x7f02008b;
+        public static final int id_purchase_regist=0x7f02008c;
+        public static final int id_purchase_system_info=0x7f02008d;
+        public static final int id_qlc=0x7f02008e;
+        public static final int id_redball=0x7f02008f;
+        public static final int id_reports=0x7f020090;
+        public static final int id_shopping_delete_item=0x7f020091;
+        public static final int id_ssq=0x7f020092;
+        public static final int id_ssq_blue_title=0x7f020093;
+        public static final int id_ssq_red_title=0x7f020094;
+        public static final int id_subtraction=0x7f020095;
+        public static final int id_textview_bg=0x7f020096;
+        public static final int id_title=0x7f020097;
+        public static final int id_title_bg=0x7f020098;
+        public static final int id_title_goback=0x7f020099;
+        public static final int id_title_help=0x7f02009a;
+        public static final int id_union_pay=0x7f02009b;
     }
     public static final class id {
         public static final int action_bar=0x7f05001c;
@@ -1091,7 +1189,7 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f050016;
         public static final int action_menu_presenter=0x7f050017;
         public static final int action_mode_close_button=0x7f050024;
-        public static final int action_settings=0x7f05003c;
+        public static final int action_settings=0x7f050052;
         public static final int activity_chooser_view_content=0x7f050025;
         public static final int always=0x7f05000b;
         public static final int beginning=0x7f050011;
@@ -1109,6 +1207,28 @@ containing a value of this type.
         public static final int homeAsUp=0x7f050005;
         public static final int icon=0x7f05002a;
         public static final int ifRoom=0x7f05000a;
+        public static final int ii_bottom=0x7f050046;
+        public static final int ii_bottom_common=0x7f05003c;
+        public static final int ii_bottom_game=0x7f050041;
+        public static final int ii_bottom_game_choose_clean=0x7f050042;
+        public static final int ii_bottom_game_choose_notice=0x7f050043;
+        public static final int ii_bottom_game_choose_ok=0x7f050044;
+        public static final int ii_bottom_home=0x7f05003d;
+        public static final int ii_bottom_lottery_hall=0x7f05003e;
+        public static final int ii_bottom_lottery_myself=0x7f050040;
+        public static final int ii_bottom_recharge=0x7f05003f;
+        public static final int ii_common_container=0x7f050048;
+        public static final int ii_login_title=0x7f05004f;
+        public static final int ii_middle=0x7f050047;
+        public static final int ii_purchase_system_info=0x7f050050;
+        public static final int ii_title=0x7f050045;
+        public static final int ii_title_content=0x7f05004a;
+        public static final int ii_title_goback=0x7f050049;
+        public static final int ii_title_help=0x7f05004b;
+        public static final int ii_title_login=0x7f05004e;
+        public static final int ii_title_regist=0x7f05004d;
+        public static final int ii_top_user_info=0x7f050051;
+        public static final int ii_unlogin_title=0x7f05004c;
         public static final int image=0x7f050027;
         public static final int listMode=0x7f050001;
         public static final int list_item=0x7f050029;
@@ -1192,8 +1312,10 @@ containing a value of this type.
         public static final int abc_search_dropdown_item_icons_2line=0x7f030015;
         public static final int abc_search_view=0x7f030016;
         public static final int abc_simple_decor=0x7f030017;
-        public static final int activity_main=0x7f030018;
-        public static final int support_simple_spinner_dropdown_item=0x7f030019;
+        public static final int il_bottom=0x7f030018;
+        public static final int il_main=0x7f030019;
+        public static final int il_title=0x7f03001a;
+        public static final int support_simple_spinner_dropdown_item=0x7f03001b;
     }
     public static final class menu {
         public static final int main=0x7f0c0000;
@@ -1239,9 +1361,57 @@ containing a value of this type.
         /**  Description of a share target (both in the list of such or the default share button) in a ShareActionProvider (share UI). [CHAR LIMIT=NONE] 
          */
         public static final int abc_shareactionprovider_share_with_application=0x7f0a000b;
-        public static final int action_settings=0x7f0a000f;
-        public static final int app_name=0x7f0a000d;
-        public static final int hello_world=0x7f0a000e;
+        public static final int action_settings=0x7f0a0014;
+        public static final int app_name=0x7f0a000e;
+        public static final int hello=0x7f0a000d;
+        public static final int is_auto_login=0x7f0a0037;
+        public static final int is_ball_blue=0x7f0a002a;
+        public static final int is_ball_red=0x7f0a0029;
+        public static final int is_category_fc=0x7f0a0020;
+        public static final int is_category_gpc=0x7f0a0022;
+        public static final int is_category_tc=0x7f0a0021;
+        public static final int is_exit=0x7f0a000f;
+        public static final int is_forget_password_notice=0x7f0a0034;
+        public static final int is_hall_3d_title=0x7f0a001e;
+        public static final int is_hall_common_summary=0x7f0a001a;
+        public static final int is_hall_qlc_title=0x7f0a001f;
+        public static final int is_hall_ssq_pool=0x7f0a001d;
+        public static final int is_hall_ssq_title=0x7f0a001c;
+        public static final int is_hall_summary_default=0x7f0a001b;
+        public static final int is_loading=0x7f0a0012;
+        /**  登录 
+         */
+        public static final int is_login=0x7f0a0030;
+        public static final int is_login_notice1=0x7f0a0031;
+        public static final int is_login_notice11=0x7f0a0032;
+        public static final int is_login_notice2=0x7f0a0033;
+        public static final int is_lottery_money_limit=0x7f0a0013;
+        /**  选号 
+         */
+        public static final int is_need_to_chose=0x7f0a0028;
+        public static final int is_negative=0x7f0a0011;
+        public static final int is_play_bottom_title=0x7f0a002b;
+        public static final int is_positive=0x7f0a0010;
+        public static final int is_random_blue=0x7f0a0027;
+        public static final int is_random_red=0x7f0a0026;
+        public static final int is_regist_password=0x7f0a0036;
+        public static final int is_shopping_list_betting_money=0x7f0a002f;
+        public static final int is_shopping_list_betting_num=0x7f0a002e;
+        public static final int is_shopping_list_notice=0x7f0a002d;
+        public static final int is_shopping_list_title=0x7f0a002c;
+        public static final int is_ssq=0x7f0a0025;
+        public static final int is_ssq_default_notice=0x7f0a0019;
+        public static final int is_ssq_title=0x7f0a0024;
+        /**  双色球 
+         */
+        public static final int is_ssq_title_default=0x7f0a0023;
+        public static final int is_user_loginned=0x7f0a0018;
+        public static final int is_user_loginned_notice=0x7f0a0017;
+        public static final int is_user_loginned_test=0x7f0a0016;
+        /**  购彩大厅 
+         */
+        public static final int is_user_loginning=0x7f0a0015;
+        public static final int is_username=0x7f0a0035;
     }
     public static final class style {
         /** 
