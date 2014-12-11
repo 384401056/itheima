@@ -46,10 +46,18 @@ public interface ConstValue {
 
 	
 	/**
-	 * BaseUI的ID
+	 * 测试的BaseUI的ID
 	 */
 	int VIEW_FIRST = 1;
 	int VIEW_SECOND = 2;
+	
+	/**
+	 * BaseUI的ID
+	 */
+	int VIEW_HELL = 10;
+	int VIEW_SSQ = 15;
+	int VIEW_SHOPPING = 20;
+	int VIEW_PREBET = 25;
 	
 }
 

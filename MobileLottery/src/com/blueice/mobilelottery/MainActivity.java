@@ -14,8 +14,10 @@ import android.view.animation.AnimationUtils;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.blueice.mobilelottery.utils.PromptManager;
 import com.blueice.mobilelottery.view.BaseUI;
 import com.blueice.mobilelottery.view.FirstUI;
+import com.blueice.mobilelottery.view.HallUI;
 import com.blueice.mobilelottery.view.SecondUI;
 import com.blueice.mobilelottery.view.manager.BottomManager;
 import com.blueice.mobilelottery.view.manager.MiddleManager;
@@ -53,11 +55,12 @@ public class MainActivity extends Activity {
 		bottom.init(this);
 		middle.init(middleContainer);
 		
+		//将Title和Bottom加入到观察者的列表中。
 		middle.addObserver(title);
 		middle.addObserver(bottom);
 		
 		//加载首页。
-		middle.changeUI(FirstUI.class);
+		middle.changeUI(HallUI.class);
 
 	}
 	
@@ -74,7 +77,7 @@ public class MainActivity extends Activity {
 			boolean result = MiddleManager.getInstance().goback();
 			
 			if(!result){
-				Toast.makeText(MainActivity.this, "退出程序", Toast.LENGTH_LONG).show();		
+				PromptManager.showExitSystem(this);
 			}
 			
 			return false;

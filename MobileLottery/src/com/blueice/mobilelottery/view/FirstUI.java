@@ -14,22 +14,24 @@ import android.widget.TextView;
  */
 public class FirstUI extends BaseUI {
 
+	private TextView tv = null;
+	
 	public FirstUI(Context context) {
 		super(context);
+		init();
 	}
 
 	public View getChildView(){
-		
-		TextView tv = new TextView(context);
-		
+		return tv;
+	}
+
+	private void init() {
+		tv = new TextView(context);
 		LayoutParams params = tv.getLayoutParams(); //获取TextView原来的Params
 		params = new LayoutParams(LayoutParams.FILL_PARENT,LayoutParams.FILL_PARENT); //修改Params。
 		tv.setLayoutParams(params );  //设置Params.
-		
 		tv.setBackgroundColor(Color.GREEN);
 		tv.setText("第一个简单界面。");
-		
-		return tv;
 	}
 	
 	

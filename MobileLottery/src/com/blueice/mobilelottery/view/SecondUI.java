@@ -14,25 +14,30 @@ import android.widget.TextView;
  */
 public class SecondUI extends BaseUI {
 
+	private TextView tv = null;
+
 	public SecondUI(Context context) {
 		super(context);
+		init();
 	}
 
-	public View getChildView(){
+	private void init() {
 		
-		TextView tv = new TextView(context);
-		
-		LayoutParams params = tv.getLayoutParams(); //获取TextView原来的Params
-		params = new LayoutParams(LayoutParams.FILL_PARENT,LayoutParams.FILL_PARENT); //修改Params。
-		tv.setLayoutParams(params );  //设置Params.
-		
+		tv = new TextView(context);
+		LayoutParams params = tv.getLayoutParams(); // 获取TextView原来的Params
+		params = new LayoutParams(LayoutParams.FILL_PARENT,LayoutParams.FILL_PARENT); // 修改Params。
+		tv.setLayoutParams(params); // 设置Params.
 		tv.setBackgroundColor(Color.MAGENTA);
 		tv.setText("第二个简单界面。");
-		
+
+	}
+
+	public View getChildView() {
+
 		return tv;
 	}
-	
-	public int getID(){
+
+	public int getID() {
 		return ConstValue.VIEW_SECOND;
 	}
 }

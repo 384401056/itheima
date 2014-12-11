@@ -3,6 +3,9 @@ package com.blueice.mobilelottery.view.manager;
 import java.util.Observable;
 import java.util.Observer;
 
+import org.apache.commons.lang3.StringUtils;
+
+import android.R.integer;
 import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
@@ -12,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.blueice.mobilelottery.ConstValue;
 import com.blueice.mobilelottery.R;
 import com.blueice.mobilelottery.view.SecondUI;
 
@@ -153,11 +157,32 @@ public class TitleManager implements Observer {
 		userInfo.setText(str);
 	}
 
-	
+	/**
+	 * 根据Midlle容器的切换来变动Bottom容器。
+	 */
 	@Override
 	public void update(Observable observable, Object data) {
-		// TODO Auto-generated method stub
 		
+		//如果参数不为空，并且为数字。
+		if(data!=null && StringUtils.isNumeric(data.toString())){
+			
+			switch (Integer.parseInt(data.toString())) {
+			case ConstValue.VIEW_HELL:
+				showUnLoginTitle();
+				break;
+			case ConstValue.VIEW_SSQ:
+				showUnLoginTitle();
+				break;
+			case ConstValue.VIEW_SHOPPING:
+				showUnLoginTitle();
+				break;
+			case ConstValue.VIEW_PREBET:
+				showUnLoginTitle();
+				break;
+			default:
+				break;
+			}
+		}
 	}
 }
 

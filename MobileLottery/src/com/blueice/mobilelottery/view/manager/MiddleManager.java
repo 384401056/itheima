@@ -122,8 +122,7 @@ public class MiddleManager extends Observable {
 		//将界面key加入堆栈中。
 		History.addFirst(key);
 		
-		
-		//当中间容器切换成功时，处理另外的两个容器。
+		//当中间容器切换成功时，处理另外的两个容器。(通过观察者模式来进行通知)
 		changeTitileBottom();
 	}
 	
@@ -168,6 +167,8 @@ public class MiddleManager extends Observable {
 		 *        4.一旦中间容器变动，修改boolean值为true,最后通知所有观察者。
 		 *        5.观察者执行updata()方法。
 		 */
+		setChanged();
+		notifyObservers(currentUI.getID());
 	}
 
 	/**
