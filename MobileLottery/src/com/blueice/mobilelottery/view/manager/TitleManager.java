@@ -10,6 +10,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.blueice.mobilelottery.R;
+import com.blueice.mobilelottery.view.SecondUI;
 
 
 /**
@@ -94,6 +95,9 @@ public class TitleManager {
 			@Override
 			public void onClick(View v) {
 				Log.i(TAG, "login");
+				
+				MiddleManager.getInstance().changeUI(SecondUI.class);
+				
 			}
 		});
 

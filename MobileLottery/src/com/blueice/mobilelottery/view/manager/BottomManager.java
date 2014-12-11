@@ -1,6 +1,7 @@
 package com.blueice.mobilelottery.view.manager;
 
 import android.app.Activity;
+import android.content.Context;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -18,6 +19,7 @@ import com.blueice.mobilelottery.R;
 public class BottomManager {
 	
 	private static final String TAG = "MyLog";
+	private Context context;
 	
 	/******************* 第一步：管理对象的创建(单例模式) ***************************************************/
 	// 创建一个静态实例
@@ -58,6 +60,8 @@ public class BottomManager {
 	private ImageButton myselfButton;
 
 	public void init(Activity activity) {
+		
+		this.context = activity;
 		
 		commonBottom = (LinearLayout) activity.findViewById(R.id.ii_bottom_common);
 		
