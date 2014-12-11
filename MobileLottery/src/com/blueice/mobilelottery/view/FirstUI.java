@@ -1,5 +1,7 @@
 package com.blueice.mobilelottery.view;
 
+import com.blueice.mobilelottery.ConstValue;
+
 import android.content.Context;
 import android.graphics.Color;
 import android.view.View;
@@ -30,4 +32,8 @@ public class FirstUI extends BaseUI {
 		return tv;
 	}
 	
+	
+	public int getID(){
+		return ConstValue.VIEW_FIRST;
+	}
 }

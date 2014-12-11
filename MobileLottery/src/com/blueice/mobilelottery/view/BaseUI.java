@@ -21,4 +21,10 @@ public abstract class BaseUI {
 	 * @return
 	 */
 	public abstract  View getChildView();
+	
+	/**
+	 * 设置每个UI的唯一标识符。
+	 * @return 标识符
+	 */
+	public abstract int getID();
 }

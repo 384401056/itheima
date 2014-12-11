@@ -4,7 +4,6 @@ import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
-import java.util.Observable;
 
 import com.blueice.mobilelottery.R;
 import com.blueice.mobilelottery.view.BaseUI;
@@ -20,7 +19,7 @@ import android.widget.RelativeLayout;
  * 中间容器的管理类。
  *
  */
-public class MiddleManager extends Observable {
+public class MiddleManager1 {
 
 	private static final String TAG = "MyLog";
 	
@@ -30,16 +29,16 @@ public class MiddleManager extends Observable {
 	private LinkedList<String> History = new LinkedList<String>();
 	
 	/*************************  单例化  *******************/
-	private static MiddleManager instance = new MiddleManager();
+	private static MiddleManager1 instance = new MiddleManager1();
 	
-	private MiddleManager(){
+	private MiddleManager1(){
 		
 	}
 
-	public static MiddleManager getInstance() {
+	public static MiddleManager1 getInstance() {
 		
 		if(instance==null){
-			instance = new MiddleManager();
+			instance = new MiddleManager1();
 		}
 		return instance;
 	}

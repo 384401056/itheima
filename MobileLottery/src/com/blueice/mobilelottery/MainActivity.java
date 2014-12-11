@@ -42,7 +42,7 @@ public class MainActivity extends Activity {
 	private void init() {
 
 		TitleManager title = TitleManager.getInstance();
-		BottomManager bottom = BottomManager.getInstrance();
+		BottomManager bottom = BottomManager.getInstance();
 		MiddleManager middle = MiddleManager.getInstance();
 		/**
 		 * 获取中间容器，并加载View
@@ -53,9 +53,10 @@ public class MainActivity extends Activity {
 		bottom.init(this);
 		middle.init(middleContainer);
 		
+		middle.addObserver(title);
+		middle.addObserver(bottom);
+		
 		//加载首页。
-		title.showUnLoginTitle();;
-		bottom.showCommonBottom();;
 		middle.changeUI(FirstUI.class);
 
 	}

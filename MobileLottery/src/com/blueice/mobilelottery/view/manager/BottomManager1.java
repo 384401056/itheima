@@ -1,8 +1,5 @@
 package com.blueice.mobilelottery.view.manager;
 
-import java.util.Observable;
-import java.util.Observer;
-
 import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
@@ -19,23 +16,23 @@ import com.blueice.mobilelottery.R;
  * 控制底部导航容器
  * 
  */
-public class BottomManager implements Observer {
+public class BottomManager1 {
 	
 	private static final String TAG = "MyLog";
 	private Context context;
 	
 	/******************* 第一步：管理对象的创建(单例模式) ***************************************************/
 	// 创建一个静态实例
-	private static BottomManager instrance;
+	private static BottomManager1 instrance;
 
 	// 构造私有
-	private BottomManager() {
+	private BottomManager1() {
 	}
 
 	// 提供统一的对外获取实例的入口
-	public static BottomManager getInstance() {
+	public static BottomManager1 getInstance() {
 		if (instrance == null) {
-			instrance = new BottomManager();
+			instrance = new BottomManager1();
 		}
 		return instrance;
 	}
@@ -165,19 +162,9 @@ public class BottomManager implements Observer {
 		playBottom.setVisibility(View.VISIBLE);
 	}
 	
-	/**
-	 * 设置提示信息。
-	 * @param str
-	 */
+	
 	public void setNotice(String str){
 		notice.setText(str);
-	}
-
-	
-	@Override
-	public void update(Observable observable, Object data) {
-		
-		
 	}
 
 }

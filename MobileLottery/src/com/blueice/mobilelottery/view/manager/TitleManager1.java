@@ -1,8 +1,5 @@
 package com.blueice.mobilelottery.view.manager;
 
-import java.util.Observable;
-import java.util.Observer;
-
 import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
@@ -20,18 +17,18 @@ import com.blueice.mobilelottery.view.SecondUI;
  * 管理标题容器的工具
  * 
  */
-public class TitleManager implements Observer {
+public class TitleManager1 {
 	
 	private static final String TAG = "MyLog";
-	private static TitleManager instance = new TitleManager();
+	private static TitleManager1 instance = new TitleManager1();
 	private Context context;
 
-	private TitleManager() {
+	private TitleManager1() {
 	}
 
-	public static TitleManager getInstance() {
+	public static TitleManager1 getInstance() {
 		if (instance == null) {
-			instance = new TitleManager();
+			instance = new TitleManager1();
 		}
 		return instance;
 	}
@@ -151,13 +148,6 @@ public class TitleManager implements Observer {
 	 */
 	public void changeUserInfo(String str){
 		userInfo.setText(str);
-	}
-
-	
-	@Override
-	public void update(Observable observable, Object data) {
-		// TODO Auto-generated method stub
-		
 	}
 }
 
