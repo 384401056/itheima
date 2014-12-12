@@ -1,7 +1,7 @@
 package com.blueice.mobilelottery.bean;
 
 /**
- * 服务器端回复数据信息封装类。
+ * 服务器端回复公共数据信息封装类。
  *
  */
 public class ServerResponsMessage {

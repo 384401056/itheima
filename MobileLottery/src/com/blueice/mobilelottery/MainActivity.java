@@ -1,24 +1,11 @@
 package com.blueice.mobilelottery;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import android.app.Activity;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.view.KeyEvent;
-import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
-
 import com.blueice.mobilelottery.utils.PromptManager;
-import com.blueice.mobilelottery.view.BaseUI;
-import com.blueice.mobilelottery.view.FirstUI;
 import com.blueice.mobilelottery.view.HallUI;
-import com.blueice.mobilelottery.view.SecondUI;
 import com.blueice.mobilelottery.view.manager.BottomManager;
 import com.blueice.mobilelottery.view.manager.MiddleManager;
 import com.blueice.mobilelottery.view.manager.TitleManager;

@@ -21,6 +21,15 @@ public class CurrentIssues extends Element {
 	 */
 	private Leaf issues = new Leaf("issues","1");
 	
+	
+	//*************************服务器返回的数据*****************************
+
+	private String issue;
+	
+	private String lasttime;
+	
+	//********************************************************************
+	
 	@Override
 	public void serializerElement(XmlSerializer serializer) {
 		try {

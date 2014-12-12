@@ -17,6 +17,8 @@ import android.widget.TextView;
 
 import com.blueice.mobilelottery.ConstValue;
 import com.blueice.mobilelottery.R;
+import com.blueice.mobilelottery.view.FirstUI;
+import com.blueice.mobilelottery.view.HallUI;
 import com.blueice.mobilelottery.view.SecondUI;
 
 
@@ -103,7 +105,7 @@ public class TitleManager implements Observer {
 			public void onClick(View v) {
 				Log.i(TAG, "login");
 				
-				MiddleManager.getInstance().changeUI(SecondUI.class);
+//				MiddleManager.getInstance().changeUI(SecondUI.class);
 				
 			}
 		});

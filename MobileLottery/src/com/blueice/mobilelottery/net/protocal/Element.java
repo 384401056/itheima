@@ -8,9 +8,6 @@ import org.xmlpull.v1.XmlSerializer;
  */
 public abstract class Element {
 
-
-
-
 	/**
 	 * 序列化。
 	 * @param serializer XmlSerializer对象。

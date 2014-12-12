@@ -1,8 +1,8 @@
 package com.blueice.mobilelottery.test;
 
-import com.blueice.mobilelottery.bean.ServerResponsMessage;
 import com.blueice.mobilelottery.bean.User;
 import com.blueice.mobilelottery.engine.UserEngine;
+import com.blueice.mobilelottery.net.protocal.Message;
 import com.blueice.mobilelottery.utils.EngineFactory;
 
 import android.test.AndroidTestCase;
@@ -17,9 +17,9 @@ public class EngineTest extends AndroidTestCase {
 		user.setUserName("qweasd");
 		user.setPassWord("123321");
 		
-		ServerResponsMessage message = engine.login(user);
+		Message message = engine.login(user);
 		
-		Log.i("MyLog", message.getErrorcode());
+		Log.i("MyLog", message.getBody().getServiceBodyInsideInfo());
 	}
 
 //	public void testUserLogin(){

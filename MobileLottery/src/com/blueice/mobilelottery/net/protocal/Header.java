@@ -22,7 +22,7 @@ import com.blueice.mobilelottery.ConstValue;
 public class Header {
 
 	private List<Leaf> list = new ArrayList<Leaf>();
-
+	
 	private Leaf agenterid = new Leaf("agenterid");
 	private Leaf source = new Leaf("source");
 	private Leaf compress = new Leaf("compress");
@@ -116,5 +116,35 @@ public class Header {
 	public Leaf getUsername() {
 		return username;
 	}
+
+	public List<Leaf> getList() {
+		return list;
+	}
+
+	public Leaf getAgenterid() {
+		return agenterid;
+	}
+
+	public Leaf getSource() {
+		return source;
+	}
+
+	public Leaf getCompress() {
+		return compress;
+	}
+
+	public Leaf getMessengerid() {
+		return messengerid;
+	}
+
+	public Leaf getTimestamp() {
+		return timestamp;
+	}
+
+	public Leaf getDigest() {
+		return digest;
+	}
+	
+	
 
 }

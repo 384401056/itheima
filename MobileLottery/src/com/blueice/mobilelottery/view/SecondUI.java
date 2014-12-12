@@ -18,26 +18,33 @@ public class SecondUI extends BaseUI {
 
 	public SecondUI(Context context) {
 		super(context);
-		init();
 	}
 
-	private void init() {
-		
+	
+	@Override
+	public void init() {
 		tv = new TextView(context);
 		LayoutParams params = tv.getLayoutParams(); // 获取TextView原来的Params
 		params = new LayoutParams(LayoutParams.FILL_PARENT,LayoutParams.FILL_PARENT); // 修改Params。
 		tv.setLayoutParams(params); // 设置Params.
 		tv.setBackgroundColor(Color.MAGENTA);
 		tv.setText("第二个简单界面。");
-
-	}
-
-	public View getChildView() {
-
-		return tv;
 	}
 
 	public int getID() {
 		return ConstValue.VIEW_SECOND;
+	}
+
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setOnClickListener() {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -4,6 +4,7 @@ import java.io.StringReader;
 
 import org.xmlpull.v1.XmlPullParser;
 
+import android.util.Log;
 import android.util.Xml;
 
 import com.blueice.mobilelottery.bean.ServerResponsMessage;
@@ -20,7 +21,7 @@ import com.blueice.mobilelottery.net.protocal.element.UserLoginElement;
 public class UserEngineImpl extends BaseEngine implements UserEngine{
 
 	
-	public ServerResponsMessage login(User user) {
+	public Message login(User user) {
 
 		/**
 		 * 1.生成用户登陆请求XML。
@@ -31,20 +32,18 @@ public class UserEngineImpl extends BaseEngine implements UserEngine{
 		String xml = message.getXml(element);
 
 		/*
-		 * 2.调用父类的方法，发送生成的请求XML文件，以及解析并校验服务器返回的XML数据，成功返回一个ServerResponsMessage对象。则否返回null
+		 * 2.调用父类的方法，成功返回一个ServerResponsMessage对象。则否返回null
 		 */
-		ServerResponsMessage respons = getResponse(xml);
+		Message respons = getResponse(xml);
 		
 		/**
 		 * 3.//解析明文body，并取得所需的返回值。
 		 */
 		if(respons!=null){
-			
-			
 			try {
 				XmlPullParser parser = Xml.newPullParser();
 				// 将body的明文转为StringReader，进行解析。
-				parser.setInput(new StringReader(respons.getBody()));
+				parser.setInput(new StringReader(respons.getBody().getServiceBodyInsideInfo()));
 				int eventType = 0;
 				String tagName = "";
 
@@ -56,11 +55,13 @@ public class UserEngineImpl extends BaseEngine implements UserEngine{
 						tagName = parser.getName();// 获取标签名。
 
 						if ("errorcode".equals(tagName)) {
-							respons.setErrorcode(parser.nextText()); // 获取返回值。
+							respons.getBody().getOelement().setErrorcode(parser.nextText()); // 获取返回值。
+							
 						}
 
 						if ("errormsg".equals(tagName)) {
-							respons.setErrormsg(parser.nextText()); // 获取返回值。
+							respons.getBody().getOelement().setErrormsg(parser.nextText()); // 获取返回值。
+							
 						}
 						break;
 

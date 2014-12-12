@@ -10,12 +10,66 @@ import org.xmlpull.v1.XmlSerializer;
 import com.blueice.mobilelottery.ConstValue;
 import com.blueice.mobilelottery.utils.DES;
 
+import android.util.Log;
 import android.util.Xml;
 
 public class Body {
 	
 	private List<Element> elements = new ArrayList<Element>();
+	
+	/*********************处理服务器回复*************************/
+	private String serviceBodyInsideDESInfo;//服务器端回复的body中的DES加密的信息
+	private Oelement oelement=new Oelement();
+	
+	public Oelement getOelement() {
+		return oelement;
+	}
+	
+	/**
+	 * 获取服务器端回复的body中的DES加密的信息
+	 * @return
+	 */
+	public String getServiceBodyInsideDESInfo() {
+		return serviceBodyInsideDESInfo;
+	}
+	
+	/**
+	 * 设置服务器端回复的body中的DES加密的信息
+	 * @param serviceBodyInsideDESInfo
+	 */
+	public void setServiceBodyInsideDESInfo(String serviceBodyInsideDESInfo) {
+		this.serviceBodyInsideDESInfo = serviceBodyInsideDESInfo;
+	}
+	
+	
+	private String serviceBodyInsideInfo;//服务器端回复的body明文信息
+	
 
+	/**
+	 * 获取服务器端回复的body明文信息
+	 * @return
+	 */
+	public String getServiceBodyInsideInfo() {
+		return serviceBodyInsideInfo;
+	}
+
+	/**
+	 * 设置服务器端回复的body中的明文信息
+	 * @param serviceBodyInsideInfo
+	 */
+	public void setServiceBodyInsideInfo(String serviceBodyInsideInfo) {
+		this.serviceBodyInsideInfo = serviceBodyInsideInfo;
+	}
+	
+	/*********************处理服务器回复*************************/
+
+	
+	
+
+	/**
+	 * 序列化
+	 * @param serializer
+	 */
 	public void serializerBody(XmlSerializer serializer){
 
 		try{
@@ -35,7 +89,10 @@ public class Body {
 		}
 	}
 	
-	
+	/**
+	 * 生成body体内容。
+	 * @return xml格式.
+	 */
 	public String getWholeBody(){
 		
 		XmlSerializer bodyserializer = Xml.newSerializer();
@@ -50,7 +107,7 @@ public class Body {
 			 * 因为在原码中，serializer.endDocument()最后也是调用了bodyserializer.flush()才会有输出。
 			 */
 			bodyserializer.flush(); 
-			
+		
 			return writer.toString();
 			
 		} catch (Exception e) {
@@ -62,7 +119,7 @@ public class Body {
 	
 	
 	/**
-	 * 反回body中除<body>标签之外的加密码数据。
+	 * 获取body中除<body>标签之外的加密码数据。
 	 * @return
 	 */
 	public String getBodyInsideDESInfo(){

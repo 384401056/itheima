@@ -1,15 +1,18 @@
 package com.blueice.mobilelottery.engine;
 
 import java.io.InputStream;
+import java.net.ResponseCache;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.xmlpull.v1.XmlPullParser;
 
+import android.util.Log;
 import android.util.Xml;
 
 import com.blueice.mobilelottery.ConstValue;
 import com.blueice.mobilelottery.bean.ServerResponsMessage;
 import com.blueice.mobilelottery.net.HttpClientUtils;
+import com.blueice.mobilelottery.net.protocal.Message;
 import com.blueice.mobilelottery.utils.DES;
 
 
@@ -24,14 +27,14 @@ public abstract class BaseEngine {
 	 * @param xml 请求XML文件。
 	 * @return ServerResponsMessage对象
 	 */
-	public ServerResponsMessage getResponse(String xml) {
+	public Message getResponse(String xml) {
 		// 存返回值的Bean
-		ServerResponsMessage respons = new ServerResponsMessage();
+		Message respons = new Message();
 
 		// 这里并没有使用NetUtils检查网络?
 		HttpClientUtils clientUtils = new HttpClientUtils();
 		InputStream is = clientUtils.sendXML(ConstValue.LOTTERY_URI, xml);
-
+		
 		/**
 		 * 2.解析XML文件。获取时间截.digest和body
 		 */
@@ -54,15 +57,15 @@ public abstract class BaseEngine {
 						tagName = parser.getName();// 获取标签名。
 
 						if ("timestamp".equals(tagName)) {
-							respons.setTimestamp(parser.nextText());
+							respons.getHeader().getTimestamp().setTagValue(parser.nextText());
 						}
 
 						if ("digest".equals(tagName)) {
-							respons.setDigest(parser.nextText());
+							respons.getHeader().getDigest().setTagValue(parser.nextText());
 						}
 
 						if ("body".equals(tagName)) {
-							respons.setBodyDES(parser.nextText());
+							respons.getBody().setServiceBodyInsideDESInfo(parser.nextText());
 						}
 
 						break;
@@ -82,19 +85,21 @@ public abstract class BaseEngine {
 			 */
 			DES des = new DES();
 			String body = "<body>"
-					+ des.authcode(respons.getBodyDES(), "ENCODE",
+					+ des.authcode(respons.getBody().getServiceBodyInsideDESInfo(), "ENCODE",
 							ConstValue.DES_PASSWORD) + "</body>";
-
-			respons.setBody(body);
-
+			
+			respons.getBody().setServiceBodyInsideInfo(body);
+			
 			/**
 			 * 4.把时间截+代理商密钥+body的明文，并MD5加密，然后与服务器端的digest信息相比。
 			 */
-			String md5Hex = DigestUtils.md5Hex(respons.getTimestamp()
+			String md5Hex = DigestUtils.md5Hex(respons.getHeader().getTimestamp().getTagValue()
 					+ ConstValue.AGENTER_PASSWORD + body);
+			
+			
 
 			// 如果md5的加密码信息，与服务器端返回的加密码信息一致，则解密返回内容。
-			if (md5Hex.equals(respons.getDigest())) {
+			if (md5Hex.equals(respons.getHeader().getDigest().getTagValue())) {
 				return respons;
 			}
 

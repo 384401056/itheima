@@ -42,7 +42,11 @@ public class Message {
 		
 	}
 	
-	
+	/**
+	 * 生成请求的XML
+	 * @param element body中的Elemnet。
+	 * @return
+	 */
 	public String getXml(Element element){
 		
 		//如果参数为null，抛出异常。
