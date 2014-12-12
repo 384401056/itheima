@@ -5,6 +5,7 @@ package com.blueice.mobilelottery.net.protocal;
 public class Oelement {
 	private String errorcode;
 	private String errormsg;
+	
 	public String getErrorcode() {
 		return errorcode;
 	}

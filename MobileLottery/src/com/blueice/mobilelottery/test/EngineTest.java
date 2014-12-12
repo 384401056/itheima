@@ -12,14 +12,18 @@ public class EngineTest extends AndroidTestCase {
 
 	public void testUserLogin(){
 		
-		UserEngine engine = EngineFactory.Instance(UserEngine.class);
+		UserEngine userEngine = EngineFactory.Instance(UserEngine.class);
 		User user = new User();
 		user.setUserName("qweasd");
 		user.setPassWord("123321");
 		
-		Message message = engine.login(user);
+		Message message = userEngine.login(user);
 		
 		Log.i("MyLog", message.getBody().getServiceBodyInsideInfo());
+		
+		Log.i("MyLog", message.getBody().getOelement().getErrorcode());
+		Log.i("MyLog", message.getBody().getOelement().getErrormsg());
+		
 	}
 
 //	public void testUserLogin(){

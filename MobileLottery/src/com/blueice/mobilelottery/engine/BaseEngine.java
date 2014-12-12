@@ -28,6 +28,7 @@ public abstract class BaseEngine {
 	 * @return ServerResponsMessage对象
 	 */
 	public Message getResponse(String xml) {
+		
 		// 存返回值的Bean
 		Message respons = new Message();
 
@@ -95,8 +96,6 @@ public abstract class BaseEngine {
 			 */
 			String md5Hex = DigestUtils.md5Hex(respons.getHeader().getTimestamp().getTagValue()
 					+ ConstValue.AGENTER_PASSWORD + body);
-			
-			
 
 			// 如果md5的加密码信息，与服务器端返回的加密码信息一致，则解密返回内容。
 			if (md5Hex.equals(respons.getHeader().getDigest().getTagValue())) {

@@ -14,7 +14,7 @@ public class CurrentIssues extends Element {
 	/*
 	 * 彩票种类。
 	 */
-	private Leaf lotteryid = new Leaf("lotteryid","118");
+	private Leaf lotteryid = new Leaf("lotteryid");
 	
 	/**
 	 * 第几期彩票。
@@ -22,11 +22,33 @@ public class CurrentIssues extends Element {
 	private Leaf issues = new Leaf("issues","1");
 	
 	
+	
 	//*************************服务器返回的数据*****************************
 
-	private String issue;
+	private String ISSUE;
 	
 	private String lasttime;
+	
+	public String getISSUE() {
+		return ISSUE;
+	}
+
+
+	public void setISSUE(String iSSUE) {
+		ISSUE = iSSUE;
+	}
+
+
+
+
+	public String getLasttime() {
+		return lasttime;
+	}
+
+	public void setLasttime(String lasttime) {
+		this.lasttime = lasttime;
+	}
+
 	
 	//********************************************************************
 	
@@ -44,9 +66,16 @@ public class CurrentIssues extends Element {
 		}
 	}
 
+
 	@Override
 	public String getTransactionType() {
-		return "1201";
+		return "12002";
 	}
+	
+	public Leaf getLotteryid() {
+		return lotteryid;
+	}
+	
+	
 
 }

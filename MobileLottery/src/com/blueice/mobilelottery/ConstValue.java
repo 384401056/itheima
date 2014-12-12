@@ -59,6 +59,15 @@ public interface ConstValue {
 	int VIEW_SHOPPING = 20;
 	int VIEW_PREBET = 25;
 	
+	/**
+	 * 双色球标示
+	 */
+	int SSQ=118;
+	/**
+	 * 服务器返回成功状态码
+	 */
+	String SUCCESS="0";
+	
 }
 
 

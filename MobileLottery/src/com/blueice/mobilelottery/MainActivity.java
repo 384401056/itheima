@@ -48,6 +48,7 @@ public class MainActivity extends Activity {
 		
 		//加载首页。
 		middle.changeUI(HallUI.class);
+		
 
 	}
 	

@@ -1,6 +1,11 @@
 package com.blueice.mobilelottery.view;
 
+import com.blueice.mobilelottery.net.NetUtils;
+import com.blueice.mobilelottery.net.protocal.Message;
+import com.blueice.mobilelottery.utils.PromptManager;
+
 import android.content.Context;
+import android.os.AsyncTask;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -66,4 +71,51 @@ public abstract class BaseUI implements OnClickListener {
 
 		return showInMiddle;
 	}
+	
+	
+	/**
+	 * 
+	 * @param <Params>
+	 */
+	protected abstract class MyAsynTask<Params> extends AsyncTask<Params, Void, Message>{
+
+		/**
+		 * 类似与Thread.start方法 由于final修饰，无法Override，方法重命名。网络判断后再执行。
+		 * 
+		 * @param params
+		 * @return
+		 */
+		public final AsyncTask<Params, Void, Message> executeProxy(
+				Params... params) {
+			if (NetUtils.checkNet(context)) {
+				return super.execute(params);
+			} else {
+				PromptManager.showNoNetWork(context);
+			}
+			return null;
+		}
+		
+		
+		
+	}
+	
+	
+	
+	
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
