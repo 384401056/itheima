@@ -63,7 +63,7 @@ public class MiddleManager extends Observable {
 	
 	
 	//定义一个UI栈.
-	Map<String, BaseUI> UIStack = new HashMap<String, BaseUI>();
+	private static Map<String, BaseUI> UIStack = new HashMap<String, BaseUI>();
 	
 	private BaseUI currentUI = null;//当前正在显示的BaseUI.
 	
@@ -107,6 +107,10 @@ public class MiddleManager extends Observable {
 		Log.i(TAG,targetUI.toString());
 		
 		
+		if(currentUI!=null){
+			currentUI.OnPause();
+		}
+
 		//如果切换动画的监听器中如果已经加了 removeView()的方法，此处就不用了。
 		middle.removeAllViews();
 		View child = targetUI.getChildView();
@@ -116,6 +120,10 @@ public class MiddleManager extends Observable {
 		//界面的切换动画。
 		Animation anim = AnimationUtils.loadAnimation(this.context, R.anim.ia_view_change);
 		child.setAnimation(anim);
+		
+
+		targetUI.OnResume();
+		
 		
 		currentUI = targetUI;
 		

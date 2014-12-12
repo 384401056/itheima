@@ -29,6 +29,16 @@ public abstract class BaseUI implements OnClickListener {
 
 	
 	/**
+	 * 一旦进入界面，就被执行的方法。
+	 */
+	public abstract void OnResume();
+	
+	/**
+	 * 一旦界面退出，就被抛行的方法。
+	 */
+	public abstract void OnPause();
+	
+	/**
 	 * 界面初始化。
 	 */
 	public abstract void init();
@@ -46,6 +56,7 @@ public abstract class BaseUI implements OnClickListener {
 	 * OnClickListener事件设置
 	 */
 	public abstract void setOnClickListener();
+
 
 	/**
 	 * 设置每个UI的唯一标识符。

@@ -5,7 +5,6 @@ import java.util.Observer;
 
 import org.apache.commons.lang3.StringUtils;
 
-import android.R.integer;
 import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
@@ -17,9 +16,6 @@ import android.widget.TextView;
 
 import com.blueice.mobilelottery.ConstValue;
 import com.blueice.mobilelottery.R;
-import com.blueice.mobilelottery.view.FirstUI;
-import com.blueice.mobilelottery.view.HallUI;
-import com.blueice.mobilelottery.view.SecondUI;
 
 
 /**
@@ -56,7 +52,7 @@ public class TitleManager implements Observer {
 
 	public void init(Activity activity) {
 		
-		this.context = activity.getApplicationContext();
+		this.context = activity;
 		
 		commonContainer = (RelativeLayout) activity
 				.findViewById(R.id.ii_common_container);

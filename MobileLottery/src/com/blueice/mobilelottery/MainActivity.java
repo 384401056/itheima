@@ -2,8 +2,10 @@ package com.blueice.mobilelottery;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.widget.RelativeLayout;
+
 import com.blueice.mobilelottery.utils.PromptManager;
 import com.blueice.mobilelottery.view.HallUI;
 import com.blueice.mobilelottery.view.manager.BottomManager;
@@ -22,6 +24,13 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.il_main);
+		
+		/**
+		 * 获取屏幕宽度，存入全局变量类。
+		 */
+		DisplayMetrics metrics = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(metrics);
+		GlobalParams.WIN_WIDTH = metrics.widthPixels;
 		
 		init();
 		
@@ -48,7 +57,6 @@ public class MainActivity extends Activity {
 		
 		//加载首页。
 		middle.changeUI(HallUI.class);
-		
 
 	}
 	
