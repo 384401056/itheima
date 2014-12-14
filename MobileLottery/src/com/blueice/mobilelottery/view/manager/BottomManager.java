@@ -10,6 +10,7 @@ import android.content.Context;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.webkit.WebView.FindListener;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 
 import com.blueice.mobilelottery.ConstValue;
 import com.blueice.mobilelottery.R;
+import com.blueice.mobilelottery.view.BaseUI;
 
 /**
  * 控制底部导航容器
@@ -86,6 +88,11 @@ public class BottomManager implements Observer {
 		cleanButton = (ImageButton) activity.findViewById(R.id.ii_bottom_game_choose_clean);
 		
 		addButton = (ImageButton) activity.findViewById(R.id.ii_bottom_game_choose_ok);
+		
+		/*
+		 * 购彩bottom的文字控件。
+		 */
+		notice = (TextView) activity.findViewById(R.id.ii_bottom_game_choose_notice);
 
 		// 设置监听
 		setListener();
@@ -130,19 +137,45 @@ public class BottomManager implements Observer {
 			}
 		});
 		
-		// 清空按钮
+		/**
+		 *  清空按钮
+		 */
 		cleanButton.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
+				
 				Log.i(TAG, "点击清空按钮");
+				
+				//调用CurrentUI中的clearBall()方法。
+				BaseUI currentUI = MiddleManager.getInstance().getCurrentUI();
+				
+				if(currentUI!=null && currentUI instanceof IGameUICommonMethod){
+					
+					((IGameUICommonMethod)currentUI).clearBall();
+					
+				}
+				
 
 			}
 		});
-		// 选好按钮
+		
+		/**
+		 * 点击选好按钮
+		 */
 		addButton.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
 				Log.i(TAG, "点击选好按钮");
+				
+				//调用CurrentUI中的Clear()方法。
+				BaseUI currentUI = MiddleManager.getInstance().getCurrentUI();
+				
+				if(currentUI!=null && currentUI instanceof IGameUICommonMethod){
+					
+					((IGameUICommonMethod)currentUI).selectDone();
+					
+				}
+				
 
 			}
 		});
@@ -176,6 +209,17 @@ public class BottomManager implements Observer {
 		notice.setText(str);
 	}
 
+	
+	/**
+	 * 改变底部导航容器显示情况
+	 */
+	public void changeBottomVisiblity(int type) {
+		if (bottomMenuContainer.getVisibility() != type)
+			bottomMenuContainer.setVisibility(type);
+	}
+	
+	
+	
 	/**
 	 * 根据Midlle容器的切换来变动Bottom容器。
 	 */
@@ -188,10 +232,10 @@ public class BottomManager implements Observer {
 				showCommonBottom();
 				break;
 			case ConstValue.VIEW_SSQ:
-				showCommonBottom();
+				showGameBottom();
 				break;
 			case ConstValue.VIEW_SHOPPING:
-				showCommonBottom();
+				changeBottomVisiblity(View.GONE);
 				break;
 			case ConstValue.VIEW_PREBET:
 				showCommonBottom();
@@ -202,6 +246,8 @@ public class BottomManager implements Observer {
 		}
 		
 	}
+
+
 
 }
 

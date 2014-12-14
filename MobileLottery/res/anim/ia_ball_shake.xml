@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+指定移动的轨迹 
+android:interpolator="@android:anim/cycle_interpolator"
+cycle_interpolator:按照正弦曲线
+
+-->
+<translate xmlns:android="http://schemas.android.com/apk/res/android"
+    android:duration="50"
+    android:fromXDelta="0"
+    android:interpolator="@android:anim/anticipate_overshoot_interpolator"
+    android:repeatCount="1"
+    android:toXDelta="5" >
+
+</translate>

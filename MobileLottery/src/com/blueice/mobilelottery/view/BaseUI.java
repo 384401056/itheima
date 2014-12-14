@@ -6,6 +6,7 @@ import com.blueice.mobilelottery.utils.PromptManager;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -20,6 +21,8 @@ public abstract class BaseUI implements OnClickListener {
 	protected Context context; // 注意是protected.子类要用。
 
 	protected ViewGroup showInMiddle; //返回的中间容器ViewGroup,在子类中创建。
+	
+	protected Bundle bundle;
 
 	public BaseUI(Context context) {
 		this.context = context;
@@ -109,9 +112,10 @@ public abstract class BaseUI implements OnClickListener {
 		
 		
 	}
-	
-	
-	
+
+	public void setBundle(Bundle bundle) {
+		this.bundle = bundle;
+	}
 	
 	
 }

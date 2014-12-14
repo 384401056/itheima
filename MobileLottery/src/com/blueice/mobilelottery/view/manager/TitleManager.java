@@ -169,10 +169,10 @@ public class TitleManager implements Observer {
 				showUnLoginTitle();
 				break;
 			case ConstValue.VIEW_SSQ:
-				showUnLoginTitle();
+				showCommonTitle();
 				break;
 			case ConstValue.VIEW_SHOPPING:
-				showUnLoginTitle();
+				showCommonTitle();
 				break;
 			case ConstValue.VIEW_PREBET:
 				showUnLoginTitle();

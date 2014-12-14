@@ -11,6 +11,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Matrix;
+import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
@@ -34,6 +35,7 @@ import com.blueice.mobilelottery.net.protocal.Oelement;
 import com.blueice.mobilelottery.net.protocal.element.CurrentIssues;
 import com.blueice.mobilelottery.utils.EngineFactory;
 import com.blueice.mobilelottery.utils.PromptManager;
+import com.blueice.mobilelottery.view.manager.MiddleManager;
 
 /**
  * 购彩大厅的界面。
@@ -61,6 +63,8 @@ public class HallUI extends BaseUI {
 	
 	private int offset; //偏移量
 	private int bmpW; //图片宽度
+	
+	private Bundle ssqbundle;
 	
 	public HallUI(Context context) {
 		super(context);
@@ -236,7 +240,7 @@ public class HallUI extends BaseUI {
 
 		CurrentIssues currentIssuesElement = (CurrentIssues) element;
 
-		String iissue = currentIssuesElement.getISSUE();
+		String issue = currentIssuesElement.getISSUE();
 		String lasttime = getLasttime(currentIssuesElement.getLasttime());
 
 		String str = context.getResources().getString(
@@ -244,7 +248,7 @@ public class HallUI extends BaseUI {
 
 		// 替换字符。
 		text = StringUtils.replaceEach(str, new String[] { "ISSUE", "TIME" },
-				new String[] { iissue, lasttime });
+				new String[] { issue, lasttime });
 
 		// 更新数据
 		// 方案一：新有Item都会被更新。
@@ -258,11 +262,15 @@ public class HallUI extends BaseUI {
 //			view.setText(text);
 //		}
 
-		// 方案三：
+		// 方案三：在MyAdapter中使用Tag来标识想要更新的ListView下的UI。然后通过findViewWithTag()方法找到要更新的UI.
 		 TextView view = (TextView) listView.findViewWithTag(0);
 		 if(view!=null){
 			 view.setText(text);
 		 }
+		 
+		 ssqbundle = new Bundle();
+		 ssqbundle.putString("issue", issue);
+		 
 	}
 
 	/**
@@ -345,10 +353,19 @@ public class HallUI extends BaseUI {
 
 				final int pos = position;
 				holder.bet.setOnClickListener(new OnClickListener() {
-					
 					@Override
 					public void onClick(View v) {
-						Log.i("MyLog", pos+"");
+						switch (pos) {
+						case 0:
+							MiddleManager.getInstance().changeUI(PlaySSQ.class,ssqbundle);
+							break;
+						case 1:
+							
+							break;
+						case 2:
+							
+							break;
+						}
 					}
 				});
 
@@ -363,9 +380,7 @@ public class HallUI extends BaseUI {
 			// 更新Item控件上的值。
 			holder.logo.setImageResource(logoResIds[position]);
 			holder.title.setText(titleResIds[position]);
-			
 			holder.summary.setTag(position);  //给每个summary控件设置唯一标识符。
-
 //			 if(StringUtils.isNotBlank(text)&&position==0){
 //				 holder.summary.setText(text);
 //			 }

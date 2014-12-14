@@ -10,6 +10,7 @@ import com.blueice.mobilelottery.R;
 import com.blueice.mobilelottery.view.BaseUI;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
@@ -68,7 +69,79 @@ public class MiddleManager extends Observable {
 	private BaseUI currentUI = null;//当前正在显示的BaseUI.
 	
 	/**
-	 * 切换界面。
+	 * 切换界面，版本2，增加了界面间的Bundle数据传递。
+	 * 解决的问题1：三个容器的连动。
+	 * 
+	 * @param view 要切换到的界面。
+	 * @param bundle 界面间传递的数据.
+	 */
+	public void changeUI(Class<? extends BaseUI> targetClazz,Bundle bundle){
+		
+		//判断当前界面是不是传入的targetClass对应的界面。
+		if(currentUI!=null&& currentUI.getClass()==targetClazz){
+			return;
+		}
+		
+		
+		String key = targetClazz.getSimpleName();
+		BaseUI targetUI = null;
+		
+		//思路：一旦创建过就重用，曾经创建过的界面需要存储。
+		if(UIStack.containsKey(key)){
+			
+			targetUI = UIStack.get(key);
+			
+		}else{
+			
+			try {
+				//由于构造targetUI需要参数，所以定义一个构造器。Context.class就是参数的类型。
+				Constructor<? extends BaseUI> constructor = targetClazz.getConstructor(Context.class);
+				targetUI = constructor.newInstance(context);
+				
+				UIStack.put(key, targetUI);//把构造出的BaseUI加入栈.
+				
+			} catch (Exception e) {
+				throw new RuntimeException("constructor new instance error!");
+			}
+			
+		}
+		
+		//界面间要传递的数据。
+		
+		if(targetUI!=null){
+			targetUI.setBundle(bundle);
+		}
+
+		
+		if(currentUI!=null){
+			currentUI.OnPause();
+		}
+
+		//如果切换动画的监听器中如果已经加了 removeView()的方法，此处就不用了。
+		middle.removeAllViews();
+		View child = targetUI.getChildView();
+		middle.addView(child);
+//		FadeUtil.fadeIn(child, 2000, 2000);
+		
+		//界面的切换动画。
+		Animation anim = AnimationUtils.loadAnimation(this.context, R.anim.ia_view_change);
+		child.setAnimation(anim);
+		
+
+		targetUI.OnResume();
+		
+		
+		currentUI = targetUI;
+		
+		//将界面key加入堆栈中。
+		History.addFirst(key);
+		
+		//当中间容器切换成功时，处理另外的两个容器。(通过观察者模式来进行通知)
+		changeTitileBottom();
+	}
+	
+	/**
+	 * 切换界面版本1.。
 	 * 解决的问题1：三个容器的连动。
 	 * 
 	 * @param view 要切换到的界面。
@@ -110,7 +183,7 @@ public class MiddleManager extends Observable {
 		if(currentUI!=null){
 			currentUI.OnPause();
 		}
-
+		
 		//如果切换动画的监听器中如果已经加了 removeView()的方法，此处就不用了。
 		middle.removeAllViews();
 		View child = targetUI.getChildView();
@@ -121,7 +194,7 @@ public class MiddleManager extends Observable {
 		Animation anim = AnimationUtils.loadAnimation(this.context, R.anim.ia_view_change);
 		child.setAnimation(anim);
 		
-
+		
 		targetUI.OnResume();
 		
 		
@@ -171,7 +244,7 @@ public class MiddleManager extends Observable {
 		/**
 		 * 方案三：1.将中间容器变为被观察者。
 		 * 		  2.将Title和Bottom变以观察者。
-		 *        3.将Title和Bottom加入到观察者的列表中。
+		 *        3.将Title和Bottom加入到观察者的列表中。(在每一次初始化这三个容器时就加入 MainActivity中。）
 		 *        4.一旦中间容器变动，修改boolean值为true,最后通知所有观察者。
 		 *        5.观察者执行updata()方法。
 		 */
@@ -238,8 +311,6 @@ public class MiddleManager extends Observable {
 	}
 
 	
-
-	
 	/**
 	 * 返回上个界面
 	 * @return 是否成功返回。
@@ -274,6 +345,10 @@ public class MiddleManager extends Observable {
 			}
 		}
 		return false;
+	}
+	
+	public BaseUI getCurrentUI() {
+		return currentUI;
 	}
 	
 }
