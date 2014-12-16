@@ -12,8 +12,16 @@ public interface UserEngine {
 	/**
 	 * 用户登陆
 	 * @param user 用户对象。
-	 * @return 服务器端的ServerResponsMessage结果。
+	 * @return 服务器端的Message结果。
 	 */
 	public Message login(User user);
+
+	/**
+	 * 获取用户的余额。
+	 * @param user 用户信息。
+	 * @return 余额信息。
+	 */
+	public Message getBalance(User user);
+
 	
 }

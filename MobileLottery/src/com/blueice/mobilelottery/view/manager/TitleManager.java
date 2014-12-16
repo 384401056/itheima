@@ -166,16 +166,13 @@ public class TitleManager implements Observer {
 			
 			switch (Integer.parseInt(data.toString())) {
 			case ConstValue.VIEW_HELL:
+			case ConstValue.VIEW_PREBET:
 				showUnLoginTitle();
 				break;
 			case ConstValue.VIEW_SSQ:
-				showCommonTitle();
-				break;
 			case ConstValue.VIEW_SHOPPING:
+			case ConstValue.VIEW_LOGIN:
 				showCommonTitle();
-				break;
-			case ConstValue.VIEW_PREBET:
-				showUnLoginTitle();
 				break;
 			default:
 				break;

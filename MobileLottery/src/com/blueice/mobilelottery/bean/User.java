@@ -5,6 +5,15 @@ public class User {
 	private String userName;
 	private String passWord;
 	
+	private float money;
+	
+
+	public void setMoney(float money) {
+		this.money = money;
+	}
+	public float getMoney() {
+		return money;
+	}
 	public String getUserName() {
 		return userName;
 	}

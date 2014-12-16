@@ -16,4 +16,14 @@ public class GlobalParams {
 	 */
 	public static int WIN_WIDTH = 0;
 
+	/**
+	 * 记录用户登陆状态。
+	 */
+	public static boolean isLogin = false;
+	
+	/**
+	 * 记录用户余额。
+	 */
+	public static float MONEY = 0;
+
 }

@@ -58,6 +58,7 @@ public interface ConstValue {
 	int VIEW_SSQ = 15;
 	int VIEW_SHOPPING = 20;
 	int VIEW_PREBET = 25;
+	int VIEW_LOGIN = 30;
 	
 	/**
 	 * 双色球标示

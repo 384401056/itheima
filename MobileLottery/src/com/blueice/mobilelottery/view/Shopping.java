@@ -22,9 +22,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.blueice.mobilelottery.ConstValue;
+import com.blueice.mobilelottery.GlobalParams;
 import com.blueice.mobilelottery.R;
 import com.blueice.mobilelottery.bean.ShoppingCar;
 import com.blueice.mobilelottery.bean.Ticket;
+import com.blueice.mobilelottery.net.protocal.element.UserLoginElement;
+import com.blueice.mobilelottery.utils.PromptManager;
 import com.blueice.mobilelottery.view.manager.MiddleManager;
 
 public class Shopping extends BaseUI {
@@ -113,9 +116,35 @@ public class Shopping extends BaseUI {
 			break;
 		case R.id.ii_lottery_shopping_buy:
 			//1.判断购物车中是否有投注。
-			//2.用户是否登陆。
-			//3.用户的余额够吗？
-			//4.界面跳转--》追期和倍投。
+			if(ShoppingCar.getInstance().getTickets().size()>=1){
+				
+				//2.用户是否登陆。
+				if(GlobalParams.isLogin){
+					
+					//3.用户的余额够吗？
+					if(ShoppingCar.getInstance().getLotteryvalue()>=0){
+						//4.界面跳转--》追期和倍投。
+						
+						MiddleManager.getInstance().changeUI(PreBet.class,bundle);
+						
+						
+					}else{
+						PromptManager.showToast(context, "余额不足，请充值。");
+					}
+					
+					
+				}else{
+					PromptManager.showToast(context, "请先登陆");
+					MiddleManager.getInstance().changeUI(UserLogin.class,bundle);
+					//登陆界面跳转。
+				}
+				
+			}else{
+				PromptManager.showToast(context, "选择一注。");
+			}
+			
+			
+			
 			
 			
 			break;
