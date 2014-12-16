@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.Random;
 
 import android.content.Context;
@@ -19,19 +20,20 @@ import android.widget.GridView;
 
 import com.blueice.mobilelottery.ConstValue;
 import com.blueice.mobilelottery.R;
+import com.blueice.mobilelottery.bean.ShoppingCar;
+import com.blueice.mobilelottery.bean.Ticket;
 import com.blueice.mobilelottery.engine.CommonInfoEngine;
-import com.blueice.mobilelottery.net.protocal.Element;
 import com.blueice.mobilelottery.net.protocal.Message;
 import com.blueice.mobilelottery.net.protocal.Oelement;
 import com.blueice.mobilelottery.net.protocal.element.CurrentIssues;
 import com.blueice.mobilelottery.utils.EngineFactory;
 import com.blueice.mobilelottery.utils.PromptManager;
-import com.blueice.mobilelottery.view.BaseUI.MyAsynTask;
 import com.blueice.mobilelottery.view.adapter.PoolAdapter;
 import com.blueice.mobilelottery.view.custom.MyGridView;
 import com.blueice.mobilelottery.view.custom.MyGridView.OnActionUPListener;
 import com.blueice.mobilelottery.view.manager.BottomManager;
 import com.blueice.mobilelottery.view.manager.IGameUICommonMethod;
+import com.blueice.mobilelottery.view.manager.MiddleManager;
 import com.blueice.mobilelottery.view.manager.TitleManager;
 
 public class PlaySSQ extends BaseUI implements IGameUICommonMethod {
@@ -97,6 +99,7 @@ public class PlaySSQ extends BaseUI implements IGameUICommonMethod {
 	public void OnResume() {
 		changeTitle();
 		changeBottomText();
+		clearBall();
 	}
 
 	private void changeTitle() {
@@ -361,14 +364,49 @@ public class PlaySSQ extends BaseUI implements IGameUICommonMethod {
 			//判断是否已经获取了当前信息。
 			if(bundle!=null){
 				//1.封装用户投注信息：红球、蓝球、注数。
-				//2.创建购物车，将投注信息加入购物车
-				//注意：一个购物车中只能放置一个彩种的信息。
 				
+				Ticket ticket = new Ticket();
+				DecimalFormat decimalFormat = new DecimalFormat("00");
+				
+				StringBuffer redBuffer = new StringBuffer();
+				for(Integer item:redBallSelected){
+					
+					redBuffer.append(" ").append(decimalFormat.format(item));
+				}
+				
+				ticket.setRedNum(redBuffer.substring(1));
+				
+				
+				StringBuffer blueBuffer = new StringBuffer();
+				for(Integer item:blueBallSelected){
+					
+					blueBuffer.append(" ").append(decimalFormat.format(item));
+				}
+				
+				ticket.setBlueNum(blueBuffer.substring(1));
+				
+				ticket.setNum(countNum());
+				
+				//2.创建购物车，将投注信息加入购物车
+				ShoppingCar.getInstance().getTickets().add(ticket);
+				
+				//设备期次和彩种.
+				ShoppingCar.getInstance().setIssue(bundle.getString("issue"));
+				ShoppingCar.getInstance().setLotteryid(ConstValue.SSQ);
+				
+				
+				MiddleManager.getInstance().changeUI(Shopping.class,bundle);
 				
 				
 			}else{
 				//从服务器重新获取当前期信息。
+				PromptManager.showProgressDialog(context);
 				getCurrentIssueInfo();
+				
+				if(bundle!=null){
+					PromptManager.closeProgressDialog();
+					selectDone();
+				}
 			}
 			
 		}else{
@@ -428,8 +466,7 @@ public class PlaySSQ extends BaseUI implements IGameUICommonMethod {
 					
 						
 					} else {
-						PromptManager
-								.showToast(context, oelement.getErrormsg());
+						PromptManager.showToast(context, oelement.getErrormsg());
 					}
 				} else {
 					PromptManager.showToast(context, "服务器忙，请稍后重试。");

@@ -7,6 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.opengl.Visibility;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -70,6 +71,8 @@ public class BottomManager implements Observer {
 	public void init(Activity activity) {
 		
 		this.context = activity;
+		
+		bottomMenuContainer = (RelativeLayout) activity.findViewById(R.id.ii_bottom);
 		
 		commonBottom = (LinearLayout) activity.findViewById(R.id.ii_bottom_common);
 		
@@ -188,6 +191,9 @@ public class BottomManager implements Observer {
 	 */
 	public void showCommonBottom() {
 		initBottom();
+		if (bottomMenuContainer.getVisibility() == View.GONE || bottomMenuContainer.getVisibility() == View.INVISIBLE) {
+			bottomMenuContainer.setVisibility(View.VISIBLE);
+		}
 		commonBottom.setVisibility(View.VISIBLE);
 		playBottom.setVisibility(View.INVISIBLE);
 	}
@@ -197,6 +203,9 @@ public class BottomManager implements Observer {
 	 */
 	public void showGameBottom() {
 		initBottom();
+		if (bottomMenuContainer.getVisibility() == View.GONE || bottomMenuContainer.getVisibility() == View.INVISIBLE) {
+			bottomMenuContainer.setVisibility(View.VISIBLE);
+		}
 		commonBottom.setVisibility(View.INVISIBLE);
 		playBottom.setVisibility(View.VISIBLE);
 	}

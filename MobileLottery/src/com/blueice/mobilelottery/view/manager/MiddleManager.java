@@ -114,6 +114,7 @@ public class MiddleManager extends Observable {
 
 		
 		if(currentUI!=null){
+			//执行当前UI的退出方法。
 			currentUI.OnPause();
 		}
 
@@ -330,6 +331,9 @@ public class MiddleManager extends Observable {
 				middle.removeAllViews();
 				View child = targetUI.getChildView();
 				middle.addView(child);
+				
+				//执行界面初始化方法。
+				targetUI.OnResume();
 				
 				//界面的切换动画。
 				Animation anim = AnimationUtils.loadAnimation(this.context, R.anim.ia_view_change);

@@ -35,6 +35,8 @@ import com.blueice.mobilelottery.net.protocal.Oelement;
 import com.blueice.mobilelottery.net.protocal.element.CurrentIssues;
 import com.blueice.mobilelottery.utils.EngineFactory;
 import com.blueice.mobilelottery.utils.PromptManager;
+import com.blueice.mobilelottery.view.manager.BottomManager;
+import com.blueice.mobilelottery.view.manager.IGameUICommonMethod;
 import com.blueice.mobilelottery.view.manager.MiddleManager;
 
 /**
@@ -134,9 +136,7 @@ public class HallUI extends BaseUI {
 
 	@Override
 	public void OnResume() {
-
 		getCurrentIssueInfo();
-		
 		Log.i("MyLog","OnResume");
 	}
 

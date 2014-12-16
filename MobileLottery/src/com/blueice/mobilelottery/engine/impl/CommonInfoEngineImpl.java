@@ -4,17 +4,12 @@ import java.io.StringReader;
 
 import org.xmlpull.v1.XmlPullParser;
 
-import android.util.Log;
 import android.util.Xml;
 
-import com.blueice.mobilelottery.bean.ServerResponsMessage;
-import com.blueice.mobilelottery.bean.User;
 import com.blueice.mobilelottery.engine.BaseEngine;
 import com.blueice.mobilelottery.engine.CommonInfoEngine;
-import com.blueice.mobilelottery.engine.UserEngine;
 import com.blueice.mobilelottery.net.protocal.Message;
 import com.blueice.mobilelottery.net.protocal.element.CurrentIssues;
-import com.blueice.mobilelottery.net.protocal.element.UserLoginElement;
 
 /**
  * 用户业务的实现类。

@@ -4,10 +4,8 @@ import java.io.StringReader;
 
 import org.xmlpull.v1.XmlPullParser;
 
-import android.util.Log;
 import android.util.Xml;
 
-import com.blueice.mobilelottery.bean.ServerResponsMessage;
 import com.blueice.mobilelottery.bean.User;
 import com.blueice.mobilelottery.engine.BaseEngine;
 import com.blueice.mobilelottery.engine.UserEngine;

@@ -1,16 +1,13 @@
 package com.blueice.mobilelottery.engine;
 
 import java.io.InputStream;
-import java.net.ResponseCache;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.xmlpull.v1.XmlPullParser;
 
-import android.util.Log;
 import android.util.Xml;
 
 import com.blueice.mobilelottery.ConstValue;
-import com.blueice.mobilelottery.bean.ServerResponsMessage;
 import com.blueice.mobilelottery.net.HttpClientUtils;
 import com.blueice.mobilelottery.net.protocal.Message;
 import com.blueice.mobilelottery.utils.DES;
