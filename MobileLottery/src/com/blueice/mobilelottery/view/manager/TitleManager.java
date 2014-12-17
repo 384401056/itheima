@@ -15,7 +15,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.blueice.mobilelottery.ConstValue;
+import com.blueice.mobilelottery.GlobalParams;
 import com.blueice.mobilelottery.R;
+import com.blueice.mobilelottery.view.UserLogin;
 
 
 /**
@@ -101,7 +103,7 @@ public class TitleManager implements Observer {
 			public void onClick(View v) {
 				Log.i(TAG, "login");
 				
-//				MiddleManager.getInstance().changeUI(SecondUI.class);
+				MiddleManager.getInstance().changeUI(UserLogin.class);
 				
 			}
 		});
@@ -153,7 +155,7 @@ public class TitleManager implements Observer {
 	 */
 	public void changeUserInfo(String str){
 		userInfo.setText(str);
-	}
+	} 
 
 	/**
 	 * 根据Midlle容器的切换来变动Bottom容器。
@@ -166,12 +168,18 @@ public class TitleManager implements Observer {
 			
 			switch (Integer.parseInt(data.toString())) {
 			case ConstValue.VIEW_HELL:
-			case ConstValue.VIEW_PREBET:
-				showUnLoginTitle();
+				if(GlobalParams.isLogin){
+					showCommonTitle();
+					String userInfo = "用户名:"+GlobalParams.USERNAME+"\r\n"+"余额:"+GlobalParams.MONEY;
+					changeTitle(userInfo);
+				}else {
+					showUnLoginTitle();
+				}
 				break;
 			case ConstValue.VIEW_SSQ:
 			case ConstValue.VIEW_SHOPPING:
 			case ConstValue.VIEW_LOGIN:
+			case ConstValue.VIEW_PREBET:
 				showCommonTitle();
 				break;
 			default:

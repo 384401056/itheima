@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
+import com.blueice.mobilelottery.GlobalParams;
+
+import android.R.bool;
+import android.provider.Telephony.Sms.Conversations;
+
 /**
  * 购物车信息封装类。
  *
@@ -45,10 +50,6 @@ public class ShoppingCar extends Observable {
 	 * 
 	 */
 	
-
-
-
-
 	/**
 	 * 玩法编号
 	 */
@@ -61,10 +62,20 @@ public class ShoppingCar extends Observable {
 	//为了保证一个购物车只有一种彩种的集合，所以先new出来，也不能有set方法。
 	private List<Ticket> tickets = new ArrayList<Ticket>(); 
 	
+	private Integer appnumbers = 1; //倍数,默认为1。
+	private Integer issuesnumbers = 1 ; //追期数，默认为1。
 	
 	
 	
 	
+	public Integer getAppnumbers() {
+		return appnumbers;
+	}
+
+	public Integer getIssuesnumbers() {
+		return issuesnumbers;
+	}
+
 	/**
 	 * 得到总的注数信息。
 	 * @return Long类
@@ -80,12 +91,12 @@ public class ShoppingCar extends Observable {
 	}
 	
 	/**
-	 * 得到总的投注金额。
+	 * 得到总的投注金额。总金额=2*注数*倍数*追期数.
 	 * @return 金额.
 	 */
 	public Long getLotteryvalue() {
 		
-		lotteryvalue = 2*getLotterynumber();
+		lotteryvalue = 2*getLotterynumber()*appnumbers*issuesnumbers;
 		
 		return lotteryvalue;
 	}
@@ -106,5 +117,108 @@ public class ShoppingCar extends Observable {
 		return tickets;
 	}
 	
+	/**
+	 * 操作倍数。
+	 * @param true为加倍，false为减。
+	 * @return 操作是否成功。
+	 */
+	public boolean optionAppnumbers(boolean isAdd){
+		
+		if(isAdd){
+			appnumbers++;
+			if(appnumbers>99){
+				appnumbers--;
+				return false;
+			}
+			//如果增加倍数后的金额大于用户余额
+			if( getLotteryvalue() > GlobalParams.MONEY){
+				appnumbers--;
+				return false;
+			}
+		}else{
+			
+			appnumbers--;
+			if(appnumbers<1){
+				appnumbers++;
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	
+	public boolean optionIssuesnumbers(boolean isAdd){
+		
+		if(isAdd){
+			issuesnumbers++;
+			if(issuesnumbers>99){
+				issuesnumbers--;
+				return false;
+			}
+			//如果增加追斯后的金额大于用户余额
+			if( getLotteryvalue() > GlobalParams.MONEY){
+				issuesnumbers--;
+				return false;
+			}
+		}else{
+			
+			issuesnumbers--;
+			if(issuesnumbers<1){
+				issuesnumbers++;
+				return false;
+			}
+		}
+		return true;
+
+	}
+
+	/**
+	 * 清空购物车。将初始化值。
+	 */
+	public void clear() {
+		
+		appnumbers = 1;  //倍数
+		issuesnumbers = 1; //追期数。
+		lotterynumber = (long) 0; //注数
+		lotteryvalue = (long) 0;  //注数总金额。
+		
+		tickets.clear();
+	}
+	
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

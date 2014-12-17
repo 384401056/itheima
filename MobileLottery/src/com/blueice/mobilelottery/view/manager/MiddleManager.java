@@ -354,6 +354,15 @@ public class MiddleManager extends Observable {
 	public BaseUI getCurrentUI() {
 		return currentUI;
 	}
+
+	/**
+	 * 清理返回键。
+	 */
+	public void clear() {
+		
+		History.clear();
+		
+	}
 	
 }
 

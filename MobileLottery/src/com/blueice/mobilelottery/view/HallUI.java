@@ -51,23 +51,23 @@ public class HallUI extends BaseUI {
 
 	private ListView listView;
 	private MyAdapter myAdapter;
-	
+
 	/**
 	 * ViewPager
 	 */
 	private ViewPager viewPager;
 	private List<View> pagers;
 	private ImageView cursor;
-	
+
 	private TextView fc;
 	private TextView tc;
 	private TextView gpc;
-	
-	private int offset; //偏移量
-	private int bmpW; //图片宽度
-	
+
+	private int offset; // 偏移量
+	private int bmpW; // 图片宽度
+
 	private Bundle ssqbundle;
-	
+
 	public HallUI(Context context) {
 		super(context);
 	}
@@ -82,23 +82,24 @@ public class HallUI extends BaseUI {
 		viewPager = (ViewPager) findViewById(R.id.ii_viewpager);
 		pagers = new ArrayList<View>();
 		cursor = (ImageView) findViewById(R.id.ii_category_selector);
-		
+
 		fc = (TextView) findViewById(R.id.ii_category_fc);
 		tc = (TextView) findViewById(R.id.ii_category_tc);
 		gpc = (TextView) findViewById(R.id.ii_category_gpc);
-		
-//		listView = (ListView) findViewById(R.id.ii_hall_lottery_list);
+
+		// listView = (ListView) findViewById(R.id.ii_hall_lottery_list);
 		listView = new ListView(context);
 		listButton = new ArrayList<View>();
+		
 		myAdapter = new MyAdapter();
 		listView.setAdapter(myAdapter);
-		listView.setFadingEdgeLength(0);//设置lsitview的边缘。
-		
+		listView.setFadingEdgeLength(0);// 设置lsitview的边缘。
+
 		initPager();
-		
+
 		viewPager.setAdapter(new MyPagerAdapter());
-		
-		//初始化选项卡下划线。
+
+		// 初始化选项卡下划线。
 		initCursor();
 
 	}
@@ -107,27 +108,28 @@ public class HallUI extends BaseUI {
 	 * 初始化选择项的下划线数据。
 	 */
 	private void initCursor() {
-		
-		//获取小图片宽度。
-		Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.id_category_selector);
-		//获取偏移量。
+
+		// 获取小图片宽度。
+		Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(),
+				R.drawable.id_category_selector);
+		// 获取偏移量。
 		bmpW = bitmap.getWidth();
-		offset = (GlobalParams.WIN_WIDTH/pagers.size()-bmpW)/2;
-		
+		offset = (GlobalParams.WIN_WIDTH / pagers.size() - bmpW) / 2;
+
 	}
 
 	/**
 	 * 初始化pagers
 	 */
 	private void initPager() {
-		
+
 		pagers.add(listView);
-		
+
 		TextView tv = new TextView(context);
 		tv.setText("体彩");
 		tv.setBackgroundColor(Color.GREEN);
 		pagers.add(tv);
-		
+
 		tv = new TextView(context);
 		tv.setText("高频彩");
 		tv.setBackgroundColor(Color.YELLOW);
@@ -137,7 +139,7 @@ public class HallUI extends BaseUI {
 	@Override
 	public void OnResume() {
 		getCurrentIssueInfo();
-		Log.i("MyLog","OnResume");
+		Log.i("MyLog", "OnResume");
 	}
 
 	@Override
@@ -191,16 +193,15 @@ public class HallUI extends BaseUI {
 		fc.setOnClickListener(this);
 		tc.setOnClickListener(this);
 		gpc.setOnClickListener(this);
-		
-		//viewPager的监听事件。
+
+		// viewPager的监听事件。
 		viewPager.setOnPageChangeListener(new MyPagerChangerListener());
 	}
 
-	
 	@Override
 	public void onClick(View v) {
 		int id = v.getId();
-		
+
 		switch (id) {
 		case R.id.ii_category_fc:
 			viewPager.setCurrentItem(0, true);
@@ -213,13 +214,11 @@ public class HallUI extends BaseUI {
 			break;
 		}
 	}
-	
+
 	@Override
 	public int getID() {
 		return ConstValue.VIEW_HELL;
 	}
-
-	
 
 	/**
 	 * 服务器端返回的文字信息。
@@ -252,25 +251,26 @@ public class HallUI extends BaseUI {
 
 		// 更新数据
 		// 方案一：新有Item都会被更新。
-//		 myAdapter.notifyDataSetChanged();
+		// myAdapter.notifyDataSetChanged();
 
 		// 方案二：只更新想要更新的内容。
 		// 获取需要更新控件的引用。needUpdate
 
-//		TextView view = (TextView) needUpdate.get(0);
-//		if (view != null) {
-//			view.setText(text);
-//		}
+		// TextView view = (TextView) needUpdate.get(0);
+		// if (view != null) {
+		// view.setText(text);
+		// }
 
 		// 方案三：在MyAdapter中使用Tag来标识想要更新的ListView下的UI。然后通过findViewWithTag()方法找到要更新的UI.
-		 TextView view = (TextView) listView.findViewWithTag(0);
-		 if(view!=null){
-			 view.setText(text);
-		 }
-		 
-		 ssqbundle = new Bundle();
-		 ssqbundle.putString("issue", issue);
-		 
+		TextView view = (TextView) listView.findViewWithTag(0);
+		if (view != null) {
+			view.setText(text);
+		}
+
+	//  设置需要传输的数据
+		ssqbundle = new Bundle();
+		ssqbundle.putString("issue", issue);
+
 	}
 
 	/**
@@ -326,7 +326,7 @@ public class HallUI extends BaseUI {
 		}
 
 		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
+		public View getView(final int position, View convertView, ViewGroup parent) {
 
 			ViewHolder holder = null;
 
@@ -346,44 +346,38 @@ public class HallUI extends BaseUI {
 				holder.summary = (TextView) convertView
 						.findViewById(R.id.ii_hall_lottery_summary);
 
-//				needUpdate.add(holder.summary);// 将控件加入需要更新控件列表。
-
 				holder.bet = (ImageView) convertView
 						.findViewById(R.id.ii_hall_lottery_bet);
-
-				final int pos = position;
-				holder.bet.setOnClickListener(new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						switch (pos) {
-						case 0:
-							MiddleManager.getInstance().changeUI(PlaySSQ.class,ssqbundle);
-							break;
-						case 1:
-							
-							break;
-						case 2:
-							
-							break;
-						}
-					}
-				});
 
 				convertView.setTag(holder); // 将holder存入Tag中。
 
 			} else {
 
 				holder = (ViewHolder) convertView.getTag();
-
 			}
 
 			// 更新Item控件上的值。
 			holder.logo.setImageResource(logoResIds[position]);
 			holder.title.setText(titleResIds[position]);
-			holder.summary.setTag(position);  //给每个summary控件设置唯一标识符。
-//			 if(StringUtils.isNotBlank(text)&&position==0){
-//				 holder.summary.setText(text);
-//			 }
+			
+			holder.summary.setTag(position); // 给每个summary控件设置唯一标识符。
+
+			holder.bet.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					switch (position) {
+					case 0:
+						MiddleManager.getInstance().changeUI(PlaySSQ.class,ssqbundle);
+						break;
+					case 1:
+
+						break;
+					case 2:
+
+						break;
+					}
+				}
+			});
 
 			return convertView;
 		}
@@ -398,29 +392,28 @@ public class HallUI extends BaseUI {
 
 		}
 	}
-	
-	
+
 	/**
 	 * ViewPager的Adapter.
 	 */
-	class MyPagerAdapter extends PagerAdapter{
+	class MyPagerAdapter extends PagerAdapter {
 
-		//添加View
+		// 添加View
 		@Override
 		public Object instantiateItem(ViewGroup container, int position) {
 			View view = pagers.get(position);
 			container.addView(view);
 			return view;
 		}
-		
-		//删除View
+
+		// 删除View
 		@Override
 		public void destroyItem(ViewGroup container, int position, Object object) {
 			View view = pagers.get(position);
 			container.removeView(view);
 		}
-		
-		//指定View的数量。
+
+		// 指定View的数量。
 		@Override
 		public int getCount() {
 			return pagers.size();
@@ -432,60 +425,57 @@ public class HallUI extends BaseUI {
 		}
 
 	}
-	
-	
+
 	/**
 	 * viewPager的事件类。
 	 */
-	class MyPagerChangerListener implements OnPageChangeListener{
+	class MyPagerChangerListener implements OnPageChangeListener {
 
 		@Override
 		public void onPageScrollStateChanged(int arg0) {
 			// TODO Auto-generated method stub
-			
+
 		}
 
 		/**
-		 * 当页面在滑动的时候会调用此方法，在滑动被停止之前，此方法回一直得到调用。
-		 * 其中三个参数的含义分别为：
-		 * arg0 :当前页面，及你点击滑动的到的页面序号
-		 * arg1 :当前页面偏移的百分比
-		 * arg2 :当前页面偏移的像素位置  
+		 * 当页面在滑动的时候会调用此方法，在滑动被停止之前，此方法回一直得到调用。 其中三个参数的含义分别为： arg0
+		 * :当前页面，及你点击滑动的到的页面序号 arg1 :当前页面偏移的百分比 arg2 :当前页面偏移的像素位置
 		 */
 		@Override
 		public void onPageScrolled(int arg0, float arg1, int arg2) {
 			Matrix matrix = new Matrix();
-    		
-    		//offset为算好的偏移量。bmpW为图片的宽度。
-    		switch (arg0) {
+
+			// offset为算好的偏移量。bmpW为图片的宽度。
+			switch (arg0) {
 			case 0:
-				matrix.setTranslate(offset, 0); //设置当选中面板0时的ImageView的初始位置
+				matrix.setTranslate(offset, 0); // 设置当选中面板0时的ImageView的初始位置
 				break;
 			case 1:
-				matrix.setTranslate(offset * 3 + bmpW, 0); //设置当选中面板1时的ImageView的初始位置
+				matrix.setTranslate(offset * 3 + bmpW, 0); // 设置当选中面板1时的ImageView的初始位置
 				break;
 			case 2:
-				matrix.setTranslate(offset * 5 + bmpW * 2, 0); //设置当选中面板2时的ImageView的初始位置
-				break;			
+				matrix.setTranslate(offset * 5 + bmpW * 2, 0); // 设置当选中面板2时的ImageView的初始位置
+				break;
 			default:
 				break;
 			}
-    		
-    	   //在滑动的过程中，计算出激活条应该要滑动的距离
-            float t = (offset * 2 + bmpW) * arg1;
-    		
-            //使用post追加数值
-            matrix.postTranslate(t, 0);
-            
-            cursor.setImageMatrix(matrix); //在布局文件中ImageView要设置 android:scaleType="matrix"
-			
+
+			// 在滑动的过程中，计算出激活条应该要滑动的距离
+			float t = (offset * 2 + bmpW) * arg1;
+
+			// 使用post追加数值
+			matrix.postTranslate(t, 0);
+
+			cursor.setImageMatrix(matrix); // 在布局文件中ImageView要设置
+											// android:scaleType="matrix"
+
 		}
 
 		@Override
 		public void onPageSelected(int position) {
-			
+
 		}
-		
+
 	}
 
 }

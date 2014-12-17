@@ -119,6 +119,7 @@ public class UserLogin extends BaseUI {
 							if(ConstValue.SUCCESS.equals(element.getErrorcode())){
 								
 								GlobalParams.isLogin = true;
+								GlobalParams.USERNAME = params[0].getUserName();
 								
 								//再根据user来拿余额。
 								Message balance = engine.getBalance(params[0]);

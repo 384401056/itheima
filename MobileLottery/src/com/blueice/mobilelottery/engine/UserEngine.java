@@ -23,5 +23,12 @@ public interface UserEngine {
 	 */
 	public Message getBalance(User user);
 
+	/**
+	 * 用户投注。
+	 * @param user 用户信息。
+	 * @return 投注的返回信息。
+	 */
+	public Message bet(User user);
+
 	
 }

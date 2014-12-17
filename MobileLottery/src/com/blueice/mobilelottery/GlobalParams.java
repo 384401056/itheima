@@ -26,4 +26,9 @@ public class GlobalParams {
 	 */
 	public static float MONEY = 0;
 
+	/**
+	 * 如果登陆成功，记录用户名。
+	 */
+	public static String USERNAME;
+
 }

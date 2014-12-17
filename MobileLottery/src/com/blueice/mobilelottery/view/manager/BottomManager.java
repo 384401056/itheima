@@ -238,7 +238,6 @@ public class BottomManager implements Observer {
 		if (data != null && StringUtils.isNumeric(data.toString())) {
 			switch (Integer.parseInt(data.toString())) {
 			case ConstValue.VIEW_HELL:
-			case ConstValue.VIEW_PREBET:
 			case ConstValue.VIEW_LOGIN:
 				showCommonBottom();
 				break;
@@ -246,6 +245,7 @@ public class BottomManager implements Observer {
 				showGameBottom();
 				break;
 			case ConstValue.VIEW_SHOPPING:
+			case ConstValue.VIEW_PREBET:
 				changeBottomVisiblity(View.GONE);
 				break;
 			}
