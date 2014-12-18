@@ -42,7 +42,7 @@ public interface ConstValue {
 	/**
 	 * 服务器地址(应该放在jni中去调用)
 	 */
-	String LOTTERY_URI = "http://192.168.1.100/MLServer/Entrance";// 10.0.2.2模拟器如果需要跟PC机通信127.0.0.1
+	String LOTTERY_URI = "http://192.168.0.122/MLServer/Entrance";// 10.0.2.2模拟器如果需要跟PC机通信127.0.0.1
 
 	
 	/**
