@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="fill_parent"
+        android:layout_height="55dip"
+        android:background="#66c0f9"
+        android:gravity="center"
+        android:text="功能列表"
+        android:textColor="#ffffff"
+        android:textSize="20sp" />
+    
+    <!-- 自定义的新闻滚动条 -->
+    <com.blueice.mobilesafe.ui.FocusedTextView
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:id="@+id/textView2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="滚动字幕滚动字幕滚动字幕滚动字幕滚动字幕滚动字幕滚动字幕滚动字幕滚动字幕滚动字幕滚动字幕滚动字幕滚动字幕。"
+        android:textColor="#bbbbbb"
+        android:textSize="14sp" />
+
+    <GridView
+        android:id="@+id/list_home"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dip"
+        android:verticalSpacing="15dp"
+        android:horizontalSpacing="5dp"
+        android:numColumns="3"
+        />
+
+</LinearLayout>
