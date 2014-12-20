@@ -7,7 +7,7 @@
     <TextView
         android:id="@+id/textView1"
         android:layout_width="fill_parent"
-        android:layout_height="55dip"
+        android:layout_height="45dp"
         android:background="#66c0f9"
         android:gravity="center"
         android:text="功能列表"

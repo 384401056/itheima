@@ -14,6 +14,7 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnClickListener;
@@ -25,6 +26,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
@@ -55,9 +57,6 @@ public class SplashActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_splash);
 
-		tvVersion = (TextView) findViewById(R.id.splash_version);
-		tvUpdatePrgs = (TextView) findViewById(R.id.update);
-
 		/**
 		 * 启动界面的功能： 
 		 * 1.显示Logo 
@@ -66,10 +65,40 @@ public class SplashActivity extends Activity {
 		 * 4.检查网络。 
 		 * 5.检查版权。
 		 */
+		
+		init();
+		
+	}
+
+
+	/**
+	 * 初始化。
+	 */
+	private void init() {
+		
+		tvVersion = (TextView) findViewById(R.id.splash_version);
+		tvUpdatePrgs = (TextView) findViewById(R.id.update);
+
+		//存储配置文件。 
+		GlobalParams.sp = getSharedPreferences("setting", MODE_PRIVATE);
 		tvVersion.setText("版本："+getVersion());
 		
-		checkUpdate();
+		//如果SharedPreferences中的update为true,则执行版本检查。
+		if(GlobalParams.sp.getBoolean("update", false)){
+			checkUpdate();
+		}else{
+			//延迟2秒再进入主页面。
+			new Handler().postDelayed(new Runnable() {
+				@Override
+				public void run() {
+					enterHome();
+				}
+			}, 2000);
+			
+			
+		}
 	}
+	
 
 	/**
 	 * 获取更新信息。
@@ -174,7 +203,6 @@ public class SplashActivity extends Activity {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				//下载升级apk.
-				tvUpdatePrgs.setVisibility(View.VISIBLE);
 				
 				//1.判断SD卡是否存在。
 				if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
@@ -191,6 +219,7 @@ public class SplashActivity extends Activity {
 								@Override
 								public void onStart() {
 									super.onStart();
+									tvUpdatePrgs.setVisibility(View.VISIBLE);//显示进度TextView.
 								}
 								
 								/**
@@ -200,7 +229,7 @@ public class SplashActivity extends Activity {
 								public void onLoading(long count, long current) {
 									super.onLoading(count, current);
 									int progress = (int) (current*100/count);
-									tvUpdatePrgs.setText("下载进度："+progress+"%");
+									tvUpdatePrgs.setText("下载进度："+progress+"%"); //改变进度条。
 									
 								}
 

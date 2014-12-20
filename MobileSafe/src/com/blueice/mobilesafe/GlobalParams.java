@@ -1,5 +1,7 @@
 package com.blueice.mobilesafe;
 
+import android.content.SharedPreferences;
+
 public class GlobalParams {
 	/**
 	 * 代理的IP
@@ -30,5 +32,7 @@ public class GlobalParams {
 	 * 如果登陆成功，记录用户名。
 	 */
 	public static String USERNAME;
+	
+	public static SharedPreferences sp;
 
 }
