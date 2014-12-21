@@ -36,7 +36,7 @@ public class BootCompleteReceiver extends BroadcastReceiver {
 			tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
 
 			// 读取之前保存的SiM信息；
-			String saveSim = sp.getString("sim", null)+"5556";
+			String saveSim = sp.getString("sim", null);
 
 			// 读取当前的sim卡信息
 			String realSim = tm.getSimSerialNumber();
@@ -52,17 +52,17 @@ public class BootCompleteReceiver extends BroadcastReceiver {
 				
 				PromptManager.showToast(context, "SIM卡已经变更");
 
-				String smsStr = "";
-				//发送的短信内容。
-				try {
-					
-					smsStr = new String("SIM卡已经变更....".getBytes(), "UTF-8");
-					
-				} catch (UnsupportedEncodingException e) {
-					e.printStackTrace();
-				}
+//				String smsStr = "";
+//				//发送的短信内容。
+//				try {
+//					
+//					smsStr = new String("SIM卡已经变更....".getBytes(), "UTF-8");
+//					
+//				} catch (UnsupportedEncodingException e) {
+//					e.printStackTrace();
+//				}
 				
-				SmsManager.getDefault().sendTextMessage(sp.getString("safenumber", null), null,"SIM卡已经变更....", null, null);
+				SmsManager.getDefault().sendTextMessage(sp.getString("safenumber", null), null,"SIM is change !!!", null, null);
 			}
 
 		}

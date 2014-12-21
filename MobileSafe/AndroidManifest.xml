@@ -36,6 +36,13 @@
 	<!-- 接收短信权限 -->
 	<uses-permission android:name="android.permission.RECEIVE_SMS"/>
 	
+	<!-- GPS权限 -->
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    
+    <!-- 模拟器GPS权限 -->
+    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION"/>
+	
 		
     <application
         android:allowBackup="true"
@@ -79,6 +86,8 @@
             </intent-filter>
         </receiver>
         
+        <!-- GPS获取服务 -->
+        <service android:name="com.blueice.mobilesafe.service.GPSService"/>
         
 
         <activity
