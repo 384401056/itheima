@@ -14,12 +14,29 @@
         android:targetPackage="com.blueice.mobilesafe" >
     </instrumentation>
 
+    <!-- 访问网络和获取网络状态 -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
+    <!-- 读取SIM卡状态和电话状态的权限 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    
+    <!-- 启动接收广播的权限 -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
     <!-- afinal框架需要的权限。 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
+    
+    <!-- 读取联系人权限 -->
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    
+    <!-- 发送短信权限 -->
+	<uses-permission android:name="android.permission.SEND_SMS"/>
+	
+	<!-- 接收短信权限 -->
+	<uses-permission android:name="android.permission.RECEIVE_SMS"/>
+	
+		
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -46,6 +63,43 @@
         <activity
             android:name=".SafeActivity"
             android:label="@string/title_activity_safe" >
+        </activity>
+
+        <!-- 接收BOOT_COMPLETED广播 -->
+        <receiver android:name="com.blueice.mobilesafe.receiver.BootCompleteReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        
+        <!-- 接收SMS_RECEIVED广播 定义的优先级别-->
+        <receiver android:name="com.blueice.mobilesafe.receiver.SMSReceiver" >
+            <intent-filter android:priority="1000">
+                <action android:name="android.provider.Telephony.SMS_RECEIVED"/>"
+            </intent-filter>
+        </receiver>
+        
+        
+
+        <activity
+            android:name=".Setup1Activity"
+            android:label="@string/title_activity_setup1" >
+        </activity>
+        <activity
+            android:name=".Setup2Activity"
+            android:label="@string/title_activity_setup2" >
+        </activity>
+        <activity
+            android:name=".Setup3Activity"
+            android:label="@string/title_activity_setup3" >
+        </activity>
+        <activity
+            android:name=".Setup4Activity"
+            android:label="@string/title_activity_setup4" >
+        </activity>
+        <activity
+            android:name=".SelectContactActivity"
+            android:label="@string/title_activity_select_contact" >
         </activity>
     </application>
 

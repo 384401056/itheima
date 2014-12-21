@@ -84,7 +84,7 @@ public class SplashActivity extends Activity {
 		tvVersion.setText("版本："+getVersion());
 		
 		//如果SharedPreferences中的update为true,则执行版本检查。
-		if(GlobalParams.sp.getBoolean("update", false)){
+		if(GlobalParams.sp.getBoolean("update", true)){
 			checkUpdate();
 		}else{
 			//延迟2秒再进入主页面。

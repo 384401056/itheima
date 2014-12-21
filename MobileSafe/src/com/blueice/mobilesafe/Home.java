@@ -126,9 +126,6 @@ public class Home extends Activity implements OnItemClickListener {
 			btnCancel = (Button) view.findViewById(R.id.cancel);
 			etPwd = (EditText) view.findViewById(R.id.et_setup_pwd);
 			
-			dialog = builder.create();
-			dialog.setView(view, 0, 0, 0, 0);//为了让低版本的显示没有黑边。
-			
 			/**
 			 * 确定按钮的事件处理。
 			 */
@@ -141,16 +138,18 @@ public class Home extends Activity implements OnItemClickListener {
 					
 					//检查输入的密码与已经保存的密码是否一致
 					if(savePwd.equals(pwd)){
-						
 						dialog.dismiss();
-						//进入手机安全界面。
 						
+						//进入手机安全界面。
+						startSafe();
 						Log.i("MyLog","进入手机安全界面");
+						
 					}else{
 						etPwd.setText("");
 						PromptManager.showToast(context, "密码错误。");
 					}
 				}
+
 			});
 			
 			/**
@@ -165,6 +164,8 @@ public class Home extends Activity implements OnItemClickListener {
 			
 //			builder.setView(view);
 //			dialog = builder.show();
+			dialog = builder.create();
+			dialog.setView(view, 0, 0, 0, 0);//为了让低版本的显示没有黑边。
 			dialog.show();
 			
 		}else{//如果没有设置过，打开设置密码对话框。
@@ -175,10 +176,7 @@ public class Home extends Activity implements OnItemClickListener {
 			btnCancel = (Button) view.findViewById(R.id.cancel);
 			etPwd = (EditText) view.findViewById(R.id.et_setup_pwd);
 			etConfPwd = (EditText) view.findViewById(R.id.et_setup_confirm);
-			
-			dialog = builder.create();
-			dialog.setView(view, 0, 0, 0, 0);//为了让低版本的显示没有黑边。
-			
+
 			/**
 			 * 确定按钮的事件处理。
 			 */
@@ -198,6 +196,7 @@ public class Home extends Activity implements OnItemClickListener {
 							dialog.dismiss();
 							
 							//进入手机安全界面。
+							startSafe();
 							Log.i("MyLog","进入手机安全界面");
 							
 						}else {
@@ -220,6 +219,8 @@ public class Home extends Activity implements OnItemClickListener {
 			
 //			builder.setView(view);
 //			dialog = builder.show();
+			dialog = builder.create();
+			dialog.setView(view, 0, 0, 0, 0);//为了让低版本的显示没有黑边。
 			dialog.show();
 		}
 
@@ -237,8 +238,17 @@ public class Home extends Activity implements OnItemClickListener {
 		});
 		
 	}
-
-
+	
+	
+	/**
+	 * 进入手机安全页面。
+	 */
+	private void startSafe() {
+		Intent intent = new Intent(context,SafeActivity.class);
+		startActivity(intent);
+	}
+	
+	
 	/**
 	 * 判断用户之前是否设置过密码。
 	 * @return
@@ -261,7 +271,6 @@ public class Home extends Activity implements OnItemClickListener {
 	 * 进入设置页面。
 	 */
 	private void startSetting() {
-		
 		Intent intent = new Intent(context,SettingActivity.class);
 		startActivity(intent);
 		

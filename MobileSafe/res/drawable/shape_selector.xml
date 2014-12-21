@@ -5,7 +5,6 @@
           
     <item android:state_focused="true"
           android:drawable="@drawable/gradient_box_pressed" /> <!-- focused -->
-          
-  
+         
     <item android:drawable="@drawable/gradient_box" /> <!-- default -->
 </selector>

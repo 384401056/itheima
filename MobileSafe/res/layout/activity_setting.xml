@@ -2,7 +2,6 @@
 <LinearLayout 
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:blueice="http://schemas.android.com/apk/res/com.blueice.mobilesafe"
-    
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
@@ -19,9 +18,9 @@
     
     <com.blueice.mobilesafe.ui.SettingSwichItem
         android:id="@+id/item_update"
-        blueice:myTitle="设置是否自动更新"
-        blueice:desc_on="自动更新已经开启"
-        blueice:desc_off="自动更新已经关闭"
+        blueice:myTitle="设置是否启动时检查更新"
+        blueice:desc_on="自动检查更新已经开启"
+        blueice:desc_off="自动检查更新已经关闭"
         android:layout_width="wrap_content"
     	android:layout_height="wrap_content">
     </com.blueice.mobilesafe.ui.SettingSwichItem>

@@ -17,5 +17,10 @@
     <string name="atools">高级工具</string>
     <string name="settings">设置中心</string>
     <string name="title_activity_safe">SafeActivity</string>
+    <string name="title_activity_setup1">Setup1Activity</string>
+    <string name="title_activity_setup2">Setup2Activity</string>
+    <string name="title_activity_setup3">Setup3Activity</string>
+    <string name="title_activity_setup4">Setup4Activity</string>
+    <string name="title_activity_select_contact">SelectContactActivity</string>
 
 </resources>
