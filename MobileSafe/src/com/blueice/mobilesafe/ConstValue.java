@@ -17,6 +17,10 @@ public interface ConstValue {
 	 */
 	String URI = "http://192.168.1.100/MLServer/xxx.html";
 
+	/**
+	 * 手机归属地数据库路径。
+	 */
+	String DBPATH = "data/data/com.blueice.mobilesafe/files/address.db";
 	
 }
 

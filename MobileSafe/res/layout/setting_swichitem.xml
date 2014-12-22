@@ -26,6 +26,7 @@
     <CheckBox
         android:clickable="false"
         android:focusable="false"
+        android:checked="true"
         android:id="@+id/cb_status"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="5dp"

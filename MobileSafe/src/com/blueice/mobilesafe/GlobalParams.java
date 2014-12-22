@@ -34,5 +34,8 @@ public class GlobalParams {
 	public static String USERNAME;
 	
 	public static SharedPreferences sp;
+	
+
+	
 
 }

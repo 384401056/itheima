@@ -95,7 +95,8 @@ public class Home extends Activity implements OnItemClickListener {
 			break;
 		case 6:  
 			break;
-		case 7:  
+		case 7: //进入高级工具
+			startTools();
 			break;
 		case 8:  //进入设置中心
 			startSetting();
@@ -104,6 +105,16 @@ public class Home extends Activity implements OnItemClickListener {
 	}
 	
 
+	/**
+	 * 进入高级工具界面。
+	 */
+	private void startTools() {
+		Intent intent = new Intent(context,ToolsActivity.class);
+		startActivity(intent);
+	}
+	
+	
+	
 	private Button btnConfirm;
 	private Button btnCancel;
 	private EditText etPwd;

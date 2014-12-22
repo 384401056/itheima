@@ -22,5 +22,9 @@
     <string name="title_activity_setup3">Setup3Activity</string>
     <string name="title_activity_setup4">Setup4Activity</string>
     <string name="title_activity_select_contact">SelectContactActivity</string>
+    <string name="sample_device_admin_description">安全卫士手机防盗需要设置此权限</string>
+    <string name="sample_device_admin">安全卫士手机防盗</string>
+    <string name="title_activity_tools">ToolsActivity</string>
+    <string name="title_activity_number_query">NumberQueryActivity</string>
 
 </resources>
