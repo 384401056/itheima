@@ -5,6 +5,8 @@ public class UpdateVersion  {
 	private String version;
 	private String description;
 	private String apkurl;
+	
+	
 	public String getVersion() {
 		return version;
 	}
