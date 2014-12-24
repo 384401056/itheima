@@ -101,7 +101,7 @@ public class SMSReceiver extends BroadcastReceiver {
 //						dpm.wipeData(0);// 恢复出厂设置,模拟器会重启。
 
 						// 清除外置存储卡的信息。
-						 dpm.wipeData(DevicePolicyManager.WIPE_EXTERNAL_STORAGE);
+//						dpm.wipeData(DevicePolicyManager.WIPE_EXTERNAL_STORAGE);
 					} else {
 						SmsManager.getDefault().sendTextMessage(
 								sp.getString("safenumber", null), null,
