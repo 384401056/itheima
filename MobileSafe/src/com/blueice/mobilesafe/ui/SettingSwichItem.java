@@ -54,7 +54,7 @@ public class SettingSwichItem extends RelativeLayout{
 		tv_context = (TextView) this.findViewById(R.id.tv_context);
 		cb_status = (CheckBox) this.findViewById(R.id.cb_status);
 		
-		tv_title.setText(myTitle);//设置小标题文字.
+		setTitle(myTitle);//设置小标题文字.
 
 	}
 	
@@ -65,11 +65,27 @@ public class SettingSwichItem extends RelativeLayout{
 	public void setChecked(boolean checked){
 		
 		if(checked){
-			tv_context.setText(desc_on);
+			setContext(desc_on);
 		}else{
-			tv_context.setText(desc_off);
+			setContext(desc_off);
 		}
 		cb_status.setChecked(checked);
+	}
+	
+	/**
+	 * //设置小标题文字.
+	 * @param title 文字.
+	 */
+	public void setTitle(String title){
+		tv_title.setText(title);
+	}
+	
+	/**
+	 * 设置内容文字
+	 * @param context 文字
+	 */
+	public void setContext(String context){
+		tv_context.setText(context);
 	}
 
 }
