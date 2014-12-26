@@ -1,26 +1,20 @@
 package com.blueice.mobilesafe.service;
 
+import com.blueice.mobilesafe.R;
 import com.blueice.mobilesafe.db.dao.NumberAddrQueryUtils;
-import com.blueice.mobilesafe.utils.PromptManager;
-
-import android.R;
-import android.R.integer;
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.PixelFormat;
-import android.location.GpsStatus.Listener;
 import android.os.IBinder;
-import android.provider.ContactsContract.CommonDataKinds.Im;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.WindowManager.LayoutParams;
-import android.widget.Toast;
+import android.widget.TextView;
 
 public class AddressService extends Service {
 
@@ -29,6 +23,7 @@ public class AddressService extends Service {
 	private MyPhoneStateListener listener;
 	private OutCallReceiver receiver; //去电的广播接收者。
 	private WindowManager wm;
+	private View toastView;
 	
 	@Override
 	public IBinder onBind(Intent intent) {
@@ -42,7 +37,6 @@ public class AddressService extends Service {
 		super.onCreate();
 		
 		this.context = AddressService.this;
-		
 		init();
 		
 	}
@@ -52,26 +46,9 @@ public class AddressService extends Service {
 		
 		Log.i("MyLog", "AddressService 开启..");
 
-		//获取窗体管理类，用来生成自定义的Toast.
+		//获取系统的窗体管理类，用来生成自定义的Toast.
 		wm = (WindowManager) getSystemService(WINDOW_SERVICE);
 
-		View view = View.inflate(context,R.layout.toast, null);
-		
-		//窗体管理类的参数设置。
-		WindowManager.LayoutParams params = new WindowManager.LayoutParams();
-		
-		 params.height = WindowManager.LayoutParams.WRAP_CONTENT;
-         params.width = WindowManager.LayoutParams.WRAP_CONTENT;
-         params.type = WindowManager.LayoutParams.TYPE_TOAST;
-         params.flags = WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON //保持屏幕开启
-                 | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE  //不允许有焦点
-                 | WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE; //不允许点击
-         params.format = PixelFormat.TRANSLUCENT; //半透明。
-//         params.windowAnimations = com.android.internal.R.style.Animation_Toast; //动画.
-//         params.setTitle("Toast");  //设置Toast的Title
-         
-		 wm.addView(view, params);
-		
 		//电话管理对象。
 		telephonyManager = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
 		
@@ -111,15 +88,36 @@ public class AddressService extends Service {
 		
 	}
 
-	@Override
-	public boolean onUnbind(Intent intent) {
-		// TODO Auto-generated method stub
-		return super.onUnbind(intent);
+	/**
+	 * 显示自定义的Toast.
+	 * @param text 要显示的文本。
+	 */
+	public void showMyToast(String text) {
+		
+		toastView = View.inflate(context,R.layout.my_toast, null);
+		TextView tv = (TextView)toastView.findViewById(R.id.tv);
+		
+		//窗体管理类的参数设置。
+		WindowManager.LayoutParams params = new WindowManager.LayoutParams();
+		
+		 params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+         params.width = WindowManager.LayoutParams.WRAP_CONTENT;
+         params.type = WindowManager.LayoutParams.TYPE_TOAST;
+         params.flags = WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON //保持屏幕开启
+                 | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE  //不允许有焦点
+                 | WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE; //不允许点击
+         params.format = PixelFormat.TRANSLUCENT; //半透明。
+//         params.windowAnimations = com.android.internal.R.style.Animation_Toast; //动画.
+//         params.setTitle("Toast");  //设置Toast的Title
+
+         tv.setText(text);
+		 wm.addView(toastView, params);
+		
 	}
 	
 	
+	
 	class MyPhoneStateListener extends PhoneStateListener{
-
 		/*
 		 * 当电话状态改变时。
 		 * 第一个参数是状态标志。
@@ -137,11 +135,16 @@ public class AddressService extends Service {
 				String address = NumberAddrQueryUtils.queryNumber(incomingNumber);
 				Log.i("MyLog", incomingNumber+"");
 				Log.i("MyLog", address);
-				PromptManager.showToast(getApplicationContext(), address);
-				break;
-			//当电话挂断的状态。
-			case TelephonyManager.CALL_STATE_OFFHOOK:
 				
+				showMyToast(address);
+				
+				break;
+			//当电话空闲、挂断、来电拒接的状态。
+			case TelephonyManager.CALL_STATE_IDLE:
+				//自定义Toast不再显示。
+				if(toastView!=null){
+					wm.removeView(toastView);
+				}
 				break;
 			}
 			
@@ -169,10 +172,17 @@ public class AddressService extends Service {
 			String address = NumberAddrQueryUtils.queryNumber(phone);
 			
 			//显示Toast.
-			PromptManager.showToast(context, address);
+//			PromptManager.showToast(context, address);
+			showMyToast(address);
 			
 		}
 
+	}
+	
+	@Override
+	public boolean onUnbind(Intent intent) {
+		// TODO Auto-generated method stub
+		return super.onUnbind(intent);
 	}
 
 }
