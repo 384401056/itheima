@@ -2,21 +2,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/black"
     android:orientation="vertical"
     >
 
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="111111111111111111" />
+        android:scrollbars="horizontal"
+        >
     
-	<com.example.chartdemo.MyChart
-	    android:layout_width="match_parent"
-	    android:layout_height="200dp" />
+    
+		<com.example.chartdemo.MyChart
+		    android:layout_width="1000dp"
+		    android:layout_height="200dp" 
+		    />
 	
-	<com.example.chartdemo.CommonChartView
-	    android:layout_width="match_parent"
-	    android:layout_height="200dp" />
+	</ScrollView>
+	
 
 </LinearLayout>

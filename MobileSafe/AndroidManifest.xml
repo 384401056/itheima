@@ -39,6 +39,9 @@
     <!-- GPS权限 -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    
+    <!-- 去电权限 -->
+    <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS"/>
 
     <!-- 模拟器GPS权限 -->
     <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
@@ -82,15 +85,20 @@
         <receiver android:name=".receiver.SMSReceiver" >
             <intent-filter android:priority="1000" >
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
-"
             </intent-filter>
         </receiver>
-
-        <!-- GPS获取服务 -->
-        <service android:name="com.blueice.mobilesafe.service.GPSService" />
         
-        <!-- 来电话监听服务 -->
-        <service  android:name="com.blueice.mobilesafe.service.AddressService"/>
+        <!-- 接收去电的广播，由于我们在代码中去注册和注销所以这里就不要了。
+         
+         <receiver 
+            android:name="com.blueice.mobilesafe.receiver.OutCallReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.NEW_OUTGOING_CALL"/>
+            </intent-filter>
+        </receiver>
+        
+        -->
+
 
         <!-- 一键锁屏、数据删除等与设备管理员相关的权限 description和label是显示在设备管理中文字信息。 -->
         <receiver
@@ -106,6 +114,12 @@
                 <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
             </intent-filter>
         </receiver>
+
+         <!-- GPS获取服务 -->
+        <service android:name="com.blueice.mobilesafe.service.GPSService" />
+        
+        <!-- 来电话监听服务 -->
+        <service  android:name="com.blueice.mobilesafe.service.AddressService"/>
 
         <activity
             android:name=".Setup1Activity"

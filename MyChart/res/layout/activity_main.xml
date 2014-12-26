@@ -1,0 +1,33 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="left"
+    android:background="@android:color/black"
+    >
+
+    
+    <HorizontalScrollView
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_marginRight="40dp"
+	    android:layout_marginLeft="40dp"
+	    android:scrollbars="horizontal"
+	    >
+  		
+        <RelativeLayout
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    >
+  
+			<com.example.mychart.MyChart
+			    android:layout_width="500dp"
+			    android:layout_height="200dp" 
+			    />
+			
+		</RelativeLayout>
+	
+	</HorizontalScrollView>
+    
+    
+</RelativeLayout>

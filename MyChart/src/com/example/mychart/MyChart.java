@@ -1,4 +1,4 @@
-package com.example.chartdemo;
+package com.example.mychart;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -42,7 +42,7 @@ public class MyChart extends View {
 
 	private String yUnit = "";// Y轴单位
 
-	private boolean isDrawY = true;// 是否绘制Y轴
+	private boolean isDrawY = false;// 是否绘制Y轴
 
 	private boolean isDrawX = true;// 是否绘制X轴
 
@@ -68,7 +68,7 @@ public class MyChart extends View {
 
 	private int paddingTop = 30;// 默认上下左右的padding
 
-	private int paddingLeft = 70;// 默认上下左右的padding
+	private int paddingLeft = 20;// 默认上下左右的padding
 
 	private int paddingRight = 30;// 默认上下左右的padding
 
@@ -145,7 +145,7 @@ public class MyChart extends View {
 				Float z = r.nextFloat() * 100;
 				pointInList.add(z);
 //				titleXList.add("12." + (i + 1) + "1");
-				titleXList.add(j+"时间");
+				titleXList.add(j+"点");
 			}
 			pointList.add(pointInList);
 		}
@@ -252,10 +252,10 @@ public class MyChart extends View {
 		}
 		if (isDrawInsideX) {// 绘制横向的
 			for (Point point : listY) {
-				if (!isDrawY) {
-					isDrawY = !isDrawY;
-					continue;
-				}
+//				if (!isDrawY) {
+//					isDrawY = !isDrawY;
+//					continue;
+//				}
 				int appendX = 0;
 				if (isAppendX) {
 					appendX = appendXLength;
@@ -270,12 +270,7 @@ public class MyChart extends View {
 		drawFill(canvas, positionList);// 填充折线和边框
 		drawChart(canvas, positionList);// 画折线
 		drawCicle(canvas, positionList);// 画点
-
 		setXTitle(listX, canvas);// 画折线图X的单位
-		
-		
-		
-		
 	}
 
 	/**
@@ -334,22 +329,27 @@ public class MyChart extends View {
 				int appendX = 13;
 				int appendY = 45;
 				DecimalFormat decimalFormat = new DecimalFormat("#.0");
-				String value = decimalFormat.format(pointList.get(i).get(j));
+				
 				
 				canvas.drawBitmap(bitmap, positionList.get(i).get(j).x + 0.5f- bitmap.getWidth() / 2, positionList.get(i).get(j).y
 						+ 0.5f - bitmap.getHeight() / 2, paint);
-//				 canvas.drawCircle(positionList.get(i).get(j).x,
-//				 positionList.get(i).get(j).y,
-//				 7, paint);
+//				 canvas.drawCircle(positionList.get(i).get(j).x,positionList.get(i).get(j).y,
+//				 15, paint);
+				String value = "";
+				if(i==0){
+					value = decimalFormat.format(pointList.get(i).get(j))+"℃";
+				}else{
+					value = decimalFormat.format(pointList.get(i).get(j))+"%";
+				}
 				
-//				Paint paintText = new Paint();
-//				paintText.setAntiAlias(true);
-//				paintText.setTextSize(20);
-//				paintText.setColor(lineColorList.get(i));
-//
-//				canvas.save();
-//				canvas.drawText(value, positionList.get(i).get(j).x - appendX , positionList.get(i).get(j).y - appendY + paddingDown / 2, paintText);
-//				canvas.restore();
+				Paint paintText = new Paint();
+				paintText.setAntiAlias(true);
+				paintText.setTextSize(20);
+				paintText.setColor(lineColorList.get(i));
+
+				canvas.save();
+				canvas.drawText(value, positionList.get(i).get(j).x - appendX , positionList.get(i).get(j).y - appendY + paddingDown / 2, paintText);
+				canvas.restore();
 
 			}
 		}
@@ -478,18 +478,18 @@ public class MyChart extends View {
 						* (maxNumber / (numberOfY - 1)))));
 			}
 		}
-		for (int i = 0; i < numberOfY; i++) {
-			int appendX = 20;
-			int appendY = 10;
-			if (isAppendX) {
-				appendX = appendXLength;
-			}
-			if (i != 0) {
-				canvas.drawText(titleYList.get(i), paddingLeft - appendX- paddingLeft / 3, paddingTop + appendY + listY.get(i).y, paint);
-			} else {
-				canvas.drawText(titleYList.get(i) + yUnit, paddingLeft- appendX - paddingLeft / 3, paddingTop + appendY + listY.get(i).y, paint);
-			}
-		}
+//		for (int i = 0; i < numberOfY; i++) {
+//			int appendX = 20;
+//			int appendY = 10;
+//			if (isAppendX) {
+//				appendX = appendXLength;
+//			}
+//			if (i != 0) {
+//				canvas.drawText(titleYList.get(i), paddingLeft - appendX- paddingLeft / 3, paddingTop + appendY + listY.get(i).y, paint);
+//			} else {
+//				canvas.drawText(titleYList.get(i) + yUnit, paddingLeft- appendX - paddingLeft / 3, paddingTop + appendY + listY.get(i).y, paint);
+//			}
+//		}
 	}
 
 	/**
