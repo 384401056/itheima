@@ -1,6 +1,7 @@
 package com.blueice.mobilesafe;
 
 
+import android.R.integer;
 import android.content.Intent;
 import android.os.Bundle;
 

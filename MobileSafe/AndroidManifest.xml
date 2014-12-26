@@ -87,7 +87,10 @@
         </receiver>
 
         <!-- GPS获取服务 -->
-        <service android:name=".service.GPSService" />
+        <service android:name="com.blueice.mobilesafe.service.GPSService" />
+        
+        <!-- 来电话监听服务 -->
+        <service  android:name="com.blueice.mobilesafe.service.AddressService"/>
 
         <!-- 一键锁屏、数据删除等与设备管理员相关的权限 description和label是显示在设备管理中文字信息。 -->
         <receiver

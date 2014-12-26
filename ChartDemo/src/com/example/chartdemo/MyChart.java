@@ -1,5 +1,6 @@
 package com.example.chartdemo;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -10,12 +11,11 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.Point;
-import android.graphics.Paint.Style;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.View.MeasureSpec;
 
 public class MyChart extends View {
 
@@ -48,7 +48,7 @@ public class MyChart extends View {
 
 	private boolean isDrawInsideX = true;// 是否绘制内部的X轴
 
-	private boolean isDrawInsedeY = true;// 是否绘制内部的Y轴
+	private boolean isDrawInsedeY = false;// 是否绘制内部的Y轴
 
 	private boolean isFillDown = false;// 是否填充点的下面部分
 
@@ -88,6 +88,34 @@ public class MyChart extends View {
 
 	private List<String> titleYList;// 计算得出的Y轴标题
 
+	
+	
+	
+	
+	public List<List<Float>> getPointList() {
+		return pointList;
+	}
+
+	public void setPointList(List<List<Float>> pointList) {
+		this.pointList = pointList;
+	}
+
+	public List<String> getTitleXList() {
+		return titleXList;
+	}
+
+	public void setTitleXList(List<String> titleXList) {
+		this.titleXList = titleXList;
+	}
+
+	public List<String> getTitleYList() {
+		return titleYList;
+	}
+
+	public void setTitleYList(List<String> titleYList) {
+		this.titleYList = titleYList;
+	}
+
 	public MyChart(Context context) {
 		super(context);
 		demo();
@@ -110,13 +138,14 @@ public class MyChart extends View {
 		lineColorList.add(Color.GREEN);
 		lineColorList.add(Color.YELLOW);
 
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < 2; i++) {
 			List<Float> pointInList = new ArrayList<Float>();
 			for (int j = 0; j < 6; j++) {
 				Random r = new Random();
 				Float z = r.nextFloat() * 100;
 				pointInList.add(z);
-				titleXList.add("12." + (i + 1) + "1");
+//				titleXList.add("12." + (i + 1) + "1");
+				titleXList.add(j+"时间");
 			}
 			pointList.add(pointInList);
 		}
@@ -291,19 +320,33 @@ public class MyChart extends View {
 			if (bitmapList != null && bitmapList.get(i) != null) {
 				resouceId = bitmapList.get(i);
 			} else {
-				resouceId = R.drawable.comm_chart_point;
+				resouceId = R.drawable.circle_high;
 			}
 
 			Bitmap bitmap = BitmapFactory.decodeResource(getResources(),
 					resouceId);
 
 			for (int j = 0; j < positionList.get(i).size(); j++) {
-//				canvas.drawBitmap(bitmap, positionList.get(i).get(j).x + 0.5f
-//						- bitmap.getWidth() / 2, positionList.get(i).get(j).y
-//						+ 0.5f - bitmap.getHeight() / 2, paint);
-				 canvas.drawCircle(positionList.get(i).get(j).x,
-				 positionList.get(i).get(j).y,
-				 7, paint);
+				
+				int appendX = 13;
+				int appendY = 45;
+				DecimalFormat decimalFormat = new DecimalFormat("#.0");
+				String value = decimalFormat.format(pointList.get(i).get(j));
+				
+				canvas.drawBitmap(bitmap, positionList.get(i).get(j).x + 0.5f- bitmap.getWidth() / 2, positionList.get(i).get(j).y
+						+ 0.5f - bitmap.getHeight() / 2, paint);
+//				 canvas.drawCircle(positionList.get(i).get(j).x,
+//				 positionList.get(i).get(j).y,
+//				 7, paint);
+				
+//				Paint paintText = new Paint();
+//				paintText.setAntiAlias(true);
+//				paintText.setTextSize(20);
+//				paintText.setColor(lineColorList.get(i));
+//
+//				canvas.save();
+//				canvas.drawText(value, positionList.get(i).get(j).x - appendX , positionList.get(i).get(j).y - appendY + paddingDown / 2, paintText);
+//				canvas.restore();
 
 			}
 		}
@@ -350,7 +393,8 @@ public class MyChart extends View {
 	 */
 	private void setXTitle(List<Point> listX, Canvas canvas) {
 		Paint paint = new Paint();
-		paint.setColor(Color.BLACK);
+		paint.setColor(Color.WHITE);
+		paint.setTextSize(20);
 		if (titleXList == null) {
 			titleXList = new ArrayList<String>();
 			for (int i = 1; i <= numberOfX; i++) {
@@ -358,11 +402,11 @@ public class MyChart extends View {
 			}
 		}
 		for (int i = 0; i < numberOfX; i++) {
+			int appendX = 15;
+			int appendY = 0;
 			canvas.save();
-			canvas.rotate(30, listX.get(i).x, listX.get(i).y + paddingTop
-					+ paddingDown / 2);
-			canvas.drawText(titleXList.get(i), listX.get(i).x, listX.get(i).y
-					+ paddingTop + paddingDown / 2, paint);
+			canvas.rotate(0, listX.get(i).x, listX.get(i).y + paddingTop+ paddingDown / 2);
+			canvas.drawText(titleXList.get(i), listX.get(i).x - appendX, listX.get(i).y+ paddingTop + paddingDown / 2, paint);
 			canvas.restore();
 		}
 	}
@@ -408,7 +452,8 @@ public class MyChart extends View {
 	 */
 	private void setYTitle(List<Point> listY, Canvas canvas) {
 		Paint paint = new Paint();
-		paint.setColor(Color.BLACK);
+		paint.setColor(Color.WHITE);
+		paint.setTextSize(20);
 		if (pointList == null) {
 			titleYList = new ArrayList<String>();
 			for (int i = 1; i <= numberOfY; i++) {
@@ -431,17 +476,15 @@ public class MyChart extends View {
 			}
 		}
 		for (int i = 0; i < numberOfY; i++) {
-			int appendX = 0;
+			int appendX = 20;
+			int appendY = 10;
 			if (isAppendX) {
 				appendX = appendXLength;
 			}
 			if (i != 0) {
-				canvas.drawText(titleYList.get(i), paddingLeft - appendX
-						- paddingLeft / 3, paddingTop + listY.get(i).y, paint);
+				canvas.drawText(titleYList.get(i), paddingLeft - appendX- paddingLeft / 3, paddingTop + appendY + listY.get(i).y, paint);
 			} else {
-				canvas.drawText(titleYList.get(i) + yUnit, paddingLeft
-						- appendX - paddingLeft / 3, paddingTop
-						+ listY.get(i).y, paint);
+				canvas.drawText(titleYList.get(i) + yUnit, paddingLeft- appendX - paddingLeft / 3, paddingTop + appendY + listY.get(i).y, paint);
 			}
 		}
 	}

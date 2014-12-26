@@ -24,6 +24,15 @@
         android:layout_width="wrap_content"
     	android:layout_height="wrap_content">
     </com.blueice.mobilesafe.ui.SettingSwichItem>
+    
+    <com.blueice.mobilesafe.ui.SettingSwichItem
+        android:id="@+id/item_showAddress"
+        blueice:myTitle="是否开启来电归属地显示"
+        blueice:desc_on="来电归属地显示已经开启"
+        blueice:desc_off="来电归属地显示已经关闭"
+        android:layout_width="wrap_content"
+    	android:layout_height="wrap_content">
+    </com.blueice.mobilesafe.ui.SettingSwichItem>
    
 
 </LinearLayout>
