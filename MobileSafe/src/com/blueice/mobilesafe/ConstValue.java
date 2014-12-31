@@ -1,7 +1,7 @@
 package com.blueice.mobilesafe;
 
 /**
- * 	需要用到的常理接口类。
+ * 	需要用到的常量接口类。
  * @author ServerAdmin
  *
  */
@@ -21,6 +21,9 @@ public interface ConstValue {
 	 * 手机归属地数据库路径。
 	 */
 	String DBPATH = "data/data/com.blueice.mobilesafe/files/address.db";
+	
+	
+	String[] toastStyle = {"半透明","活力橙","卫士蓝","金属灰","苹果绿"};
 	
 }
 

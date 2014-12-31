@@ -30,6 +30,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -62,6 +63,14 @@ public class SplashActivity extends Activity {
 		/**
 		 * 启动界面的功能： 1.显示Logo 2.应用程序数据初始化。 3.检查版本升级。 4.检查网络。 5.检查版权。
 		 */
+		
+		/**
+		 * 获取屏幕宽度、高度，存入全局变量类。
+		 */
+		DisplayMetrics metrics = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(metrics);
+		GlobalParams.WIN_WIDTH = metrics.widthPixels;
+		GlobalParams.WIN_HEIGHT = metrics.heightPixels;
 
 		initDB();
 

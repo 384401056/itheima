@@ -1,7 +1,10 @@
 package com.blueice.mobilesafe;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
@@ -9,6 +12,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 
 import com.blueice.mobilesafe.service.AddressService;
+import com.blueice.mobilesafe.ui.SettingClickItem;
 import com.blueice.mobilesafe.ui.SettingSwichItem;
 import com.blueice.mobilesafe.utils.ServiceUtils;
 
@@ -17,6 +21,7 @@ public class SettingActivity extends Activity {
 	private Context context;
 	private SettingSwichItem item_update;
 	private SettingSwichItem item_showAddress;
+	private SettingClickItem item_toastStyle;
 	private Intent shwoAddressService;
 	private Editor editor;
 
@@ -38,8 +43,13 @@ public class SettingActivity extends Activity {
 
 		item_showAddress = (SettingSwichItem) findViewById(R.id.item_showAddress);
 		itemShowAddressInit();
-
+		
+		
+		item_toastStyle = (SettingClickItem) findViewById(R.id.item_toastStyle);
+		item_toastStyleInit();
 	}
+
+	
 
 	/**
 	 * 由于服务可以在应用管理中手动关闭，所以要在此方法中再判断一次。
@@ -56,6 +66,49 @@ public class SettingActivity extends Activity {
 			item_showAddress.setChecked(false);
 		}
 	}
+	
+	
+	/**
+	 * 设置归属地显示的风格。
+	 */
+	private void item_toastStyleInit() {
+		
+		//设置控件的内容文字。
+		final int which = GlobalParams.sp.getInt("toastStyle", 0);
+		item_toastStyle.setContext(ConstValue.toastStyle[which]);
+
+		//设置控件的点击事件。
+		item_toastStyle.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				AlertDialog.Builder builder = new Builder(context);
+				
+				builder.setTitle(item_toastStyle.getMyTitle());
+				
+				//第三个参数，要使用DialogInterface.OnClickListener()全名，否则找不到这个接口,因为和外层点击事件重名了。
+				builder.setSingleChoiceItems(ConstValue.toastStyle , which, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						//保存选取的参数
+						Editor edit = GlobalParams.sp.edit();
+						edit.putInt("toastStyle", which);
+						edit.commit();
+						
+						//设置内容文字信息
+						item_toastStyle.setContext(ConstValue.toastStyle[which]);
+						
+						dialog.dismiss();
+					}
+				});
+				
+				builder.setNegativeButton("取消",null);
+				
+				builder.show();
+			}
+		});
+		
+	}
+	
 
 	/**
 	 * 是否开启来电归属地显示

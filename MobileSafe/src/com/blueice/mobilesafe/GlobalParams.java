@@ -17,7 +17,12 @@ public class GlobalParams {
 	 * 手机屏的宽度。
 	 */
 	public static int WIN_WIDTH = 0;
-
+	
+	/*
+	 * 手机屏的高度。
+	 */
+	public static int WIN_HEIGHT = 0;
+	
 	/**
 	 * 记录用户登陆状态。
 	 */
@@ -34,8 +39,5 @@ public class GlobalParams {
 	public static String USERNAME;
 	
 	public static SharedPreferences sp;
-	
-
-	
 
 }

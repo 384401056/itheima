@@ -45,6 +45,9 @@
 
     <!-- 模拟器GPS权限 -->
     <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
+    
+    <!-- 自定义可拖动Toast的权限 -->
+    <uses-permission  android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
 
     <application
         android:allowBackup="true"

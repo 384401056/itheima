@@ -33,6 +33,16 @@
         android:layout_width="wrap_content"
     	android:layout_height="wrap_content">
     </com.blueice.mobilesafe.ui.SettingSwichItem>
+    
+    <com.blueice.mobilesafe.ui.SettingClickItem
+        android:id="@+id/item_toastStyle"
+        blueice:myTitle="归属地提示框风格"
+        blueice:desc_on="来电归属地显示已经开启"
+        blueice:desc_off="来电归属地显示已经关闭"
+        android:layout_width="wrap_content"
+    	android:layout_height="wrap_content">
+    </com.blueice.mobilesafe.ui.SettingClickItem>
+    
    
 
 </LinearLayout>

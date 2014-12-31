@@ -23,7 +23,7 @@
         android:textColor="#999999"
         android:textSize="14sp" />
    
-    <CheckBox
+     <CheckBox
         android:clickable="false"
         android:focusable="false"
         android:checked="true"
