@@ -11,7 +11,7 @@ public class NumberAddrQueryUtils {
 	 * 查询数据库，
 	 * 
 	 * 数据库文件虽然已经放到raw文件下，但是还是必须复制到 data/data/com.blueice.mobilesafe/...的目录下才能被
-	 * SQLiteDatabase找到。
+	 * SQLiteDatabase找到,所以在程序一运行时就应该查检此文件是否存在，如果不存在则复制。
 	 * 
 	 * @param number
 	 *            电话号码。

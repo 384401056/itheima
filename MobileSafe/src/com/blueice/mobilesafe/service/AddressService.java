@@ -23,6 +23,10 @@ import com.blueice.mobilesafe.GlobalParams;
 import com.blueice.mobilesafe.R;
 import com.blueice.mobilesafe.db.dao.NumberAddrQueryUtils;
 
+/**
+ * 来电归属地显示服务
+ *
+ */
 public class AddressService extends Service {
 
 	private Context context;
@@ -119,7 +123,6 @@ public class AddressService extends Service {
 		toastView.setOnTouchListener(new OnTouchListener() {
 			int startX;
 			int startY;
-
 			@Override
 			public boolean onTouch(View view, MotionEvent event) {
 
@@ -144,6 +147,7 @@ public class AddressService extends Service {
 					// 改变Toast的参数。
 					params.x += dx;
 					params.y += dy;
+					
 					// 处理parms的边限问题。
 					if (params.x < 0) {
 						params.x = 0;

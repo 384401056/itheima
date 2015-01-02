@@ -39,16 +39,23 @@
     <!-- GPS权限 -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    
+
     <!-- 去电权限 -->
-    <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS"/>
+    <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
 
     <!-- 模拟器GPS权限 -->
     <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
-    
-    <!-- 自定义可拖动Toast的权限 -->
-    <uses-permission  android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
 
+    <!-- 自定义可拖动Toast的权限 -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    
+    <!-- 拨打电话和挂断电话的权限 -->
+	<uses-permission android:name="android.permission.CALL_PHONE"/>
+	
+	<!-- 删除通话记录的权限 -->
+	<uses-permission android:name="android.permission.READ_CALL_LOG"/>
+	<uses-permission android:name="android.permission.WRITE_CALL_LOG"/>
+	
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -90,16 +97,16 @@
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>
-        
-        <!-- 接收去电的广播，由于我们在代码中去注册和注销所以这里就不要了。
+
+        <!--
+        接收去电的广播，由于我们在代码中去注册和注销所以这里就不要了。
          
          <receiver 
             android:name="com.blueice.mobilesafe.receiver.OutCallReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.NEW_OUTGOING_CALL"/>
             </intent-filter>
-        </receiver>
-        
+        </receiver>
         -->
 
 
@@ -118,11 +125,14 @@
             </intent-filter>
         </receiver>
 
-         <!-- GPS获取服务 -->
-        <service android:name="com.blueice.mobilesafe.service.GPSService" />
-        
+        <!-- GPS获取服务 -->
+        <service android:name=".service.GPSService" />
+
         <!-- 来电话监听服务 -->
-        <service  android:name="com.blueice.mobilesafe.service.AddressService"/>
+        <service android:name=".service.AddressService" />
+        
+        <!-- 黑名单拦截服务 -->
+        <service android:name="com.blueice.mobilesafe.service.BlackListService"/>
 
         <activity
             android:name=".Setup1Activity"
@@ -151,6 +161,10 @@
         <activity
             android:name=".NumberQueryActivity"
             android:label="@string/title_activity_number_query" >
+        </activity>
+        <activity
+            android:name=".CallmsgsafeActivity"
+            android:label="@string/title_activity_callmsgsafe" >
         </activity>
     </application>
 

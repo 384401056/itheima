@@ -44,5 +44,14 @@
     </com.blueice.mobilesafe.ui.SettingClickItem>
     
    
+    <com.blueice.mobilesafe.ui.SettingSwichItem
+        android:id="@+id/item_blacklist"
+        blueice:myTitle="是否开启黑名单拦截"
+        blueice:desc_on="黑名单拦截已经开启"
+        blueice:desc_off="黑名单拦截已经关闭"
+        android:layout_width="wrap_content"
+    	android:layout_height="wrap_content">
+    </com.blueice.mobilesafe.ui.SettingSwichItem>
+    
 
 </LinearLayout>

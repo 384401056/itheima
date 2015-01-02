@@ -33,7 +33,7 @@ public class Home extends Activity implements OnItemClickListener {
 	private Context context;
 	private TextView tv01;
 	private GridView home_list;
-	
+	private Intent intent;
 	private MyListAdapter adapter;
 	
 	private static int[] names = {
@@ -83,7 +83,8 @@ public class Home extends Activity implements OnItemClickListener {
 		case 0:  //进入手机防盗
 			showSetPwdDialog();
 			break;
-		case 1:  
+		case 1: 
+			showCallMsgSafe();
 			break;
 		case 2:  
 			break;
@@ -104,16 +105,22 @@ public class Home extends Activity implements OnItemClickListener {
 		}
 	}
 	
+	/**
+	 * 进入通讯卫士界面。
+	 */
+	private void showCallMsgSafe() {
+		intent = new Intent(context,CallmsgsafeActivity.class);
+		startActivity(intent);
+	}
+
 
 	/**
 	 * 进入高级工具界面。
 	 */
 	private void startTools() {
-		Intent intent = new Intent(context,ToolsActivity.class);
+		intent = new Intent(context,ToolsActivity.class);
 		startActivity(intent);
 	}
-	
-	
 	
 	private Button btnConfirm;
 	private Button btnCancel;
@@ -255,7 +262,7 @@ public class Home extends Activity implements OnItemClickListener {
 	 * 进入手机安全页面。
 	 */
 	private void startSafe() {
-		Intent intent = new Intent(context,SafeActivity.class);
+		intent = new Intent(context,SafeActivity.class);
 		startActivity(intent);
 	}
 	
@@ -282,7 +289,7 @@ public class Home extends Activity implements OnItemClickListener {
 	 * 进入设置页面。
 	 */
 	private void startSetting() {
-		Intent intent = new Intent(context,SettingActivity.class);
+		intent = new Intent(context,SettingActivity.class);
 		startActivity(intent);
 		
 	}

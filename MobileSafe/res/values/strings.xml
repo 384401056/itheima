@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">手机卫士</string>
+    <string name="app_name">安全卫士</string>
     <string name="hello_world">Hello world!</string>
     <string name="is_positive">确定</string>
     <string name="title_activity_home">Home</string>
@@ -26,5 +26,6 @@
     <string name="sample_device_admin">安全卫士手机防盗</string>
     <string name="title_activity_tools">ToolsActivity</string>
     <string name="title_activity_number_query">NumberQueryActivity</string>
+    <string name="title_activity_callmsgsafe">CallmsgsafeActivity</string>
 
 </resources>

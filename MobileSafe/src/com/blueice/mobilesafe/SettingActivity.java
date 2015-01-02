@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 
 import com.blueice.mobilesafe.service.AddressService;
+import com.blueice.mobilesafe.service.BlackListService;
 import com.blueice.mobilesafe.ui.SettingClickItem;
 import com.blueice.mobilesafe.ui.SettingSwichItem;
 import com.blueice.mobilesafe.utils.ServiceUtils;
@@ -19,10 +20,18 @@ import com.blueice.mobilesafe.utils.ServiceUtils;
 public class SettingActivity extends Activity {
 
 	private Context context;
+	
 	private SettingSwichItem item_update;
 	private SettingSwichItem item_showAddress;
 	private SettingClickItem item_toastStyle;
+	private SettingSwichItem item_blacklist;
+	
+	/*
+	 * 服务的Intent
+	 */
 	private Intent shwoAddressService;
+	private Intent blackListService;
+	
 	private Editor editor;
 
 	@Override
@@ -44,12 +53,15 @@ public class SettingActivity extends Activity {
 		item_showAddress = (SettingSwichItem) findViewById(R.id.item_showAddress);
 		itemShowAddressInit();
 		
-		
 		item_toastStyle = (SettingClickItem) findViewById(R.id.item_toastStyle);
 		item_toastStyleInit();
+		
+		item_blacklist = (SettingSwichItem) findViewById(R.id.item_blacklist);
+		item_blacklistInit();
 	}
 
 	
+
 
 	/**
 	 * 由于服务可以在应用管理中手动关闭，所以要在此方法中再判断一次。
@@ -58,13 +70,47 @@ public class SettingActivity extends Activity {
 	protected void onResume() {
 		super.onResume();
 
-		// 判断服务是否在运行
-		boolean isRunning = ServiceUtils.isServiceRunning(context,"com.blueice.mobilesafe.service.AddressService");
-		if (isRunning) {
-			item_showAddress.setChecked(true); // 如果运行中为选中状态。
-		} else {
-			item_showAddress.setChecked(false);
-		}
+		// 判断归属地服务是否在运行
+		boolean isAddressServiceRunning = ServiceUtils.isServiceRunning(context,"com.blueice.mobilesafe.service.AddressService");
+		item_showAddress.setChecked(isAddressServiceRunning);// 如果运行中为选中状态。
+		
+		
+		//判断黑名单拦截是否在运行
+		boolean isBlackListRunning = ServiceUtils.isServiceRunning(context,"com.blueice.mobilesafe.service.BlackListService");
+		item_blacklist.setChecked(isBlackListRunning); // 如果运行中为选中状态。
+
+	}
+	
+	
+	/**
+	 * 开启和关闭黑名单拦截。
+	 */
+	private void item_blacklistInit() {
+		
+		blackListService = new Intent(this, BlackListService.class);
+
+		//判断黑名单拦截是否在运行
+		boolean isBlackListRunning = ServiceUtils.isServiceRunning(context,"com.blueice.mobilesafe.service.BlackListService");
+		item_blacklist.setChecked(isBlackListRunning); // 如果运行中为选中状态。
+		
+		
+		item_blacklist.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// 如果已被选中。
+				if (item_blacklist.isChecked()) {
+					item_blacklist.setChecked(false);
+					// 关闭服务
+					stopService(blackListService);
+				} else {
+					item_blacklist.setChecked(true);
+					// 开启服务
+					startService(blackListService);
+				}
+			}
+		});
+		
+		
 	}
 	
 	
@@ -111,20 +157,15 @@ public class SettingActivity extends Activity {
 	
 
 	/**
-	 * 是否开启来电归属地显示
+	 * 开启和关闭来电归属地显示
 	 */
 	private void itemShowAddressInit() {
 
 		shwoAddressService = new Intent(this, AddressService.class);
 
-		// 判断服务是否在运行
-		boolean isRunning = ServiceUtils.isServiceRunning(context,
-				"com.blueice.mobilesafe.service.AddressService");
-		if (isRunning) {
-			item_showAddress.setChecked(true); // 如果运行中为选中状态。
-		} else {
-			item_showAddress.setChecked(false);
-		}
+		// 判断归属地服务是否在运行
+		boolean isAddressServiceRunning = ServiceUtils.isServiceRunning(context, "com.blueice.mobilesafe.service.AddressService");
+		item_showAddress.setChecked(isAddressServiceRunning);// 如果运行中为选中状态。
 
 		item_showAddress.setOnClickListener(new OnClickListener() {
 			@Override
@@ -141,15 +182,13 @@ public class SettingActivity extends Activity {
 					startService(shwoAddressService);
 
 				}
-
-				editor.commit(); // 必须commit，否则存储不生效。
 			}
 		});
 
 	}
 
 	/**
-	 * 是否开启更新栏的初始化。
+	 * 是否开启自动更新。
 	 */
 	private void itemUpdateInit() {
 
