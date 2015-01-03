@@ -2,13 +2,9 @@ package com.blueice.mobilesafe.service;
 
 import java.lang.reflect.Method;
 
-import org.apache.commons.lang3.ObjectUtils.Null;
 
 import com.android.internal.telephony.ITelephony;
 import com.blueice.mobilesafe.db.dao.BlackListDao;
-import com.blueice.mobilesafe.db.dao.NumberAddrQueryUtils;
-import com.blueice.mobilesafe.service.AddressService.MyPhoneStateListener;
-
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
@@ -16,7 +12,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.ContentObserver;
-import android.database.Observable;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.IBinder;

@@ -86,7 +86,8 @@ public class Home extends Activity implements OnItemClickListener {
 		case 1: 
 			showCallMsgSafe();
 			break;
-		case 2:  
+		case 2:
+			showAppManager();
 			break;
 		case 3:  
 			break;
@@ -105,6 +106,16 @@ public class Home extends Activity implements OnItemClickListener {
 		}
 	}
 	
+	/**
+	 * 进入软件管理。
+	 */
+	private void showAppManager() {
+		intent = new Intent(context,AppManagerActivity.class);
+		startActivity(intent);
+	}
+
+
+
 	/**
 	 * 进入通讯卫士界面。
 	 */

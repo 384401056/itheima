@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="60dp"
+    >
+    
+     <ImageView 
+         android:id="@+id/iv_appicon"
+         android:layout_marginTop="10dp"
+         android:layout_marginLeft="5dp"
+         android:layout_marginRight="5dp"
+         android:layout_centerVertical="true"
+         android:src="@drawable/ic_launcher"
+         android:layout_width="50dp"
+         android:layout_height="50dp"
+         />
+     
+     
+     <TextView
+        android:id="@+id/tv_name"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        android:text="应用名称"
+        android:layout_toRightOf="@id/iv_appicon"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+     
+     
+     <TextView
+        android:id="@+id/tv_location"
+        android:textColor="#55000000"
+        android:textSize="12sp"
+        android:text="所在位置"
+        android:layout_below="@id/tv_name"
+        android:layout_toRightOf="@id/iv_appicon"
+        android:layout_marginTop="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+     
+     
+     <TextView
+        android:id="@+id/tv_type"
+        android:textColor="#55000000"
+        android:textSize="12sp"
+        android:text="应用类型"
+        android:layout_below="@id/tv_name"
+        android:layout_toRightOf="@id/tv_location"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+     
+     
+      <Button
+        android:id="@+id/btn_unstall"
+        android:textColor="#88000000"
+        android:textSize="14sp"
+        android:text="卸载"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="6dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="50dp"
+        android:layout_height="40dp" 
+        android:background="@drawable/button_bg"
+        />
+
+</RelativeLayout>

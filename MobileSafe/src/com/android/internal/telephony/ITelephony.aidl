@@ -18,7 +18,7 @@ package com.android.internal.telephony;
 
 import android.os.Bundle;
 import java.util.List;
-import android.telephony.NeighboringCellInfo;
+import com.android.telephony.NeighboringCellInfo;
 
 /**
  * Interface used to interact with the phone.  Mostly this is used by the

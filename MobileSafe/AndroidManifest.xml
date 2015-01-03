@@ -48,14 +48,14 @@
 
     <!-- 自定义可拖动Toast的权限 -->
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    
+
     <!-- 拨打电话和挂断电话的权限 -->
-	<uses-permission android:name="android.permission.CALL_PHONE"/>
-	
-	<!-- 删除通话记录的权限 -->
-	<uses-permission android:name="android.permission.READ_CALL_LOG"/>
-	<uses-permission android:name="android.permission.WRITE_CALL_LOG"/>
-	
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
+    <!-- 删除通话记录的权限 -->
+    <uses-permission android:name="android.permission.READ_CALL_LOG" />
+    <uses-permission android:name="android.permission.WRITE_CALL_LOG" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -106,7 +106,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.NEW_OUTGOING_CALL"/>
             </intent-filter>
-        </receiver>
+        </receiver>
         -->
 
 
@@ -130,9 +130,9 @@
 
         <!-- 来电话监听服务 -->
         <service android:name=".service.AddressService" />
-        
+
         <!-- 黑名单拦截服务 -->
-        <service android:name="com.blueice.mobilesafe.service.BlackListService"/>
+        <service android:name=".service.BlackListService" />
 
         <activity
             android:name=".Setup1Activity"
@@ -165,6 +165,10 @@
         <activity
             android:name=".CallmsgsafeActivity"
             android:label="@string/title_activity_callmsgsafe" >
+        </activity>
+        <activity
+            android:name=".AppManagerActivity"
+            android:label="@string/title_activity_app_manager" >
         </activity>
     </application>
 
