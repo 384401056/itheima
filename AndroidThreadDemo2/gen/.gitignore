@@ -1,2 +1,5 @@
 /android/
 /com/
+/.gitignore.BASE.gitignore
+/.gitignore.LOCAL.gitignore
+/.gitignore.REMOTE.gitignore
