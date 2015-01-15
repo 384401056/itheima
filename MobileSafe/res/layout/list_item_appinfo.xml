@@ -54,6 +54,9 @@
      
       <Button
         android:id="@+id/btn_unstall"
+        android:focusable="false"
+        android:clickable="false"
+        android:focusableInTouchMode="false"
         android:textColor="#88000000"
         android:textSize="14sp"
         android:text="卸载"

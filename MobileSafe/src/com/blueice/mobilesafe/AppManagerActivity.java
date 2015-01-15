@@ -10,22 +10,27 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.StatFs;
 import android.text.format.Formatter;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.webkit.WebSettings.TextSize;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.blueice.mobilesafe.beam.AppInfo;
 import com.blueice.mobilesafe.engine.AppInfoEngine;
+import com.blueice.mobilesafe.utils.DensityUtil;
 
 public class AppManagerActivity extends Activity {
 
@@ -39,6 +44,8 @@ public class AppManagerActivity extends Activity {
 	private List<AppInfo> userApps;
 	private List<AppInfo> systemApps;
 	private MyAppListAdapter adapter;
+	private AppInfo appInfo;	//ListView中的应用程序信息。
+	private PopupWindow popu;	//点击ListView的Item弹出的气泡窗体。
 	
 	
 	@Override
@@ -49,6 +56,12 @@ public class AppManagerActivity extends Activity {
 		init();
 	}
 
+	
+	@Override
+	protected void onDestroy() {
+		popuWinDismiss(); //在Activity关闭后再关闭一次PopupWindow.
+		super.onDestroy();
+	}
 
 
 	private void init() {
@@ -58,6 +71,47 @@ public class AppManagerActivity extends Activity {
 		lv_appList = (ListView) findViewById(R.id.lv_appList);
 		ll_loading = (LinearLayout) findViewById(R.id.ll_loading);
 		tv_appTitle = (TextView) findViewById(R.id.tv_appTitle);
+		
+		/**
+		 * ListView条目点击事件,如果ListView中有可点击的组件，会使此事件无效。需要对它们设置以下属性。
+		 * android:focusable="false" 其中这个属性是关键。
+		 * android:clickable="false" 
+		 * android:focusableInTouchMode="false"
+		 * 
+		 */
+		lv_appList.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				
+				//如果点击的是分栏的条目，就不外理。
+				if(position==0||position==userApps.size()+1){
+					return;
+				}
+				
+				//如果是用户程序。
+				if(position<=userApps.size()){
+					int newPosition = position-1; //减去条目的位置。
+					appInfo = userApps.get(newPosition);//获取userApps中的应用程序信息。
+				}else{
+					//否则都是系统程序。
+					int newPosition = position-2-userApps.size();//减去条目的位置。
+					appInfo = systemApps.get(newPosition);
+				}
+				
+				popuWinDismiss();
+				
+				View contentView = View.inflate(context, R.layout.appmanager_popuwindow, null);
+				popu = new PopupWindow(contentView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+				
+				int[] location = new int[2];
+				view.getLocationInWindow(location);//获取当前点击条目的位置。
+				//设置popu的显示位置。
+				int x = DensityUtil.dip2px(context, 55);//将dip转为像素值。
+				popu.showAtLocation(parent, Gravity.LEFT | Gravity.TOP, location[0]+x, location[1]);
+
+			}
+		});
 		
 		
 		/*
@@ -74,6 +128,9 @@ public class AppManagerActivity extends Activity {
 			 */
 			@Override
 			public void onScroll(AbsListView view, int firstVisibleItem,int visibleItemCount, int totalItemCount) {
+				
+				popuWinDismiss();
+				
 				if (userApps != null && systemApps != null) {
 					
 					//当一开始时tv_appTitle是隐藏的，只有拖动了一个条目后才显示
@@ -100,15 +157,28 @@ public class AppManagerActivity extends Activity {
 		initTextView();
 		adapter = new MyAppListAdapter();
 		getAppData();
+		
+
 
 	}
+	
+	
+	/**
+	 * 关闭PopupWindow
+	 */
+	private void popuWinDismiss() {
+		if(popu!=null && popu.isShowing()){
+			popu.dismiss();
+			popu=null;
+		}
+	}
+	
 	
 	/**
 	 * 在子线程中获取appList数据.
 	 */
 	private void getAppData() {
 		ll_loading.setVisibility(View.VISIBLE);
-		
 		
 		new Thread(){
 			public void run() {
@@ -126,20 +196,15 @@ public class AppManagerActivity extends Activity {
 					}
 				}
 				
-				
 				runOnUiThread(new Runnable() {
 					public void run() {
 						lv_appList.setAdapter(adapter);
 						ll_loading.setVisibility(View.INVISIBLE);
 					}
 				});
-				
-				
 			};
 		}.start();
-		
 	}
-
 
 
 	/**
@@ -173,7 +238,7 @@ public class AppManagerActivity extends Activity {
 	}
 	
 	
-	
+
 	private class MyAppListAdapter extends BaseAdapter{
 
 		@Override
@@ -254,6 +319,13 @@ public class AppManagerActivity extends Activity {
 				hodler.btn_unstall = (Button) view.findViewById(R.id.btn_unstall);
 				view.setTag(hodler);
 			}
+			
+			hodler.btn_unstall.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Log.i("MyLog","btn_unstall");
+				}
+			});
 			
 			//更新数据到UI
 			hodler.iv_appicon.setImageDrawable(appInfo.getIcon());

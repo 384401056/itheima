@@ -2,6 +2,10 @@ package com.blueice.mobilesafe.beam;
 
 import android.graphics.drawable.Drawable;
 
+/**
+ * 手机内应用程序的Bean
+ *
+ */
 public class AppInfo {
 
 	private Drawable icon;
