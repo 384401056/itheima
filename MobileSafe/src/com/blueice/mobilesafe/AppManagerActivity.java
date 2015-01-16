@@ -5,7 +5,13 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.StatFs;
@@ -31,8 +37,9 @@ import android.widget.TextView;
 import com.blueice.mobilesafe.beam.AppInfo;
 import com.blueice.mobilesafe.engine.AppInfoEngine;
 import com.blueice.mobilesafe.utils.DensityUtil;
+import com.blueice.mobilesafe.utils.PromptManager;
 
-public class AppManagerActivity extends Activity {
+public class AppManagerActivity extends Activity implements OnClickListener {
 
 	private Context context;
 	private TextView tv_rom;
@@ -46,6 +53,11 @@ public class AppManagerActivity extends Activity {
 	private MyAppListAdapter adapter;
 	private AppInfo appInfo;	//ListView中的应用程序信息。
 	private PopupWindow popu;	//点击ListView的Item弹出的气泡窗体。
+	
+	
+	private LinearLayout ll_start;
+	private LinearLayout ll_uninstall;
+	private LinearLayout ll_share;
 	
 	
 	@Override
@@ -104,6 +116,21 @@ public class AppManagerActivity extends Activity {
 				View contentView = View.inflate(context, R.layout.appmanager_popuwindow, null);
 				popu = new PopupWindow(contentView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 				
+				
+				ll_start = (LinearLayout) contentView.findViewById(R.id.ll_start);
+				ll_uninstall = (LinearLayout) contentView.findViewById(R.id.ll_uninstall);
+				ll_share = (LinearLayout) contentView.findViewById(R.id.ll_share);
+				
+				/**
+				 * 设置PopupWindow中的点击事件。
+				 */
+				ll_start.setOnClickListener(AppManagerActivity.this);
+				ll_uninstall.setOnClickListener(AppManagerActivity.this);
+				ll_share.setOnClickListener(AppManagerActivity.this);
+				
+				//设置PopupWindow的背景颜色为透明，如果要给PopupWindow设置动画效果则必须设置背景色。
+				popu.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT)); 
+				
 				int[] location = new int[2];
 				view.getLocationInWindow(location);//获取当前点击条目的位置。
 				//设置popu的显示位置。
@@ -155,14 +182,77 @@ public class AppManagerActivity extends Activity {
 		
 		
 		initTextView();
-		adapter = new MyAppListAdapter();
 		getAppData();
 		
-
-
 	}
 	
 	
+	@Override
+	public void onClick(View v) {
+
+		popuWinDismiss();
+		
+		switch (v.getId()) {
+		case R.id.ll_start:
+			Log.i("MyLog","启动"+appInfo.getName());
+			startApplication();
+			break;
+		case R.id.ll_uninstall:
+			Log.i("MyLog","卸载"+appInfo.getName());
+			uninstallApplication();
+			break;
+		case R.id.ll_share:
+			Log.i("MyLog","分享"+appInfo.getName());
+			
+			break;
+		}
+		
+		
+	}
+	
+	/**
+	 * 卸载选中的应用。
+	 */
+	private void uninstallApplication() {
+
+		Intent intent = new Intent();
+		intent.setAction("android.intent.action.VIEW");
+		intent.setAction("android.intent.action.DELETE");
+		intent.addCategory("android.intent.category.DEFAULT");
+		intent.setData(Uri.parse("package:"+appInfo.getPackName()));
+		startActivityForResult(intent, 0);
+	}
+
+	/**
+	 * 当卸载应用后返回此Activity时执行的代码。
+	 */
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		getAppData();//重新获取一次App的数据。达到刷新的目的。
+		super.onActivityResult(requestCode, resultCode, data);
+	}
+
+	/**
+	 * 启动选中的应用。
+	 */
+	private void startApplication() {
+		PackageManager pm = getPackageManager();
+		
+//		Intent intent = new Intent();
+//		intent.setAction("android.intent.action.MAIN");
+//		intent.addCategory("android.intent.category.LAUNCHER");
+//		//获取手机上所有可以启动的Activity.
+//		List<ResolveInfo> lancherActivities = pm.queryIntentActivities(intent, PackageManager.GET_INTENT_FILTERS);
+		
+		Intent launchIntent = pm.getLaunchIntentForPackage(appInfo.getPackName());
+		if(launchIntent==null){
+			PromptManager.showToast(context, "对不起，该应用无法启动。");
+		}else{
+			startActivity(launchIntent);
+		}
+	}
+
+
 	/**
 	 * 关闭PopupWindow
 	 */
@@ -178,6 +268,7 @@ public class AppManagerActivity extends Activity {
 	 * 在子线程中获取appList数据.
 	 */
 	private void getAppData() {
+		
 		ll_loading.setVisibility(View.VISIBLE);
 		
 		new Thread(){
@@ -198,7 +289,14 @@ public class AppManagerActivity extends Activity {
 				
 				runOnUiThread(new Runnable() {
 					public void run() {
-						lv_appList.setAdapter(adapter);
+						//如果ListView适配器为空，则先创建适配器。否则只要更新就可以了。
+						if(adapter==null){
+							adapter = new MyAppListAdapter();
+							lv_appList.setAdapter(adapter);
+						}else{
+							adapter.notifyDataSetChanged();
+						}
+						
 						ll_loading.setVisibility(View.INVISIBLE);
 					}
 				});
@@ -363,8 +461,7 @@ public class AppManagerActivity extends Activity {
 		TextView tv_type;
 		Button btn_unstall;
 	}
-	
-	
+
 }
 
 
