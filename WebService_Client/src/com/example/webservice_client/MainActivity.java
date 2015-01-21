@@ -7,13 +7,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import org.ksoap2.SoapEnvelope;
-import org.ksoap2.SoapFault;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
-import org.xmlpull.v1.XmlPullParserException;
-
-import sun.util.logging.resources.logging;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
