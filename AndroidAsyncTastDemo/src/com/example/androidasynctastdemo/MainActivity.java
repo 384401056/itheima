@@ -66,7 +66,6 @@ public class MainActivity extends Activity {
 				String url = ed01.getText().toString().trim();
 				
 				if(!"".equals(url)){
-					
 					//执行同步任务。将输入的url传入。
 					new MyAsyncTast().execute(url);
 					

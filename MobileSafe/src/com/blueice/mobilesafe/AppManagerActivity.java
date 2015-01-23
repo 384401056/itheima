@@ -442,10 +442,6 @@ public class AppManagerActivity extends Activity implements OnClickListener {
 				hodler.tv_type.setText("类型:系统应用");
 			}
 			
-			if(appInfo.isUserApp()){
-				
-			}
-			
 			
 			return view;
 		}
