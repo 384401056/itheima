@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:orientation="vertical" >
+    
+    <LinearLayout 
+        android:id="@+id/ll_news"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:gravity="center_vertical"
+	    android:layout_margin="10dp"
+	    android:orientation="horizontal" >
+    
+    <ImageView 
+        android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:src="@drawable/icon_favorite"
+        />
+    
+    <TextView 
+        android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:layout_marginLeft="20dp"
+    	android:textColor="@color/white"
+    	android:text="新闻"
+        />
+
+    </LinearLayout>
+    
+    <LinearLayout
+        android:id="@+id/ll_topic"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:gravity="center_vertical"
+	    android:layout_margin="10dp"
+	    android:orientation="horizontal" >
+    
+    <ImageView 
+        android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:src="@drawable/icon_favorite"
+        />
+    
+    <TextView 
+        android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:layout_marginLeft="20dp"
+    	android:textColor="@color/white"
+    	android:text="专题"
+        />
+
+    </LinearLayout>
+    
+    <LinearLayout 
+        android:id="@+id/ll_picture"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:gravity="center_vertical"
+	    android:layout_margin="10dp"
+	    android:orientation="horizontal" >
+    
+    <ImageView 
+        android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:src="@drawable/icon_favorite"
+        />
+    
+    <TextView 
+        android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:layout_marginLeft="20dp"
+    	android:textColor="@color/white"
+    	android:text="组图"
+        />
+
+    </LinearLayout>
+    
+    <LinearLayout 
+        android:id="@+id/ll_vote"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:gravity="center_vertical"
+	    android:layout_margin="10dp"
+	    android:orientation="horizontal" >
+    
+    <ImageView 
+        android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:src="@drawable/icon_favorite"
+        />
+    
+    <TextView 
+        android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:layout_marginLeft="20dp"
+    	android:textColor="@color/white"
+    	android:text="投票"
+        />
+
+    </LinearLayout>
+</LinearLayout>
