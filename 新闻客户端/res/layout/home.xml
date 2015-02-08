@@ -1,17 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@color/white"
-    android:orientation="vertical" >
-
-    <ImageView
+    android:orientation="vertical"
+    >
+    
+        <!--
+         <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1.0" />
+    -->
+    <com.example.news.view.NoTouchViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="0dip"
         android:layout_weight="1.0"
-       
          />
+    <!-- </FrameLayout> -->
 
     <RadioGroup
         android:id="@+id/main_radio"
@@ -27,6 +35,7 @@
             android:id="@+id/rb_function"
             style="@style/main_tab_bottom"
             android:drawableTop="@drawable/icon_function"
+            android:checked="true"
             android:text="@string/tab_function" />
 
 

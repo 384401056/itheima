@@ -23,8 +23,6 @@ public class MenuFragment extends Fragment implements OnClickListener {
 	private LinearLayout ll_vote;
 	
 
-
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		Log.i("MyLog", "onCreate");
@@ -72,7 +70,7 @@ public class MenuFragment extends Fragment implements OnClickListener {
 			f = new Picture();
 			break;
 		case R.id.ll_vote:
-			f = new Vote();
+			f = new Home();
 			break;
 		}
 		

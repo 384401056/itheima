@@ -32,17 +32,17 @@ public class MainActivity extends Activity {
 	};
 	
 	private final String[] discription = {
-			"Ì©¿­Ë¹",
-			"ÄÂÀ­¶¡",
-			"À×¼Ó¶û",
-			"¿­Èğ¸Ê",
-			"Ì©Èğ¶û"	
+			"å·©ä¿ä¸ä½ä¿—ï¼Œæˆ‘å°±ä¸èƒ½ä½ä¿—",
+			"æ‰‘æ ‘åˆå›æ¥å•¦ï¼å†å”±ç»å…¸è€æ­Œå¼•ä¸‡äººå¤§åˆå”±",
+			"æ­ç§˜åŒ—äº¬ç”µå½±å¦‚ä½•å‡çº§",
+			"ä¹è§†ç½‘TVç‰ˆå¤§æ´¾é€",
+			"çƒ­è¡€å±Œä¸çš„åæ€"	
 	};
 	
 	
 	private List<ImageView> imageList = new ArrayList<ImageView>();
 	
-	//ÉÏÒ»¸öµÄµãµÄÎ»ÖÃ¡£
+	//ä¸Šä¸€ä¸ªé¡µé¢çš„ä½ç½®
 	protected int lastPosition = 0;
 	
 
@@ -59,16 +59,16 @@ public class MainActivity extends Activity {
 
 		for (int i = 0; i < images.length; i++) {
 			
-			//Ìí¼ÓÍ¼Æ¬µ½imageList.
+			//åˆå§‹åŒ–å›¾ç‰‡èµ„æº
 			ImageView iv = new ImageView(this);
 			iv.setBackgroundResource(images[i]);
 			imageList.add(iv);
 			
-			//Ìí¼Óµãµ½Linearlayout.
+			//æ·»åŠ æŒ‡ç¤ºç‚¹
 			ImageView point = new ImageView(this);
 			
 			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(20,20); 
-			params.rightMargin = 15;     //ÉèÖÃImageViewµÄmargin_rigthÊôĞÔ¡£
+			params.rightMargin = 15; 
 			point.setLayoutParams(params);
 			
 			point.setBackgroundResource(R.drawable.point_selector);
@@ -79,7 +79,6 @@ public class MainActivity extends Activity {
 			}
 			pointGroup.addView(point);
 			
-			//Ô²µãµÄµã»÷ÊÂ¼ş¡£
 			point.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -95,17 +94,19 @@ public class MainActivity extends Activity {
 		
 		viewPager.setOnPageChangeListener(new OnPageChangeListener() {
 			/**
-			 * Ò³ÃæÇĞ»»Ê±µ÷ÓÃ´Ë·½·¨¡£
+			 * é¡µé¢åˆ‡æ¢åè°ƒç”¨ 
+			 * position  æ–°çš„é¡µé¢ä½ç½®
 			 */
 			@Override
 			public void onPageSelected(int position) {
 				
-				//ÉèÖÃÎÄ±¾ÏÔÊ¾
+				//è®¾ç½®æ–‡å­—æè¿°å†…å®¹
 				imageDisc.setText(discription[position]);
 				
-				//ÉèÖÃpointµÄÏÔÊ¾,ÕâÀïÒª×¢Òâ£¬ÉèÖÃÒÑºóÒª°ÑÉÏÒ»¸öµã»Ö¸´Îªfalse
+				//æ”¹å˜æŒ‡ç¤ºç‚¹çš„çŠ¶æ€
+				//æŠŠå½“å‰ç‚¹enbale ä¸ºtrue 
 				pointGroup.getChildAt(position).setEnabled(true);
-				
+				//æŠŠä¸Šä¸€ä¸ªç‚¹è®¾ä¸ºfalse
 				pointGroup.getChildAt(lastPosition).setEnabled(false);
 
 				lastPosition = position;
@@ -113,7 +114,7 @@ public class MainActivity extends Activity {
 			}
 			
 			/**
-			 * Ò³ÃæÕıÔÚÇĞ»»£¬²»¶ÏµØ»Øµ÷¡£
+			 * é¡µé¢æ­£åœ¨æ»‘åŠ¨çš„æ—¶å€™ï¼Œå›è°ƒ
 			 */
 			@Override
 			public void onPageScrolled(int position, float positionOffset,
@@ -122,29 +123,35 @@ public class MainActivity extends Activity {
 			}
 			
 			/**
-			 * Ò³Ãæ×´Ì¬¸Ä±äÊ±¡£
+			 * å½“é¡µé¢çŠ¶æ€å‘ç”Ÿå˜åŒ–çš„æ—¶å€™ï¼Œå›è°ƒ
 			 */
 			@Override
 			public void onPageScrollStateChanged(int state) {
 				
 			}
 		});
+		
+		/*
+		  * è‡ªåŠ¨å¾ªç¯ï¼š
+		  * 1ã€å®šæ—¶å™¨ï¼šTimer
+		  * 2ã€å¼€å­çº¿ç¨‹ while  true å¾ªç¯
+		  * 3ã€ColckManager 
+		  * 4ã€ ç”¨handler å‘é€å»¶æ—¶ä¿¡æ¯ï¼Œå®ç°å¾ªç¯
+		  */
+//		 isRunning = true;
+//		 handler.sendEmptyMessageDelayed(0, 2000);
 
 	}
 	
-
 	/**
-	 * ×Ô¶¨ÒåPagerAdapterÀà¡£
-	 *
+	 * åˆ¤æ–­æ˜¯å¦è‡ªåŠ¨æ»šåŠ¨
 	 */
+//	private boolean isRunning = false;
+	
 	class MyPageAdapter extends PagerAdapter{
 
 		/**
-		 * Èç¹ûÒªÏÖÊµ×óÓÒ»¬¶¯ÎŞÏŞÑ­»·µÄ¹¦ÄÜ£¬Òª°ÑgetCountµÄ·µ»ØÖµÉèÎªÒ»¸öInteger.MAX_VALUE.
-		 * ÓÃÕâ¸öºÜ´óµÄÊıÖµ¶ÔimageList.size()È¡ÓàÕâÑù¾Í»¹ÊÇ»áµÃµ½ 0-imageList.size()Ö®¼äµÄÊı£¬ÕâÑùÓÒ±ßµÄÊıºÜÄÑ»¬¶¯µ½×îºó£¬²¢ÇÒ³¬¹ı5¾Í»á±äÎª0.
-		 * Èç¹û°ÑÒ»¿ªÊ¼viewPager.setCurrentItem()ÉèÖÃÎªInteger.MAX_VALUEµÄÒ»°ë£¬ÄÇĞ©Ïò×ó±ß»¬¶¯Ò²¿ÉÒÔÑ­»·ÁË£¬²¢ÇÒ³¬¹ı0¾Í±äÎªÁË5.
-		 * 
-		 * ×Ô¶¯Ñ­»·¾ÍÓÃHandlerµÄĞÅÏ¢¶ÓÁĞ¾Í¿ÉÒÔÊµÏÖ¡£¼ÇµÃ³ÌĞòonDestroyÊ±£¬Í£Ö¹ĞÅÏ¢·¢ËÍ¡£
+		 * è·å¾—é¡µé¢çš„æ€»æ•°
 		 */
 		@Override
 		public int getCount() {
@@ -154,12 +161,14 @@ public class MainActivity extends Activity {
 
 		
 		/**
-		 * »ñÈ¡ÏàÓ¦Î»ÖÃÉÏµÄView
+		 * è·å¾—ç›¸åº”ä½ç½®ä¸Šçš„view
+		 * container  viewçš„å®¹å™¨ï¼Œå…¶å®å°±æ˜¯viewpagerè‡ªèº«
+		 * position 	ç›¸åº”çš„ä½ç½®
 		 */
 		@Override
 		public Object instantiateItem(ViewGroup container, int position) {
 			
-			//¸øViewPagerµÄÈİÆ÷Ìí¼ÓView.²¢·µ»Ø´Ëview
+			//ï¿½ï¿½ViewPagerï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½View.ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½view
 			container.addView(imageList.get(position));
 			return imageList.get(position);
 			
@@ -168,7 +177,7 @@ public class MainActivity extends Activity {
 
 
 		/**
-		 * Ïú»ÙÏàÓ¦Î»ÖÃÉÏµÄView.
+		 * é”€æ¯å¯¹åº”ä½ç½®ä¸Šçš„object
 		 */
 		@Override
 		public void destroyItem(ViewGroup container, int position, Object object) {
@@ -180,7 +189,7 @@ public class MainActivity extends Activity {
 
 
 		/**
-		 * ÅĞ¶Ïview ºÍ objectÖ®¼äµÄ¹ØÏµ¡£
+		 * åˆ¤æ–­ viewå’Œobjectçš„å¯¹åº”å…³ç³» 
 		 */
 		@Override
 		public boolean isViewFromObject(View view, Object object) {
