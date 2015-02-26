@@ -21,10 +21,14 @@ import com.example.news.home.SettingPage;
 import com.example.news.home.SmartServicePage;
 import com.example.news.view.LazyViewPager.OnPageChangeListener;
 import com.example.news.view.NoTouchViewPager;
+import com.lidroid.xutils.ViewUtils;
+import com.lidroid.xutils.view.annotation.ViewInject;
 
 public class Home extends BasicFragment {
 
+	@ViewInject(R.id.viewpager)
 	private NoTouchViewPager viewPager;
+	@ViewInject(R.id.main_radio)
 	private RadioGroup main_radio;
 	private int checkedId = R.id.rb_function;
 	
@@ -35,8 +39,10 @@ public class Home extends BasicFragment {
 		
 		View view = inflater.inflate(R.layout.home, null);
 		
-		viewPager = (NoTouchViewPager) view.findViewById(R.id.viewpager);
-		main_radio = (RadioGroup) view.findViewById(R.id.main_radio);
+		ViewUtils.inject(this,view);
+		
+//		viewPager = (NoTouchViewPager) view.findViewById(R.id.viewpager);
+//		main_radio = (RadioGroup) view.findViewById(R.id.main_radio);
 
 		return view;
 	}
