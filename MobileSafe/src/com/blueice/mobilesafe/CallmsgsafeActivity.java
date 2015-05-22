@@ -50,9 +50,9 @@ public class CallmsgsafeActivity extends Activity {
 	private LinearLayout ll_loading2;
 	
 	private TextView tv_number;
-	private int max = 20;
-	private int offset = 0;
-	private int dataMax = 0;
+	private int max = 20;//每页显示多少条。
+	private int offset = 0;//从哪一条开始加载数据。
+	private int dataMax = 0;//数据的总条数。
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -166,7 +166,6 @@ public class CallmsgsafeActivity extends Activity {
 		 * ListView的滚动事件。用于数据分页时的加载。
 		 */
 		blackList.setOnScrollListener(new OnScrollListener() {
-			
 			/**
 			 * 当滚动状态发生变化时。
 			 */
