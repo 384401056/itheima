@@ -1,5 +1,5 @@
 /** Automatically generated file. DO NOT MODIFY */
-package com.example.jnidemo;
+package com.example.jnidemonew;
 
 public final class BuildConfig {
     public final static boolean DEBUG = true;
