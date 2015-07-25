@@ -16,4 +16,7 @@
     
     <!-- USB转串口2 -->
     <usb-device vendor-id="6790" product-id="29987"/>
+    
+    <!-- DIY OTG -->
+    <usb-device vendor-id="1027" product-id="24577"/>
 </resources>

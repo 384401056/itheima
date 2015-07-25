@@ -1,5 +1,6 @@
 package com.example.usb_hid;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -26,6 +27,7 @@ public class MainActivity extends Activity {
 	private Button btnSend;        //发送数据按钮
     private ListView lsv1;         //显示USB信息的列表
     private TextView tvRecv;
+    private EditText etsend;
     
     private UsbManager manager;       //USB管理对象.
     private UsbDevice mUsbDevice;     //USB设备对象.
@@ -40,8 +42,8 @@ public class MainActivity extends Activity {
     private Iterator<UsbDevice> deviceIterator;     //USB设备类型的遍历器。
     private ArrayList<String> USBDeviceList;        //存放USB设备信息的列表。
     
-    private byte[] SendBuff;    //发送信息buffer
-    private byte[] RecvBuff = new byte[1024];    //接收信息buffer
+    private byte[] SendBuff = new byte[1];    //发送信息buffer
+    private byte[] RecvBuff = new byte[1];    //接收信息buffer
     
     
 
@@ -55,6 +57,7 @@ public class MainActivity extends Activity {
 		lsv1 = (ListView)findViewById(R.id.lsv1);
 		tvRecv = (TextView)findViewById(R.id.tvreceive);
 		btnSend = (Button)findViewById(R.id.btsend);
+		etsend = (EditText) findViewById(R.id.etsend);
 		
 		btnGetInfo.setOnClickListener(new GetInfoListener());
 		btnRecv.setOnClickListener(new RecvListener());
@@ -151,7 +154,18 @@ public class MainActivity extends Activity {
 					//传输成功则返回所传输的字节数组的长度，失败则返回负数。
 					int ret = mDeviceConnection.bulkTransfer(epIn, RecvBuff, RecvBuff.length, 1000);
 					
-					tvRecv.setText(String.valueOf(ret));
+					String isoString = "";
+					
+					try {
+						//isoString = new String(RecvBuff,"GBK");
+						isoString = new String(RecvBuff,"UTF-8");
+						//isoString = new String(RecvBuff,"iso-8859-1");
+						//isoString = new String(RecvBuff,"UTF-16LE");
+					} catch (UnsupportedEncodingException e) {
+						e.printStackTrace();
+					}
+					
+					tvRecv.setText(isoString);
 					
 				}else{
 					Toast.makeText(MainActivity.this, "claimInterface() 失败！", Toast.LENGTH_SHORT).show();
@@ -198,12 +212,13 @@ public class MainActivity extends Activity {
 					return;
 				if(mDeviceConnection.claimInterface(mInterface, true)){
 					
+					
+					
 					SendBuff = new byte[] { 0, 1, 2, 3, 4, 5};
 					
 					//传输成功则返回所传输的字节数组的长度，失败则返回负数。
-					int ret = mDeviceConnection.bulkTransfer(epOut, SendBuff, SendBuff.length, 1000);
-					tvRecv.setText(String.valueOf(ret));
-					
+					int sendNum = mDeviceConnection.bulkTransfer(epOut, SendBuff, SendBuff.length, 0);
+
 				}else{
 					Toast.makeText(MainActivity.this, "claimInterface() 失败！", Toast.LENGTH_SHORT).show();
 				}
@@ -221,12 +236,6 @@ public class MainActivity extends Activity {
 		
 	}
 	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
-
 }
 
 

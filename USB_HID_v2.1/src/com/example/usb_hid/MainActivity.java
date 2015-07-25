@@ -95,7 +95,9 @@ public class MainActivity extends Activity {
 				
 				if(mDeviceConnection == null)
 					return;
-				if(mDeviceConnection.claimInterface(mInterface, true)){
+				
+				
+				if(mDeviceConnection.claimInterface(mInterface, true)){//声明独占访问的UsbInterface
 					
 					//传输成功则返回所传输的字节数组的长度，失败则返回负数。
 					int ret = mDeviceConnection.bulkTransfer(epIn, RecvBuff, RecvBuff.length, 1000);
@@ -122,9 +124,8 @@ public class MainActivity extends Activity {
 				return;
 			}
 			
-			mDeviceConnection.releaseInterface(mInterface);
-			mDeviceConnection.close();
-			
+			mDeviceConnection.releaseInterface(mInterface);//释放接口
+			mDeviceConnection.close();//关闭连接。
 			myHandler.postDelayed(myRunnable, 1000);
 			
 		}
