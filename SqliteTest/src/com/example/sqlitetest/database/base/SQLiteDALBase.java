@@ -1,5 +1,8 @@
 package com.example.sqlitetest.database.base;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.example.sqlitetest.database.base.SQLiteHelper.SQLiteDataTable;
 
 import android.content.Context;
@@ -59,7 +62,7 @@ public abstract class SQLiteDALBase implements SQLiteDataTable {
 	
 	/**
 	 * 获取指定条件的数据条数。
-	 * @param condition
+	 * @param condition 条件
 	 * @return 数据条数
 	 */
 	protected int getCount(String condition) {
@@ -71,7 +74,13 @@ public abstract class SQLiteDALBase implements SQLiteDataTable {
 		return count;
 	}
 	
-	
+	/**
+	 * 获取指定条件的数据条数。
+	 * @param tableName 表名
+	 * @param PK 主键
+	 * @param condition 条件
+	 * @return
+	 */
 	protected int getCount(String tableName,String PK,String condition){
 		Cursor cursor = execSql("select " + PK + " form " + tableName + " where 1=1 " + condition);
 		int count = cursor.getCount();
@@ -80,14 +89,42 @@ public abstract class SQLiteDALBase implements SQLiteDataTable {
 	}
 	
 	/**
+	 * 获取查询列表
+	 * @param sqlStr sql语句。
+	 * @return list
+	 */
+	protected List getList(String sqlStr){
+		Cursor cursor = execSql(sqlStr);
+		return CursorToList(cursor);
+	}
+	
+	/**
+	 * 将游标转为List
+	 * @param cursor
+	 * @return list
+	 */
+	protected List CursorToList(Cursor cursor){
+		
+		List list = new ArrayList();
+		while (cursor.moveToNext()) {
+			
+			Object obj = findModel(cursor);
+			list.add(obj);
+		}
+		cursor.close();
+		
+		return list;
+	}
+	
+	/**
 	 * 删除数据
 	 * @param tableName 表名
 	 * @param condition 条件
-	 * @return 成功为true.
+	 * @return 是否成功.
 	 */
 	protected Boolean delete(String tableName,String condition){
 		
-		return getDatabase().delete(tableName, condition, null)>=0;
+		return getDatabase().delete(tableName, condition, null)>0;
 		
 	}
 	
@@ -97,18 +134,26 @@ public abstract class SQLiteDALBase implements SQLiteDataTable {
 	 * @param strSql
 	 * @return 结果集
 	 */
-	protected Cursor execSql(String strSql){
+	protected Cursor execSql(String sqlStr){
 		
-		return getDatabase().rawQuery(strSql, null);
+		return getDatabase().rawQuery(sqlStr, null);
 		
 	}
 	
-	protected Cursor execSql(String strSql,String[] params){
-		return getDatabase().rawQuery(strSql, params);
+	protected Cursor execSql(String sqlStr,String[] params){
+		return getDatabase().rawQuery(sqlStr, params);
 	}
 
+	/**
+	 * 获取表名和主键名。
+	 * @return
+	 */
 	protected abstract String[] GetTableNameAndPK();
 	
+	/**
+	 * @param cursor
+	 * @return
+	 */
 	protected abstract Object findModel(Cursor cursor);
 }
 

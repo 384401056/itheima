@@ -4,5 +4,4 @@
     <string name="app_name">SqliteTest</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="hello_world">Hello world!</string>
-
 </resources>

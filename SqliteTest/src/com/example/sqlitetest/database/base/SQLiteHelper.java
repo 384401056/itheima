@@ -3,6 +3,7 @@ package com.example.sqlitetest.database.base;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 /**
  * 数据帮助类，使用单例模式。
@@ -35,7 +36,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 	 */
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-
+		Log.i("MyLog","onCreate");
 	}
 
 	/**
@@ -43,14 +44,23 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 	 */
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+		Log.i("MyLog","onUpgrade");
 	}
 	
 	/**
 	 * 一个创建数据库表的接口
 	 */
 	public interface SQLiteDataTable{
+		/**
+		 * 创建表
+		 * @param database 数据库对象
+		 */
 		void onCreate(SQLiteDatabase database);
+		
+		/**
+		 * 更新表
+		 * @param database 数据库对象
+		 */
 		void onUpgrade(SQLiteDatabase database);
 	}
 	

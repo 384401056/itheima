@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="initusertable">
+        <item >王二</item>
+        <item >张三</item>
+        <item >李四</item>
+        <item >孙五</item>
+        <item >赵六</item>
+    </string-array>
+</resources>
