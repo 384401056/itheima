@@ -32,7 +32,7 @@ public class ShowNFCTextActivity extends Activity {
 		
 		Ndef ndef = Ndef.get(myTag);
 		
-		mTagText = "Type:"+ndef.getType()+"\nMaxSize:"+ndef.getMaxSize()+"bytes\n";
+		mTagText = "标签类型:"+ndef.getType()+"\n最大容量:"+ndef.getMaxSize()+"bytes\n";
 		
 		readNFCTag();
 		
@@ -44,19 +44,21 @@ public class ShowNFCTextActivity extends Activity {
 		Parcelable[] arrayMsg = getIntent().getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
 		
 		NdefMessage message[] = null;
-		
-		for(int i=0;i<arrayMsg.length;i++){
-			message[0] = (NdefMessage) arrayMsg[0];
+		int contentSize = 0;
+		if (arrayMsg != null) {
+			message = new NdefMessage[arrayMsg.length];
+			for (int i = 0; i < arrayMsg.length; i++) {
+				message[i] = (NdefMessage) arrayMsg[i];
+				contentSize += message[i].toByteArray().length;
+			}
 		}
 
 		try {
 			if (message != null) {
-
 				NdefRecord record = message[0].getRecords()[0];
-
 				// 通过TextRecord类来解析record
 				TextRecord textRecord = TextRecord.parsef(record);
-
+				mTagText += "已经使用："+contentSize + " bytes\n";
 				tv_text.setText(textRecord.getmText());
 			}
 		}catch(Exception e){

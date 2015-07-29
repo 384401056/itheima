@@ -1,0 +1,12 @@
+<resources>
+
+    <string name="app_name">读写NFC标签的文本</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_nfctag_writer_main">读写NFC标签的文本</string>
+    <string name="title_activity_read_nfctag">ReadNFCTagActivity</string>
+    <string name="title_activity_show_nfctag_content">ShowNFCTagContentActivity</string>
+    <string name="title_activity_nfctag_writer">NFCTagWriterActivity</string>
+    <string name="title_activity_uri_list">UriListActivity</string>
+
+</resources>

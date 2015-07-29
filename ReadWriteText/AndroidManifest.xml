@@ -1,50 +1,41 @@
-<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.nfctestdemo"
+    package="cn.eoe.read.write.text"
     android:versionCode="1"
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="14"
-        android:targetSdkVersion="21" />
+        android:minSdkVersion="15"
+        android:targetSdkVersion="15" />
 
     <uses-permission android:name="android.permission.NFC" />
 
     <application
-        android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-
-        <!-- 设置了启动模式 -->
         <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" >
+            android:name=".ReadWriteTextMainActivity"
+            android:label="读写NFC标签的纯文本数据"
+            android:launchMode="singleTask" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
-                
             </intent-filter>
             <intent-filter>
                 <action android:name="android.nfc.action.NDEF_DISCOVERED" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:mimeType="text/plain" />
             </intent-filter>
-
         </activity>
         <activity
-            android:name=".ShowNFCTextActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:name=".ShowNFCTagContentActivity"
+            android:label="显示NFC标签内容"
+            android:launchMode="singleTask" />
+
         <activity
             android:name=".InputTextActivity"
-            android:label="@string/title_activity_input_text" >
-        </activity>
-    </application>
+            android:label="向NFC标签写入文本" />
 
+    </application>
 
 </manifest>

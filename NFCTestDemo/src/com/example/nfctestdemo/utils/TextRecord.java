@@ -1,6 +1,8 @@
 package com.example.nfctestdemo.utils;
 
+import java.nio.charset.Charset;
 import java.util.Arrays;
+import java.util.Locale;
 
 import android.nfc.NdefRecord;
 
@@ -45,6 +47,29 @@ public class TextRecord {
 		} catch (Exception e) {
 			throw new IllegalArgumentException();
 		}
+	}
+	
+	
+	public static NdefRecord createTextRecord(String text){
+		
+		//1.生成语言码
+		byte[] languageByte = Locale.CHINA.getLanguage().getBytes(Charset.forName("US-ASCII"));
+		//2.生成状态码
+		int utfBit = 0;
+		char status = (char) (utfBit+languageByte.length);//0+语言编码长度
+		//3.生成文本数据
+		byte[] textByte = text.getBytes(Charset.forName("UTF-8"));
+		
+		byte[] data = new byte[languageByte.length+textByte.length+1];
+
+		data[0] = (byte) status;//设置状态码
+		System.arraycopy(languageByte, 0, data, 1, languageByte.length);//设置语言编码
+		System.arraycopy(textByte, 0, data, 1+languageByte.length, textByte.length);//设置文本数据
+		
+		//将data生成一个NdefRecord对象.第三个参数就是一个Record的序号。
+		NdefRecord ndefRecord = new NdefRecord(NdefRecord.TNF_WELL_KNOWN, NdefRecord.RTD_TEXT, new byte[0], data);
+		
+		return ndefRecord;
 	}
 	
 	
