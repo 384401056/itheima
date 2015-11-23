@@ -8,8 +8,8 @@
      <uses-feature android:name="android.hardware.usb.host" android:required="true"/>
      
     <uses-sdk
-        android:minSdkVersion="10"
-        android:targetSdkVersion="10" />
+        android:minSdkVersion="14"
+        android:targetSdkVersion="14" />
 
     <application
         android:allowBackup="true"

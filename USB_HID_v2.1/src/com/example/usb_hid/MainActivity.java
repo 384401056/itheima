@@ -105,9 +105,9 @@ public class MainActivity extends Activity {
 					String isoString = "";
 					try {
 						//isoString = new String(RecvBuff,"GBK");
-						isoString = new String(RecvBuff,"UTF-8");
-						//isoString = new String(RecvBuff,"iso-8859-1");
-						//isoString = new String(RecvBuff,"UTF-16LE");
+//						isoString = new String(RecvBuff,"UTF-8");
+//						isoString = new String(RecvBuff,"iso-8859-1");
+						isoString = new String(RecvBuff,"UTF-16LE");
 					} catch (UnsupportedEncodingException e) {
 						e.printStackTrace();
 					}
@@ -163,6 +163,7 @@ public class MainActivity extends Activity {
 	            USBDeviceList.add(String.valueOf("DeviceName:"+device.getDeviceName()));
 	            USBDeviceList.add(String.valueOf("DeviceId:"+device.getDeviceId()));
 	            USBDeviceList.add(String.valueOf("DeviceClass:"+device.getDeviceClass()));
+	            USBDeviceList.add(String.valueOf("DeviceProtocol:"+device.getDeviceProtocol()));
 	            
 	            mUsbDevice = device;
 
