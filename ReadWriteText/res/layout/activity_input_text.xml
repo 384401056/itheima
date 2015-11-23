@@ -1,0 +1,25 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        
+        android:text="请输入要写入的文本" android:textSize="16sp" />
+
+    <EditText
+        android:layout_marginTop="10dp"
+        android:id="@+id/edittext_text_tag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"	
+        android:onClick="onClick_OK"
+        android:text="确定" />
+
+</LinearLayout>
