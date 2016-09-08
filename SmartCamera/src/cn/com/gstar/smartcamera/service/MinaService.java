@@ -39,39 +39,40 @@ public class MinaService extends Service {
 
     private void startMinaServer() {
         initNotify();
-        serverThread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try{
-                    //创建一个非阻塞的server端的Socket
-                    acceptor = new NioSocketAcceptor();
-                    //设置过滤器（使用mina提供的文本换行符编解码器）
-                    acceptor.getFilterChain().addLast(
-                            "codec", new ProtocolCodecFilter(
-                                    new TextLineCodecFactory(
-                                            Charset.forName("UTF-8"),
-                                            LineDelimiter.WINDOWS.getValue(),
-                                            LineDelimiter.WINDOWS.getValue()
-                                    )
+//        serverThread = new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//
+//            }
+//        });
+//        serverThread.start();
+        try{
+            //创建一个非阻塞的server端的Socket
+            acceptor = new NioSocketAcceptor();
+            //设置过滤器（使用mina提供的文本换行符编解码器）
+            acceptor.getFilterChain().addLast(
+                    "codec", new ProtocolCodecFilter(
+                            new TextLineCodecFactory(
+                                    Charset.forName("UTF-8"),
+                                    LineDelimiter.WINDOWS.getValue(),
+                                    LineDelimiter.WINDOWS.getValue()
                             )
-                    );
-                    //自定义的编解码器
-                    //acceptor.getFilterChain().addLast("codec", new ProtocolCodecFilter(new CharsetCodecFactory()));
-                    //设置读取数据的换从区大小
-                    acceptor.getSessionConfig().setReadBufferSize(2048);
-                    //读写通道10秒内无操作进入空闲状态
-                    acceptor.getSessionConfig().setIdleTime(IdleStatus.BOTH_IDLE, 10);
-                    //为接收器设置管理服务
-                    acceptor.setHandler(new ServerHandler());
-                    //绑定端口
-                    acceptor.bind(new InetSocketAddress(PORT));
-                    LogUtils.i("服务器启动成功...    端口号："+PORT);
-                }catch (Exception e){
-                    LogUtils.e("服务器异常.."+e);
-                }
-            }
-        });
-        serverThread.start();
+                    )
+            );
+            //自定义的编解码器
+            //acceptor.getFilterChain().addLast("codec", new ProtocolCodecFilter(new CharsetCodecFactory()));
+            //设置读取数据的换从区大小
+            acceptor.getSessionConfig().setReadBufferSize(2048);
+            //读写通道10秒内无操作进入空闲状态
+            acceptor.getSessionConfig().setIdleTime(IdleStatus.BOTH_IDLE, 10);
+            //为接收器设置管理服务
+            acceptor.setHandler(new ServerHandler());
+            //绑定端口
+            acceptor.bind(new InetSocketAddress(PORT));
+            LogUtils.i("服务器启动成功...    端口号："+PORT);
+        }catch (Exception e){
+            LogUtils.e("服务器异常.."+e);
+        }
     }
 
 
@@ -102,12 +103,12 @@ public class MinaService extends Service {
     public void onDestroy() {
         super.onDestroy();
         acceptor.unbind();
-        LogUtils.i("onDestroy.....");
+//        LogUtils.i("onDestroy.....");
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        LogUtils.i("onStartCommand.....");
+//        LogUtils.i("onStartCommand.....");
         return super.onStartCommand(intent, flags, startId);
     }
 

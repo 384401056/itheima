@@ -6,13 +6,7 @@ import android.view.View;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
-	
-	static{
-		
-		System.loadLibrary("Funcs");
-		
-	}
-	
+
 	DataProvider dp;
 	
 	@Override

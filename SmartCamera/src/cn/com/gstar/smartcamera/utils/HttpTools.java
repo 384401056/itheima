@@ -67,9 +67,7 @@ public class HttpTools {
 			long length = data.length;
 			//添加请求参数
 			params.setBodyEntity(new InputStreamEntity(instream , length));
-
 			ResponseStream responseStream = httpUtils.sendSync(HttpMethod.POST, url,params);
-
 			if(responseStream.getStatusCode()==200){
 				return responseStream.readString();
 			}
